@@ -124,4 +124,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/PhenocCam_v2/*
+
+# Ignore PhenoCam_v2 Directory
+PhenocCam_v2/
