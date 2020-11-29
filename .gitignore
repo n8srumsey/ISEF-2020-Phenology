@@ -1,5 +1,6 @@
 # Ignore PhenoCam_v2 Directory
 PhenoCam_v2/
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
