@@ -126,4 +126,4 @@ dmypy.json
 
 
 # Ignore PhenoCam_v2 Directory
-/PhenocCam_v2
+PhenocCam_v2/
