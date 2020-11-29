@@ -1,3 +1,6 @@
+# Ignore PhenoCam_v2 Directory
+PhenoCam_v2/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -123,7 +126,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-
-# Ignore PhenoCam_v2 Directory
-PhenocCam_v2/
