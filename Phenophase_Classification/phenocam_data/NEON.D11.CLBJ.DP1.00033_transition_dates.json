@@ -1,0 +1,21 @@
+{
+    "sitename": "NEON.D11.CLBJ.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_3_26",
+            "year": 2017,
+            "month": 3,
+            "day": 26,
+            "doy": 85
+        },
+        {
+            "rising": false,
+            "date": "2017_11_2",
+            "year": 2017,
+            "month": 11,
+            "day": 2,
+            "doy": 306
+        }
+    ]
+}

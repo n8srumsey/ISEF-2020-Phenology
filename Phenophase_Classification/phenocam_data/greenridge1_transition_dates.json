@@ -1,0 +1,45 @@
+{
+    "sitename": "greenridge1",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_29",
+            "year": 2017,
+            "month": 4,
+            "day": 29,
+            "doy": 119
+        },
+        {
+            "rising": true,
+            "date": "2018_5_3",
+            "year": 2018,
+            "month": 5,
+            "day": 3,
+            "doy": 123
+        },
+        {
+            "rising": false,
+            "date": "2018_10_28",
+            "year": 2018,
+            "month": 10,
+            "day": 28,
+            "doy": 301
+        },
+        {
+            "rising": false,
+            "date": "2017_10_29",
+            "year": 2017,
+            "month": 10,
+            "day": 29,
+            "doy": 302
+        },
+        {
+            "rising": false,
+            "date": "2016_10_22",
+            "year": 2016,
+            "month": 10,
+            "day": 22,
+            "doy": 296
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D03.JERC.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_3_24",
+            "year": 2017,
+            "month": 3,
+            "day": 24,
+            "doy": 83
+        },
+        {
+            "rising": true,
+            "date": "2018_3_28",
+            "year": 2018,
+            "month": 3,
+            "day": 28,
+            "doy": 87
+        },
+        {
+            "rising": false,
+            "date": "2018_10_18",
+            "year": 2018,
+            "month": 10,
+            "day": 18,
+            "doy": 291
+        },
+        {
+            "rising": false,
+            "date": "2017_11_2",
+            "year": 2017,
+            "month": 11,
+            "day": 2,
+            "doy": 306
+        }
+    ]
+}

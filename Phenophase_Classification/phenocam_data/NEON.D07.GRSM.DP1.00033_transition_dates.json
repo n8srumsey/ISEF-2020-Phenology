@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D07.GRSM.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_12",
+            "year": 2017,
+            "month": 4,
+            "day": 12,
+            "doy": 102
+        },
+        {
+            "rising": true,
+            "date": "2018_4_17",
+            "year": 2018,
+            "month": 4,
+            "day": 17,
+            "doy": 107
+        },
+        {
+            "rising": false,
+            "date": "2018_10_30",
+            "year": 2018,
+            "month": 10,
+            "day": 30,
+            "doy": 303
+        },
+        {
+            "rising": false,
+            "date": "2017_11_3",
+            "year": 2017,
+            "month": 11,
+            "day": 3,
+            "doy": 307
+        }
+    ]
+}

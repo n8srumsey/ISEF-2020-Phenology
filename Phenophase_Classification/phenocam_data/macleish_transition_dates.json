@@ -1,0 +1,37 @@
+{
+    "sitename": "macleish",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_25",
+            "year": 2017,
+            "month": 4,
+            "day": 25,
+            "doy": 115
+        },
+        {
+            "rising": true,
+            "date": "2018_5_5",
+            "year": 2018,
+            "month": 5,
+            "day": 5,
+            "doy": 125
+        },
+        {
+            "rising": false,
+            "date": "2018_10_11",
+            "year": 2018,
+            "month": 10,
+            "day": 11,
+            "doy": 284
+        },
+        {
+            "rising": false,
+            "date": "2017_10_12",
+            "year": 2017,
+            "month": 10,
+            "day": 12,
+            "doy": 285
+        }
+    ]
+}

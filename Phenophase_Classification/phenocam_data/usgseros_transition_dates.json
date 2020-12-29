@@ -1,0 +1,53 @@
+{
+    "sitename": "usgseros",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2015_4_22",
+            "year": 2015,
+            "month": 4,
+            "day": 22,
+            "doy": 112
+        },
+        {
+            "rising": true,
+            "date": "2016_4_19",
+            "year": 2016,
+            "month": 4,
+            "day": 19,
+            "doy": 110
+        },
+        {
+            "rising": true,
+            "date": "2017_5_2",
+            "year": 2017,
+            "month": 5,
+            "day": 2,
+            "doy": 122
+        },
+        {
+            "rising": false,
+            "date": "2016_9_30",
+            "year": 2016,
+            "month": 9,
+            "day": 30,
+            "doy": 274
+        },
+        {
+            "rising": false,
+            "date": "2015_10_1",
+            "year": 2015,
+            "month": 10,
+            "day": 1,
+            "doy": 274
+        },
+        {
+            "rising": false,
+            "date": "2014_9_19",
+            "year": 2014,
+            "month": 9,
+            "day": 19,
+            "doy": 262
+        }
+    ]
+}

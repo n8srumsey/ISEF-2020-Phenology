@@ -1,0 +1,101 @@
+{
+    "sitename": "arbutuslake",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2009_5_14",
+            "year": 2009,
+            "month": 5,
+            "day": 14,
+            "doy": 134
+        },
+        {
+            "rising": true,
+            "date": "2010_5_2",
+            "year": 2010,
+            "month": 5,
+            "day": 2,
+            "doy": 122
+        },
+        {
+            "rising": true,
+            "date": "2011_5_7",
+            "year": 2011,
+            "month": 5,
+            "day": 7,
+            "doy": 127
+        },
+        {
+            "rising": true,
+            "date": "2012_5_10",
+            "year": 2012,
+            "month": 5,
+            "day": 10,
+            "doy": 131
+        },
+        {
+            "rising": true,
+            "date": "2013_5_6",
+            "year": 2013,
+            "month": 5,
+            "day": 6,
+            "doy": 126
+        },
+        {
+            "rising": true,
+            "date": "2014_5_16",
+            "year": 2014,
+            "month": 5,
+            "day": 16,
+            "doy": 136
+        },
+        {
+            "rising": false,
+            "date": "2013_9_24",
+            "year": 2013,
+            "month": 9,
+            "day": 24,
+            "doy": 267
+        },
+        {
+            "rising": false,
+            "date": "2012_9_24",
+            "year": 2012,
+            "month": 9,
+            "day": 24,
+            "doy": 268
+        },
+        {
+            "rising": false,
+            "date": "2011_9_26",
+            "year": 2011,
+            "month": 9,
+            "day": 26,
+            "doy": 269
+        },
+        {
+            "rising": false,
+            "date": "2010_9_24",
+            "year": 2010,
+            "month": 9,
+            "day": 24,
+            "doy": 267
+        },
+        {
+            "rising": false,
+            "date": "2009_9_24",
+            "year": 2009,
+            "month": 9,
+            "day": 24,
+            "doy": 267
+        },
+        {
+            "rising": false,
+            "date": "2008_9_25",
+            "year": 2008,
+            "month": 9,
+            "day": 25,
+            "doy": 269
+        }
+    ]
+}

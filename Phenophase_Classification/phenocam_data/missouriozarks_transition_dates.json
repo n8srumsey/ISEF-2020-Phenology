@@ -1,0 +1,117 @@
+{
+    "sitename": "missouriozarks",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2012_3_27",
+            "year": 2012,
+            "month": 3,
+            "day": 27,
+            "doy": 87
+        },
+        {
+            "rising": true,
+            "date": "2013_4_29",
+            "year": 2013,
+            "month": 4,
+            "day": 29,
+            "doy": 119
+        },
+        {
+            "rising": true,
+            "date": "2014_4_30",
+            "year": 2014,
+            "month": 4,
+            "day": 30,
+            "doy": 120
+        },
+        {
+            "rising": true,
+            "date": "2015_4_18",
+            "year": 2015,
+            "month": 4,
+            "day": 18,
+            "doy": 108
+        },
+        {
+            "rising": true,
+            "date": "2016_4_19",
+            "year": 2016,
+            "month": 4,
+            "day": 19,
+            "doy": 110
+        },
+        {
+            "rising": true,
+            "date": "2017_4_16",
+            "year": 2017,
+            "month": 4,
+            "day": 16,
+            "doy": 106
+        },
+        {
+            "rising": true,
+            "date": "2018_5_2",
+            "year": 2018,
+            "month": 5,
+            "day": 2,
+            "doy": 122
+        },
+        {
+            "rising": false,
+            "date": "2018_10_24",
+            "year": 2018,
+            "month": 10,
+            "day": 24,
+            "doy": 297
+        },
+        {
+            "rising": false,
+            "date": "2017_10_29",
+            "year": 2017,
+            "month": 10,
+            "day": 29,
+            "doy": 302
+        },
+        {
+            "rising": false,
+            "date": "2016_10_22",
+            "year": 2016,
+            "month": 10,
+            "day": 22,
+            "doy": 296
+        },
+        {
+            "rising": false,
+            "date": "2015_10_15",
+            "year": 2015,
+            "month": 10,
+            "day": 15,
+            "doy": 288
+        },
+        {
+            "rising": false,
+            "date": "2014_10_20",
+            "year": 2014,
+            "month": 10,
+            "day": 20,
+            "doy": 293
+        },
+        {
+            "rising": false,
+            "date": "2013_10_26",
+            "year": 2013,
+            "month": 10,
+            "day": 26,
+            "doy": 299
+        },
+        {
+            "rising": false,
+            "date": "2012_10_12",
+            "year": 2012,
+            "month": 10,
+            "day": 12,
+            "doy": 286
+        }
+    ]
+}

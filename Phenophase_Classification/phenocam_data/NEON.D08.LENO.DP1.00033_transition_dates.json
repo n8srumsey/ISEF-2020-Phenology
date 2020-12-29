@@ -1,0 +1,45 @@
+{
+    "sitename": "NEON.D08.LENO.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_3_23",
+            "year": 2017,
+            "month": 3,
+            "day": 23,
+            "doy": 82
+        },
+        {
+            "rising": true,
+            "date": "2018_3_29",
+            "year": 2018,
+            "month": 3,
+            "day": 29,
+            "doy": 88
+        },
+        {
+            "rising": false,
+            "date": "2018_11_16",
+            "year": 2018,
+            "month": 11,
+            "day": 16,
+            "doy": 320
+        },
+        {
+            "rising": false,
+            "date": "2017_11_9",
+            "year": 2017,
+            "month": 11,
+            "day": 9,
+            "doy": 313
+        },
+        {
+            "rising": false,
+            "date": "2016_11_14",
+            "year": 2016,
+            "month": 11,
+            "day": 14,
+            "doy": 319
+        }
+    ]
+}

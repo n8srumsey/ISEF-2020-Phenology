@@ -1,0 +1,181 @@
+{
+    "sitename": "harvard",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2008_5_8",
+            "year": 2008,
+            "month": 5,
+            "day": 8,
+            "doy": 129
+        },
+        {
+            "rising": true,
+            "date": "2009_5_2",
+            "year": 2009,
+            "month": 5,
+            "day": 2,
+            "doy": 122
+        },
+        {
+            "rising": true,
+            "date": "2010_4_26",
+            "year": 2010,
+            "month": 4,
+            "day": 26,
+            "doy": 116
+        },
+        {
+            "rising": true,
+            "date": "2011_5_7",
+            "year": 2011,
+            "month": 5,
+            "day": 7,
+            "doy": 127
+        },
+        {
+            "rising": true,
+            "date": "2012_5_2",
+            "year": 2012,
+            "month": 5,
+            "day": 2,
+            "doy": 123
+        },
+        {
+            "rising": true,
+            "date": "2013_5_4",
+            "year": 2013,
+            "month": 5,
+            "day": 4,
+            "doy": 124
+        },
+        {
+            "rising": true,
+            "date": "2014_5_11",
+            "year": 2014,
+            "month": 5,
+            "day": 11,
+            "doy": 131
+        },
+        {
+            "rising": true,
+            "date": "2015_5_5",
+            "year": 2015,
+            "month": 5,
+            "day": 5,
+            "doy": 125
+        },
+        {
+            "rising": true,
+            "date": "2016_5_12",
+            "year": 2016,
+            "month": 5,
+            "day": 12,
+            "doy": 133
+        },
+        {
+            "rising": true,
+            "date": "2017_5_10",
+            "year": 2017,
+            "month": 5,
+            "day": 10,
+            "doy": 130
+        },
+        {
+            "rising": true,
+            "date": "2018_5_8",
+            "year": 2018,
+            "month": 5,
+            "day": 8,
+            "doy": 128
+        },
+        {
+            "rising": false,
+            "date": "2018_10_31",
+            "year": 2018,
+            "month": 10,
+            "day": 31,
+            "doy": 304
+        },
+        {
+            "rising": false,
+            "date": "2017_10_30",
+            "year": 2017,
+            "month": 10,
+            "day": 30,
+            "doy": 303
+        },
+        {
+            "rising": false,
+            "date": "2016_10_23",
+            "year": 2016,
+            "month": 10,
+            "day": 23,
+            "doy": 297
+        },
+        {
+            "rising": false,
+            "date": "2015_10_24",
+            "year": 2015,
+            "month": 10,
+            "day": 24,
+            "doy": 297
+        },
+        {
+            "rising": false,
+            "date": "2014_10_17",
+            "year": 2014,
+            "month": 10,
+            "day": 17,
+            "doy": 290
+        },
+        {
+            "rising": false,
+            "date": "2013_10_15",
+            "year": 2013,
+            "month": 10,
+            "day": 15,
+            "doy": 288
+        },
+        {
+            "rising": false,
+            "date": "2012_10_13",
+            "year": 2012,
+            "month": 10,
+            "day": 13,
+            "doy": 287
+        },
+        {
+            "rising": false,
+            "date": "2011_10_22",
+            "year": 2011,
+            "month": 10,
+            "day": 22,
+            "doy": 295
+        },
+        {
+            "rising": false,
+            "date": "2010_10_14",
+            "year": 2010,
+            "month": 10,
+            "day": 14,
+            "doy": 287
+        },
+        {
+            "rising": false,
+            "date": "2009_10_18",
+            "year": 2009,
+            "month": 10,
+            "day": 18,
+            "doy": 291
+        },
+        {
+            "rising": false,
+            "date": "2008_10_20",
+            "year": 2008,
+            "month": 10,
+            "day": 20,
+            "doy": 294
+        }
+    ]
+}

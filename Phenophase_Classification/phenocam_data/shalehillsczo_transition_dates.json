@@ -1,0 +1,61 @@
+{
+    "sitename": "shalehillsczo",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2013_5_6",
+            "year": 2013,
+            "month": 5,
+            "day": 6,
+            "doy": 126
+        },
+        {
+            "rising": true,
+            "date": "2014_5_11",
+            "year": 2014,
+            "month": 5,
+            "day": 11,
+            "doy": 131
+        },
+        {
+            "rising": true,
+            "date": "2015_5_5",
+            "year": 2015,
+            "month": 5,
+            "day": 5,
+            "doy": 125
+        },
+        {
+            "rising": false,
+            "date": "2015_10_10",
+            "year": 2015,
+            "month": 10,
+            "day": 10,
+            "doy": 283
+        },
+        {
+            "rising": false,
+            "date": "2014_10_8",
+            "year": 2014,
+            "month": 10,
+            "day": 8,
+            "doy": 281
+        },
+        {
+            "rising": false,
+            "date": "2013_10_6",
+            "year": 2013,
+            "month": 10,
+            "day": 6,
+            "doy": 279
+        },
+        {
+            "rising": false,
+            "date": "2012_10_4",
+            "year": 2012,
+            "month": 10,
+            "day": 4,
+            "doy": 278
+        }
+    ]
+}

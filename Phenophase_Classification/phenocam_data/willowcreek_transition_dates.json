@@ -1,0 +1,117 @@
+{
+    "sitename": "willowcreek",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2012_5_8",
+            "year": 2012,
+            "month": 5,
+            "day": 8,
+            "doy": 129
+        },
+        {
+            "rising": true,
+            "date": "2013_5_17",
+            "year": 2013,
+            "month": 5,
+            "day": 17,
+            "doy": 137
+        },
+        {
+            "rising": true,
+            "date": "2014_5_23",
+            "year": 2014,
+            "month": 5,
+            "day": 23,
+            "doy": 143
+        },
+        {
+            "rising": true,
+            "date": "2015_5_13",
+            "year": 2015,
+            "month": 5,
+            "day": 13,
+            "doy": 133
+        },
+        {
+            "rising": true,
+            "date": "2016_5_15",
+            "year": 2016,
+            "month": 5,
+            "day": 15,
+            "doy": 136
+        },
+        {
+            "rising": true,
+            "date": "2017_5_13",
+            "year": 2017,
+            "month": 5,
+            "day": 13,
+            "doy": 133
+        },
+        {
+            "rising": true,
+            "date": "2018_5_12",
+            "year": 2018,
+            "month": 5,
+            "day": 12,
+            "doy": 132
+        },
+        {
+            "rising": false,
+            "date": "2018_9_30",
+            "year": 2018,
+            "month": 9,
+            "day": 30,
+            "doy": 273
+        },
+        {
+            "rising": false,
+            "date": "2017_9_30",
+            "year": 2017,
+            "month": 9,
+            "day": 30,
+            "doy": 273
+        },
+        {
+            "rising": false,
+            "date": "2016_9_30",
+            "year": 2016,
+            "month": 9,
+            "day": 30,
+            "doy": 274
+        },
+        {
+            "rising": false,
+            "date": "2015_9_28",
+            "year": 2015,
+            "month": 9,
+            "day": 28,
+            "doy": 271
+        },
+        {
+            "rising": false,
+            "date": "2014_9_19",
+            "year": 2014,
+            "month": 9,
+            "day": 19,
+            "doy": 262
+        },
+        {
+            "rising": false,
+            "date": "2013_9_23",
+            "year": 2013,
+            "month": 9,
+            "day": 23,
+            "doy": 266
+        },
+        {
+            "rising": false,
+            "date": "2012_9_21",
+            "year": 2012,
+            "month": 9,
+            "day": 21,
+            "doy": 265
+        }
+    ]
+}

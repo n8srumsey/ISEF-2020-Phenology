@@ -1,0 +1,29 @@
+{
+    "sitename": "nist",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2018_4_25",
+            "year": 2018,
+            "month": 4,
+            "day": 25,
+            "doy": 115
+        },
+        {
+            "rising": false,
+            "date": "2018_10_31",
+            "year": 2018,
+            "month": 10,
+            "day": 31,
+            "doy": 304
+        },
+        {
+            "rising": false,
+            "date": "2017_10_31",
+            "year": 2017,
+            "month": 10,
+            "day": 31,
+            "doy": 304
+        }
+    ]
+}

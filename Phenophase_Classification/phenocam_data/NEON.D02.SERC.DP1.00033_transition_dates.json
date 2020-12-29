@@ -1,0 +1,53 @@
+{
+    "sitename": "NEON.D02.SERC.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2016_3_30",
+            "year": 2016,
+            "month": 3,
+            "day": 30,
+            "doy": 90
+        },
+        {
+            "rising": true,
+            "date": "2017_4_14",
+            "year": 2017,
+            "month": 4,
+            "day": 14,
+            "doy": 104
+        },
+        {
+            "rising": true,
+            "date": "2018_4_15",
+            "year": 2018,
+            "month": 4,
+            "day": 15,
+            "doy": 105
+        },
+        {
+            "rising": false,
+            "date": "2018_10_21",
+            "year": 2018,
+            "month": 10,
+            "day": 21,
+            "doy": 294
+        },
+        {
+            "rising": false,
+            "date": "2017_11_4",
+            "year": 2017,
+            "month": 11,
+            "day": 4,
+            "doy": 308
+        },
+        {
+            "rising": false,
+            "date": "2016_11_2",
+            "year": 2016,
+            "month": 11,
+            "day": 2,
+            "doy": 307
+        }
+    ]
+}

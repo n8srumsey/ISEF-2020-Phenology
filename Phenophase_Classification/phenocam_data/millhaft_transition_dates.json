@@ -1,0 +1,45 @@
+{
+    "sitename": "millhaft",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_19",
+            "year": 2017,
+            "month": 4,
+            "day": 19,
+            "doy": 109
+        },
+        {
+            "rising": true,
+            "date": "2018_5_3",
+            "year": 2018,
+            "month": 5,
+            "day": 3,
+            "doy": 123
+        },
+        {
+            "rising": false,
+            "date": "2018_11_7",
+            "year": 2018,
+            "month": 11,
+            "day": 7,
+            "doy": 311
+        },
+        {
+            "rising": false,
+            "date": "2017_10_26",
+            "year": 2017,
+            "month": 10,
+            "day": 26,
+            "doy": 299
+        },
+        {
+            "rising": false,
+            "date": "2016_11_1",
+            "year": 2016,
+            "month": 11,
+            "day": 1,
+            "doy": 306
+        }
+    ]
+}

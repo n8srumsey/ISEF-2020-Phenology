@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D07.ORNL.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_8",
+            "year": 2017,
+            "month": 4,
+            "day": 8,
+            "doy": 98
+        },
+        {
+            "rising": true,
+            "date": "2018_4_13",
+            "year": 2018,
+            "month": 4,
+            "day": 13,
+            "doy": 103
+        },
+        {
+            "rising": false,
+            "date": "2018_10_21",
+            "year": 2018,
+            "month": 10,
+            "day": 21,
+            "doy": 294
+        },
+        {
+            "rising": false,
+            "date": "2017_10_20",
+            "year": 2017,
+            "month": 10,
+            "day": 20,
+            "doy": 293
+        }
+    ]
+}

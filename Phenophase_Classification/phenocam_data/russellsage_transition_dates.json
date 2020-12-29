@@ -1,0 +1,85 @@
+{
+    "sitename": "russellsage",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2014_4_1",
+            "year": 2014,
+            "month": 4,
+            "day": 1,
+            "doy": 91
+        },
+        {
+            "rising": true,
+            "date": "2015_4_1",
+            "year": 2015,
+            "month": 4,
+            "day": 1,
+            "doy": 91
+        },
+        {
+            "rising": true,
+            "date": "2016_3_27",
+            "year": 2016,
+            "month": 3,
+            "day": 27,
+            "doy": 87
+        },
+        {
+            "rising": true,
+            "date": "2017_3_22",
+            "year": 2017,
+            "month": 3,
+            "day": 22,
+            "doy": 81
+        },
+        {
+            "rising": true,
+            "date": "2018_3_25",
+            "year": 2018,
+            "month": 3,
+            "day": 25,
+            "doy": 84
+        },
+        {
+            "rising": false,
+            "date": "2018_11_23",
+            "year": 2018,
+            "month": 11,
+            "day": 23,
+            "doy": 327
+        },
+        {
+            "rising": false,
+            "date": "2017_11_25",
+            "year": 2017,
+            "month": 11,
+            "day": 25,
+            "doy": 329
+        },
+        {
+            "rising": false,
+            "date": "2016_11_23",
+            "year": 2016,
+            "month": 11,
+            "day": 23,
+            "doy": 328
+        },
+        {
+            "rising": false,
+            "date": "2015_11_21",
+            "year": 2015,
+            "month": 11,
+            "day": 21,
+            "doy": 325
+        },
+        {
+            "rising": false,
+            "date": "2014_11_20",
+            "year": 2014,
+            "month": 11,
+            "day": 20,
+            "doy": 324
+        }
+    ]
+}

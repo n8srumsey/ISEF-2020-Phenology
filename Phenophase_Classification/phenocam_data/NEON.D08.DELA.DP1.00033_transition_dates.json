@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D08.DELA.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_3_24",
+            "year": 2017,
+            "month": 3,
+            "day": 24,
+            "doy": 83
+        },
+        {
+            "rising": true,
+            "date": "2018_3_28",
+            "year": 2018,
+            "month": 3,
+            "day": 28,
+            "doy": 87
+        },
+        {
+            "rising": false,
+            "date": "2018_11_16",
+            "year": 2018,
+            "month": 11,
+            "day": 16,
+            "doy": 320
+        },
+        {
+            "rising": false,
+            "date": "2017_11_8",
+            "year": 2017,
+            "month": 11,
+            "day": 8,
+            "doy": 312
+        }
+    ]
+}

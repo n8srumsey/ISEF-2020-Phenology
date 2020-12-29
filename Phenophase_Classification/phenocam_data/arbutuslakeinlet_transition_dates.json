@@ -1,0 +1,53 @@
+{
+    "sitename": "arbutuslakeinlet",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2016_5_24",
+            "year": 2016,
+            "month": 5,
+            "day": 24,
+            "doy": 145
+        },
+        {
+            "rising": true,
+            "date": "2017_5_23",
+            "year": 2017,
+            "month": 5,
+            "day": 23,
+            "doy": 143
+        },
+        {
+            "rising": true,
+            "date": "2018_5_25",
+            "year": 2018,
+            "month": 5,
+            "day": 25,
+            "doy": 145
+        },
+        {
+            "rising": false,
+            "date": "2018_9_24",
+            "year": 2018,
+            "month": 9,
+            "day": 24,
+            "doy": 267
+        },
+        {
+            "rising": false,
+            "date": "2017_8_30",
+            "year": 2017,
+            "month": 8,
+            "day": 30,
+            "doy": 242
+        },
+        {
+            "rising": false,
+            "date": "2016_9_13",
+            "year": 2016,
+            "month": 9,
+            "day": 13,
+            "doy": 257
+        }
+    ]
+}

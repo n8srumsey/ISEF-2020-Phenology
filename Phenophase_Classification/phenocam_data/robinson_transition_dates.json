@@ -1,0 +1,29 @@
+{
+    "sitename": "robinson",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2018_4_21",
+            "year": 2018,
+            "month": 4,
+            "day": 21,
+            "doy": 111
+        },
+        {
+            "rising": false,
+            "date": "2018_10_27",
+            "year": 2018,
+            "month": 10,
+            "day": 27,
+            "doy": 300
+        },
+        {
+            "rising": false,
+            "date": "2017_10_18",
+            "year": 2017,
+            "month": 10,
+            "day": 18,
+            "doy": 291
+        }
+    ]
+}

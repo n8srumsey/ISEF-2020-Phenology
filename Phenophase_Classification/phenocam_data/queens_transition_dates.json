@@ -1,0 +1,93 @@
+{
+    "sitename": "queens",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2009_5_4",
+            "year": 2009,
+            "month": 5,
+            "day": 4,
+            "doy": 124
+        },
+        {
+            "rising": true,
+            "date": "2010_4_24",
+            "year": 2010,
+            "month": 4,
+            "day": 24,
+            "doy": 114
+        },
+        {
+            "rising": true,
+            "date": "2011_5_1",
+            "year": 2011,
+            "month": 5,
+            "day": 1,
+            "doy": 121
+        },
+        {
+            "rising": true,
+            "date": "2012_5_1",
+            "year": 2012,
+            "month": 5,
+            "day": 1,
+            "doy": 122
+        },
+        {
+            "rising": true,
+            "date": "2013_4_30",
+            "year": 2013,
+            "month": 4,
+            "day": 30,
+            "doy": 120
+        },
+        {
+            "rising": false,
+            "date": "2013_9_30",
+            "year": 2013,
+            "month": 9,
+            "day": 30,
+            "doy": 273
+        },
+        {
+            "rising": false,
+            "date": "2012_9_29",
+            "year": 2012,
+            "month": 9,
+            "day": 29,
+            "doy": 273
+        },
+        {
+            "rising": false,
+            "date": "2011_10_10",
+            "year": 2011,
+            "month": 10,
+            "day": 10,
+            "doy": 283
+        },
+        {
+            "rising": false,
+            "date": "2010_10_9",
+            "year": 2010,
+            "month": 10,
+            "day": 9,
+            "doy": 282
+        },
+        {
+            "rising": false,
+            "date": "2009_10_3",
+            "year": 2009,
+            "month": 10,
+            "day": 3,
+            "doy": 276
+        },
+        {
+            "rising": false,
+            "date": "2008_10_9",
+            "year": 2008,
+            "month": 10,
+            "day": 9,
+            "doy": 283
+        }
+    ]
+}

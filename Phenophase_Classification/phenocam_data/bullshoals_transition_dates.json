@@ -1,0 +1,85 @@
+{
+    "sitename": "bullshoals",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2014_4_20",
+            "year": 2014,
+            "month": 4,
+            "day": 20,
+            "doy": 110
+        },
+        {
+            "rising": true,
+            "date": "2015_4_10",
+            "year": 2015,
+            "month": 4,
+            "day": 10,
+            "doy": 100
+        },
+        {
+            "rising": true,
+            "date": "2016_4_10",
+            "year": 2016,
+            "month": 4,
+            "day": 10,
+            "doy": 101
+        },
+        {
+            "rising": true,
+            "date": "2017_4_10",
+            "year": 2017,
+            "month": 4,
+            "day": 10,
+            "doy": 100
+        },
+        {
+            "rising": true,
+            "date": "2018_4_26",
+            "year": 2018,
+            "month": 4,
+            "day": 26,
+            "doy": 116
+        },
+        {
+            "rising": false,
+            "date": "2018_10_23",
+            "year": 2018,
+            "month": 10,
+            "day": 23,
+            "doy": 296
+        },
+        {
+            "rising": false,
+            "date": "2017_10_22",
+            "year": 2017,
+            "month": 10,
+            "day": 22,
+            "doy": 295
+        },
+        {
+            "rising": false,
+            "date": "2016_10_19",
+            "year": 2016,
+            "month": 10,
+            "day": 19,
+            "doy": 293
+        },
+        {
+            "rising": false,
+            "date": "2015_10_14",
+            "year": 2015,
+            "month": 10,
+            "day": 14,
+            "doy": 287
+        },
+        {
+            "rising": false,
+            "date": "2014_10_22",
+            "year": 2014,
+            "month": 10,
+            "day": 22,
+            "doy": 295
+        }
+    ]
+}

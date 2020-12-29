@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D02.SCBI.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_4_9",
+            "year": 2017,
+            "month": 4,
+            "day": 9,
+            "doy": 99
+        },
+        {
+            "rising": true,
+            "date": "2018_4_22",
+            "year": 2018,
+            "month": 4,
+            "day": 22,
+            "doy": 112
+        },
+        {
+            "rising": false,
+            "date": "2018_10_31",
+            "year": 2018,
+            "month": 10,
+            "day": 31,
+            "doy": 304
+        },
+        {
+            "rising": false,
+            "date": "2017_11_4",
+            "year": 2017,
+            "month": 11,
+            "day": 4,
+            "doy": 308
+        }
+    ]
+}
