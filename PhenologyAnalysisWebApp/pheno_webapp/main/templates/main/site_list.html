@@ -1,0 +1,14 @@
+{% extends 'main/data_management.html' %}
+
+{% block title %} Sites {% endblock %}
+
+{% block content %}
+    <div style="margin-top: 1rem;">
+        <h3> Sites </h3>
+        <ul>
+            {% for site in sites %}
+                <li> {{site.sitename}}</li>
+            {% endfor%}
+        </ul>
+    </div>
+{% endblock %}

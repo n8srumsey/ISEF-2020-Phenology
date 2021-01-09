@@ -1,7 +1,7 @@
 # Ignore PhenoCam_v2 Directory
 PhenoCam_v2/
 data/
-
+media/
 # Ignore .vscode directory
 .vscode/
 

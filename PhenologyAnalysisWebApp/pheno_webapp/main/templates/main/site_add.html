@@ -1,0 +1,15 @@
+{% extends 'main/data_management.html' %}
+
+{% block title %} Add New Site {% endblock %}
+
+{% block content %} 
+<div style="margin-top: 1rem;">
+    <h2> New Site Page </h2>
+    <form method='post' action='/data-management/sites/add/'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type='submit' name='save_leave'> Save </button>
+        <button type='submit' name='save_add_more'> Save and Add Another </button>
+    </form>
+</div>
+{% endblock %}

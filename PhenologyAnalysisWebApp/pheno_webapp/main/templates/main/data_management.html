@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Data Management {% endblock %}
+
+{% block navbar-datamanagement %}
+    <li class="nav-item active">
+        <a class="nav-link" href="/data-management/">Data-Management <span class="sr-only">(current)</span> </a>
+    </li>
+{% endblock %}
+
+{% block sidenav %}
+<div class="col-md-auto" id="sticky-sidebar" style="margin-right: 2rem;">
+    <div class="sticky-top">
+        <div class="nav flex-column">
+            <div style="margin-top: 1rem;">
+                <h4 style="margin-bottom: 0px;"><a href="/data-management/sites/">Sites</a></h4>
+                <ul >
+                    {% for site in most_recent %}
+                        <li> <a href="/data-management/sites/{{site.sitename}}">{{site.sitename}}</a></li>
+                    {% endfor%}
+                    <li><a href="/data-management/sites/">All</a></li>
+                </ul>
+            </div>
+            <div style="margin-top: 1rem;">
+                <h4><a href="/data-management/sites/add/">Create New Site</a></h4>
+                <h4><a href="/data-management/upload_images/">Upload Images</a></h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<div class="col order-1"></div>
+        {% block content %}
+        <div style="margin-top: 1rem;">
+            <h2> Data Management </h2>
+            <p> *Welcome Message*</p>
+        </div>
+        {% endblock %}
+</div>
+        
+
+
+
