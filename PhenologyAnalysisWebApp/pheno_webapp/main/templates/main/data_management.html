@@ -15,10 +15,10 @@
             <div style="margin-top: 1rem;">
                 <h4 style="margin-bottom: 0px;"><a href="/data-management/sites/">Sites</a></h4>
                 <ul >
+                    <li>(most recent)</li>
                     {% for site in most_recent %}
                         <li> <a href="/data-management/sites/{{site.sitename}}">{{site.sitename}}</a></li>
                     {% endfor%}
-                    <li><a href="/data-management/sites/">All</a></li>
                 </ul>
             </div>
             <div style="margin-top: 1rem;">
