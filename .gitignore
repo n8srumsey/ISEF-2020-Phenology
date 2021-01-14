@@ -1,10 +1,10 @@
 # Ignore PhenoCam_v2 Directory
 PhenoCam_v2/
-data/
+images/
 media/
+*.tfrecord
 # Ignore .vscode directory
 .vscode/
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
