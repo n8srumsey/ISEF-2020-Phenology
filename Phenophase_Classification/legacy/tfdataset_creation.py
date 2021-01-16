@@ -11,6 +11,7 @@ BATCH_SIZE = 64
 im_dir = './Phenophase_Classification/data/images/'
 target_dir = './Phenophase_Classification/data/'
 
+""" Originally to be in main directory; uneeded now so is stored as 'legacy' """
 
 def create_tfrecords_dataset():
     all_images = np.array(os.listdir(im_dir))
