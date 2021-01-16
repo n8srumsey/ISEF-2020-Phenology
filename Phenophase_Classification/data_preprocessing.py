@@ -6,16 +6,20 @@ from tqdm import tqdm
 directory = './PhenoCam_v2/sorted_images/'
 target_directory = './Phenophase_Classification/data/images/'
 
-# sort images classified as 'rising'
-files_in_directory = os.listdir(directory + 'rising')
-for file in tqdm(files_in_directory):
-    im = Image.open(directory + 'rising/' + file)
-    im = im.resize((86, 64))
-    im.save(target_directory + 'rising_' + file)
+image_dim = (172, 128)
+image_shape = (172, 128, 3)
 
-# sort images classified as 'falling'
-files_in_directory = os.listdir(directory + 'falling')
-for file in tqdm(files_in_directory):
-    im = Image.open(directory + 'falling/' + file)
-    im = im.resize((86, 64))
-    im.save(target_directory + 'falling_' + file)
+if __name__=='__main__':
+    # sort images classified as 'rising'
+    files_in_directory = os.listdir(directory + 'rising')
+    for file in tqdm(files_in_directory):
+        im = Image.open(directory + 'rising/' + file)
+        im = im.resize(image_dim)
+        im.save(target_directory + 'rising_' + file)
+
+    # sort images classified as 'falling'
+    files_in_directory = os.listdir(directory + 'falling')
+    for file in tqdm(files_in_directory):
+        im = Image.open(directory + 'falling/' + file)
+        im = im.resize(image_dim)
+        im.save(target_directory + 'falling_' + file)
