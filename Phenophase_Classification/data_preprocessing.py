@@ -6,8 +6,8 @@ from tqdm import tqdm
 directory = './PhenoCam_v2/sorted_images/'
 target_directory = './Phenophase_Classification/data/images/'
 
-image_dim = (172, 128)
-image_shape = (172, 128, 3)
+image_dim = (86, 64)
+image_shape = (86, 64, 3)
 
 if __name__=='__main__':
     # sort images classified as 'rising'
