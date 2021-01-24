@@ -2,6 +2,7 @@
 PhenoCam_v2/
 images/
 media/
+models/
 *.tfrecord
 # Ignore .vscode directory
 .vscode/

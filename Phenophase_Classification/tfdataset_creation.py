@@ -1,7 +1,7 @@
 import multiprocessing as mp
-from multiprocessing import process
 import os
 import random
+from multiprocessing import process
 
 import imageio
 import numpy as np
@@ -10,7 +10,8 @@ from skimage.util import random_noise
 from tqdm import tqdm
 
 from data_preprocessing import image_shape
-from utils import K, BATCH_SIZE, TRANSFORM, NB_TRANSFORMATIONS, EFFECTIVE_BATCH_SIZE
+from utils import (BATCH_SIZE, EFFECTIVE_BATCH_SIZE, NB_TRANSFORMATIONS,
+                   TRANSFORM, K)
 
 im_dir = './Phenophase_Classification/data/images/'
 target_dir = './Phenophase_Classification/data/'
