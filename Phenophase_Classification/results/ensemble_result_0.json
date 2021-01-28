@@ -1141,11 +1141,6 @@
         "f1_score": 0.7516583857062538,
         "val_f1_score": 0.606588768042788
     },
-    "ensemble": {
-        "mode_binary_accuracy": 0.44549763033175355,
-        "mean_binary_accuracy": 0.44549763033175355,
-        "evaluated_on": "training dataset"
-    },
     "model_summary": [
         "Model: \"sequential_5\"",
         "_________________________________________________________________",
