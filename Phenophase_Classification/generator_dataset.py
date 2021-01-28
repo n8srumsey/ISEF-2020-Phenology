@@ -70,8 +70,8 @@ class Generator(Sequence):
                     new_im = new_im + np.random.normal(0.0, 50.0) / 255.0
 
                     # random noise
-                    if bool(random.getrandbits(1)):
-                        new_im = random_noise(new_im, clip=True)
+                    """if bool(random.getrandbits(1)):
+                        new_im = random_noise(new_im, clip=True)"""
 
                     batch_x.append(new_im)
                     batch_y.append(label)
@@ -94,7 +94,7 @@ class Generator(Sequence):
 
 
 def get_generators(num_fold=None, batch_size=BATCH_SIZE, transform=True, nb_transformations=16, shuffle=False):
-    if num_fold is not None:
+    if num_fold != None and num_fold != -1:
         train_imgs = []
         val_imgs = data_partitions[num_fold]
         for i in range(K):

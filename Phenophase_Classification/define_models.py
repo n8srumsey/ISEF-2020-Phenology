@@ -15,7 +15,10 @@ def define_model(k):
     model = Sequential([
         Conv2D(filters=32, kernel_size=(3, 3), strides=(2, 2), activation='relu', use_bias=True, input_shape=image_shape, kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4),
                bias_regularizer=l2(1e-4), activity_regularizer=l2(1e-5)),
-        # Dropout(0.75),
+        BatchNormalization(),
+        MaxPool2D(pool_size=(3, 3), strides=(2, 2)),
+        Conv2D(filters=32, kernel_size=(3, 3), strides=(1, 1), activation='relu', padding='same', use_bias=True, kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4),
+               bias_regularizer=l2(1e-4), activity_regularizer=l2(1e-5)),
         BatchNormalization(),
         MaxPool2D(pool_size=(3, 3), strides=(2, 2)),
         Conv2D(filters=16, kernel_size=(3, 3), strides=(1, 1), activation='relu', padding='same', use_bias=True, kernel_regularizer=l1_l2(l1=1e-5, l2=1e-4),

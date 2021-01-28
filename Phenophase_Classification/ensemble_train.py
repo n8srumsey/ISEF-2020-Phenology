@@ -1,49 +1,16 @@
+import gc
 import json
 import os
 import re
-from statistics import mode
-from itertools import chain
 
-import numpy as np
 from tensorflow.keras.callbacks import EarlyStopping
-from tqdm import tqdm
+from  tensorflow.keras.backend import clear_session
+import tensorflow as tf
 
 from define_models import define_model
 from generator_dataset import get_generators
 from utils import (BATCH_SIZE, EPOCHS, MODELS_DIR, NB_TRANSFORMATIONS,
                    RESULTS_DIR, TRANSFORM, K)
-
-
-def evaluate_ensemble(models, eval_dataset):
-    mode_predictions = []
-    mean_predictions = []
-    generator = eval_dataset.gen_iter()
-    # loop through batches
-    for _ in tqdm(range(len(eval_dataset))):
-        x, y = next(generator)
-        pred = []
-        for model in models:
-            output = model.predict(x, batch_size=1)
-            pred.append(output[0])
-        for i in range(len(pred[0])):
-            item_predicitons = [predictions[i] for predictions in pred]
-            # mode
-            if mode([np.argmax(item) for item in item_predicitons]) == np.argmax(y):
-                mode_predictions.append(1)
-            else:
-                mode_predictions.append(0)
-            # mean
-            mean = np.argmax(np.sum(item_predicitons, axis=0) / len(pred))
-            if mean == np.argmax(y):
-                mean_predictions.append(1)
-            else:
-                mean_predictions.append(0)
-
-    mode_binary_accuracy = float(np.sum(np.array(mode_predictions)) / len(mode_predictions))
-    mean_binary_accuracy = float(np.sum(np.array(mean_predictions)) / len(mean_predictions))
-
-    return mode_binary_accuracy, mean_binary_accuracy
-
 
 params = {
     # dataset and model architechture
@@ -61,29 +28,35 @@ params = {
 """ Start Training """
 if __name__ == '__main__':
     results = {}
-    models = []
 
     model_save_dir = MODELS_DIR + 'iteration_{}/'.format(len([item for item in os.listdir(MODELS_DIR)]))
 
-    callbacks = [EarlyStopping(monitor='loss', min_delta=0.001, patience=3, mode='min')]
+    callbacks = [EarlyStopping(monitor='loss', min_delta=0.001, patience=5, mode='min')]
 
     # k-fikd Cross-Validation Ensemble Training
     for k in range(K):
         print('\n\n\n*** STARTING ITERATION {} out of {} ***\n'.format(k+1, K))
         train_gen, val_gen = get_generators(k, batch_size=params['batch_size'], transform=params['transform_bool'],
                                             nb_transformations=params['nb_transformations'], shuffle=params['shuffle'])
-        models.append(define_model(k))
+        model = define_model(k)
 
         # train
-        history = models[k].fit(train_gen, validation_data=val_gen, epochs=params['epochs'], verbose=1, callbacks=callbacks,
-                                use_multiprocessing=True, workers=8)
+        history = model.fit(train_gen, validation_data=val_gen, epochs=params['epochs'], verbose=1, callbacks=callbacks,
+                                use_multiprocessing=True, workers=6, max_queue_size=6)
 
         # save model
         save_dir = model_save_dir + 'k_{}'.format(k)
-        models[k].save(save_dir)
+        model.save(save_dir)
 
         # save results
         results['iteration_{}'.format(k)] = history.history
+        
+        # manage memory leaks
+        del model, history
+        gc.collect()
+        clear_session()
+        tf.compat.v1.reset_default_graph()
+        
 
     # summarize results
     iteration_summaries = {'loss': [], 'binary_accuracy': [], 'auc': [], 'precision': [], 'recall': [], 'val_loss': [],
@@ -138,20 +111,11 @@ if __name__ == '__main__':
         results[entry]['f1_score'] = f1_score
         results[entry]['val_f1_score'] = val_f1_score
 
-    
-
-    # test combined models
-    print('\n\n\n*** EVALUATING ENSEMBLE ***')
-    total_eval_dataset = get_generators()
-    mode_binary_acc, mean_binary_acc = evaluate_ensemble(models, total_eval_dataset)
-    results['ensemble'] = {'mode_binary_accuracy': mode_binary_acc, 'mean_binary_accuracy': mean_binary_acc, 'evaluated_on': 'training dataset'}
-    print('Accuracies: mode_ensemble={}    mean_ensemble={}'.format(mode_binary_acc, mean_binary_acc))
-    
     results['model_summary'] = []
     define_model(None).summary(print_fn=lambda x: results['model_summary'].append(x))
 
     results['params'] = params
-    
+
     num_result = len(os.listdir(RESULTS_DIR))
     save_to = RESULTS_DIR + 'ensemble_result_{}.json'.format(num_result)
 
