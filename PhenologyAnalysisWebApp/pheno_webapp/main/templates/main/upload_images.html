@@ -3,6 +3,7 @@
 {% block content %}
 <div style="margin-top: 1rem;">    
     <h2>Upload Images</h2>
+
     <form method='post' action='#' enctype="multipart/form-data">
         {% csrf_token %}
         Add to Site: <select class="custom-select" style="width: 12rem;" name="site_selected">
@@ -10,9 +11,24 @@
             <option value="{{site}}">{{site}}</option>
             {% endfor %}
         </select>
-        <input type="file" class="form-control-file" id="images_input" aria-describedby="fileHelp" multiple style="margin-top: 10px;" name="images">
-        <small id="fileHelp" class="form-text text-muted">Files must be JPG files and follow the namming convention "sitename_YYYY_MM_DD_HHMMSS.jpg"</small>
-        <button type='submit' name='upload_all' value="upload_all" style="margin-top: 10px;"> Upload </button>
+        <div class="input-group" style="margin-top:1rem;display:flex;align-items:center;">
+            <input type="file" id="actual-btn" multiple hidden name="images"/>
+            <label class="btn btn-success" for="actual-btn">Choose Files</label>
+            <span id="file-chosen" style="margin-left:1rem;">No file chosen</span>
+        </div>
+        <small id="fileHelp" class="form-text text-muted">Files must be JPG files and follow the naming convention "sitename_YYYY_MM_DD_HHMMSS.jpg"</small>
+        <button class="btn btn-success" type='submit' name='upload_all' value="upload_all" style="margin-top: 10px;"> Upload </button>
     </form>
+
+    <script>
+        const actualBtn = document.getElementById('actual-btn');
+        const fileChosen = document.getElementById('file-chosen');
+        actualBtn.addEventListener('change', function(){
+            if (this.files.length > 1) { fileChosen.textContent=this.files.length + ' Files Selected'}
+            else if (this.files.length = 1) { fileChosen.textContent='1 File Selected'}
+            else if (this.files.length < 1) { fileChosen.textContent='Select Files'}
+        })
+    </script>
+
 </div>
 {% endblock %}

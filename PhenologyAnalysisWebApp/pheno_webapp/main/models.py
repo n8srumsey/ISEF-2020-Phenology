@@ -6,6 +6,8 @@ class Site(models.Model):
     location_desc = models.CharField(max_length=500)
     obj_created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.sitename

@@ -1,23 +1,69 @@
 {% extends 'main/data_management.html' %}
-
+{% load site_view_funcs %}
 {% block title %} {{site.sitename}} {% endblock %}
+
+{% block style %}
+    .custom-range::-webkit-slider-thumb {
+        background: #93c54b;
+    }
+    .custom-range::-webkit-slider-thumb:active{
+        background-color: #abc289;
+    }
+{% endblock %}
 
 {% block content %}
 <div style="margin-top: 1rem;">
+    {% block editable_site_info%}
     <h1> {{site.sitename}} </h1>
     <p> Location: {{site.location_desc}} </p>
-    <p>First Image Date</p>
-    <p>Last Image Date</p>
+    {% mult_neg_one site.latitude as neg_latitude %}
+    {% mult_neg_one site.longitude as neg_longitude %}
+    {% if site.latitude >= 0.0%}
+        {% if site.longitude >= 0.0 %}
+            <p> Coordinates: {{site.latitude}}<span>&#176;</span> N, {{site.longitude}}<span>&#176;</span> E</p>
+        {% else %}
+            <p> Coordinates: {{site.latitude}}<span>&#176;</span> N, {{neg_longitude}}<span>&#176;</span> W</p>
+        {% endif %}
+    {% else %}
+        {% if site.longitude >= 0.0 %}
+            <p> Coordinates: {{neg_latitude}}<span>&#176;</span> S, {{site.longitude}}<span>&#176;</span> E</p>
+        {% else %}
+            <p> Coordinates: {{neg_latitude}}<span>&#176;</span> S, {{neg_longitude}}<span>&#176;</span> W</p>
+        {% endif %}
+    {% endif%}
+    {% endblock %}
 
-    <p>*on right side* button export data (with dropdown) </p>
-    <p> button edit site </p>
-    <p> button edit images</p>
+    {% get_last_image_date site as last_im_date %}
+    {% get_first_image_date site as first_im_date %}
+    <p>Image Date Range: {{first_im_date}} - {{last_im_date}}</p>
+    
+    {% site_last_updated_str site as lst_update %}
+    <p>Site Last Modified: {{lst_update}}</p>
+    
+    <p><br></br></p>
 
-    <p>Images slidebar</p>
-    <p>slidebar with image displayed above for current image, and date below slider, tracking it, and with start and end dates labeled on slider</p>
-    <p>button link to upload images</p>
+    <div> 
+        {% get_num_site_imgs site as num_imgs%}
+        <h4>Images</h4>
+        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 500px; height: auto;"/> </div>
+        <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem;"/>
+        <p id="date">{% get_first_datetime site %}</p>
+        <script>
+            var date_list = {{date_list|safe}};
+            var img_paths = {{img_paths|safe}};
+            document.getElementById("date").innerHTML = date_list[n];
+            document.getElementById("img").src = "/media/" + img_paths[n];
+            function showVal(n){
+                document.getElementById("date").innerHTML = date_list[n];
+                document.getElementById("img").src = "/media/" + img_paths[n];
+            }
+        </script>
+    </div>
 
-    <p>transition dates</p>
-    <p>table</p>
+    {% block site_links %}
+    <a href='./gallery'><button type="button" class="btn btn-success">Go to Gallery</button></a>
+    <a href='./edit'><button type="button" class="btn btn-success">Edit Site</button></a>
+    {% endblock %}
+    <p><br></br></p>
 </div>
 {% endblock %}

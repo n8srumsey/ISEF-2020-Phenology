@@ -1,0 +1,19 @@
+{% extends 'main/site_view.html' %}
+{% load site_view_funcs %}
+{% block title %} Edit {{site.sitename}} {% endblock %}
+
+{% block editable_site_info%}
+    <h1> Edit {{site.sitename}} </h1>
+    <form method='post' action='/data-management/sites/{{site.sitename}}/edit/'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <a href='/data-management/sites/{{site.sitename}}/'><button type="button" class="btn btn-success">Cancel</button></a>
+        <button type='submit' class="btn btn-success" name='save'> Save </button>
+    </form>
+    <p> &emsp;</p>
+{% endblock %}
+
+{% block site_links %}
+<a href='/data-management/sites/{{site.sitename}}/gallery/'><button type="button" class="btn btn-success">Go to Gallery</button></a>
+<a href='/data-management/sites/{{site.sitename}}/'><button type="button" class="btn btn-success">Back to Site View</button></a>
+{% endblock %}

@@ -5,10 +5,27 @@
 {% block content %}
     <div style="margin-top: 1rem;">
         <h3> Sites </h3>
-        <ul>
-            {% for site in sites %}
-                <li> <a href="/data-management/sites/{{site.sitename}}">{{site.sitename}}</a></li>
-            {% endfor%}
-        </ul>
+        <table class="table table-hover">
+            <thead> 
+                <tr> 
+                    <th scope="col" style='padding-right: 12rem;'>Site </th>
+                    <th scope='col'>Location</th>
+                    <th scope='col'>Lattitude</th>
+                    <th scope'col'>Longitude</th>
+                    <th scope="col">Last Updated</th>
+                </tr> 
+            </thead>
+            <tbody> 
+                {% for site in sites %}
+                    <tr> 
+                    <td><a href="/data-management/sites/{{site.sitename}}">{{site.sitename}}</a></td>
+                    <td>{{site.location_desc}}</td>
+                    <td>{{site.latitude}}</td>
+                    <td>{{site.longitude}}</td>
+                    <td>{{site.last_updated}}</td>
+                    </tr>
+                {% endfor%}      
+            </tbody>
+        </table>
     </div>
 {% endblock %}

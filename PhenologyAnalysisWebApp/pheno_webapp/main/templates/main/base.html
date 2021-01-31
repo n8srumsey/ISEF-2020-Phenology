@@ -11,7 +11,7 @@
       }
       
       #content {
-        padding-bottom: 2.5rem;    /* Footer height */
+        padding-bottom: 4.0rem;    /* Footer height */
         margin-left: 1.5rem;
       }
       
@@ -19,9 +19,29 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 2.5rem;     
+        height: 4.0rem;     
         background-color: #111;       /* Footer height */
+        align: center;
       }
+
+      .footer-p {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        left: 50%;
+      }
+
+      .footer-link {
+        color: grey;
+      }
+      .footer-link:hover {
+        color: gainsboro;
+      }
+
+    {% block style %}
+
+    {% endblock %}
+
     </style>
 
     <meta charset="utf-8">
@@ -92,7 +112,11 @@
       </div>
     
       <footer id="footer">
-        <p>Footer</p>
+        <p class='footer-p'>
+          <a class='footer-link', href='/admin/'>Admin Login</a> | 
+          <a class='footer-link' href='mailto:nathan.s.rumsey@gmail.com'>Contact</a> | 
+          <a class='footer-link' href='https://github.com/n8srumsey/ISEF-2020-Phenology'>  Github</a>
+        </p>
       </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

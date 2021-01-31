@@ -10,20 +10,18 @@
 
 {% block sidenav %}
 <div class="col-md-auto" id="sticky-sidebar" style="margin-right: 2rem;">
-    <div class="sticky-top">
-        <div class="nav flex-column">
-            <div style="margin-top: 1rem;">
-                <h4 style="margin-bottom: 0px;"><a href="/data-management/sites/">Sites</a></h4>
-                <ul >
-                    <li>(most recent)</li>
-                    {% for site in most_recent %}
-                        <li> <a href="/data-management/sites/{{site.sitename}}">{{site.sitename}}</a></li>
-                    {% endfor%}
-                </ul>
+    <div class="sticky-top"> 
+        <div class="nav flex-column" style='margin-top:2rem; '>
+            <div class="card text-white border-light mb-3" style="max-width: 20rem;">
+                <div class='card-header'><h5 style='color:black'>Data Management Menu</h5></div>
+                <div class="card-body">
+                    <h5><a href="/data-management/sites/">Sites</a></h5>
+                    <h5><a href="/data-management/sites/add/">Add New Site</a></h5>
+                    <h5><a href="/data-management/upload_images/">Upload Images</a></h5>
+                </div>
             </div>
-            <div style="margin-top: 1rem;">
-                <h4><a href="/data-management/sites/add/">Create New Site</a></h4>
-                <h4><a href="/data-management/upload_images/">Upload Images</a></h4>
+            <div>
+                
             </div>
         </div>
     </div>

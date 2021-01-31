@@ -1,7 +1,13 @@
 {% extends 'main/data_management.html' %}
 
-{% block content %}
-<div style="margin-top: 1rem;">
+{% block style %}
 
+{% endblock%}
+
+{% block content %}
+<div class="col-md" style="margin-top: 1rem; margin-left: 3rem;">
+    <h1> {{image.image_upload.name|slice:"7:-4"}}</h1>
+    <img src="/media/{{image.image_upload.name}}" style="width: 100%; height: auto; object-fit: contain; width: 700px; 
+                                                            height: auto; display: block; margin-top: 1rem;"/>
 </div>
 {% endblock %}
