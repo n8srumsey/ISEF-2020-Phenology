@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Compare Sites {% endblock %}
+
+{% block navbar-compare %}
+    <li class="nav-item active">
+        <a class="nav-link" href="/analysis/">Compare <span class="sr-only">(current)</span> </a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+<div style="margin-top: 1rem; margin-left: 18.5rem;">
+    <h1> Compare Sites </h1>
+    {% block compare_content %}
+    
+    {% endblock %}
+</div>
+{% endblock %}

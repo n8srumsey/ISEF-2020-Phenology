@@ -4,14 +4,23 @@
 
 {% block content %}
     <div style="margin-top: 1rem;">
-        <h3> Sites </h3>
+        <h2> Sites </h2>
+        <form method='post' style='margin-bottom:1rem; display:flex; flex-direction: column; align-items: flex-end;'>
+            {% csrf_token %}
+            <span> Go to Site: <select class="custom-select" style="width: 12rem;" name="site_selected">
+                {% for site_iter in sites %}
+                    <option value="{{site_iter}}">{{site_iter}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success" type='submit'> Go </button> </span>
+        </form>
         <table class="table table-hover">
             <thead> 
                 <tr> 
                     <th scope="col" style='padding-right: 12rem;'>Site </th>
                     <th scope='col'>Location</th>
                     <th scope='col'>Lattitude</th>
-                    <th scope'col'>Longitude</th>
+                    <th scope='col'>Longitude</th>
                     <th scope="col">Last Updated</th>
                 </tr> 
             </thead>

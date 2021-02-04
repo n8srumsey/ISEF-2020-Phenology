@@ -1,13 +1,19 @@
 {% extends 'main/data_management.html' %}
-
+{% load site_view_funcs %}
 {% block style %}
 
 {% endblock%}
 
 {% block content %}
-<div class="col-md" style="margin-top: 1rem; margin-left: 3rem;">
-    <h1> {{image.image_upload.name|slice:"7:-4"}}</h1>
+<div class="col-sm" style="margin-top: 1rem; ">
+    {% if image.is_rising %}
+        <h1> {% imgname_to_datetime image.image_upload.name %} - During Bud Burst </h1>
+    {% else %}
+        <h1> {% imgname_to_datetime image.image_upload.name %} - During Leaf Senescence </h1>
+    {% endif %}
+
     <img src="/media/{{image.image_upload.name}}" style="width: 100%; height: auto; object-fit: contain; width: 700px; 
                                                             height: auto; display: block; margin-top: 1rem;"/>
+    <a  href='/data-management/sites/{{site}}/gallery/'><button style="margin-top:2rem;" class="btn btn-success"> Back to Gallery </button></a>
 </div>
 {% endblock %}

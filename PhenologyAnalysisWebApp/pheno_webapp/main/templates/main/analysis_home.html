@@ -8,6 +8,20 @@
     </li>
 {% endblock %}
 
+
 {% block content %}
-    <h2> Analysis </h2>
+<div style="margin-top: 1rem; margin-left: 18.5rem;">
+    <h1 style="margin-bottom: 1rem;"> {% block analysis_header %} Analysis {% endblock %}</h1>
+    {% block analysis_content %}
+    <form method='post'>
+        {% csrf_token %}
+        Site: <select class="custom-select" style="width: 12rem;" name="site_selected">
+            {% for site_iter in sites %}
+                <option value="{{site_iter}}">{{site_iter}}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-success" type='submit'> Go </button>
+    </form>
+    {% endblock %}
+</div>
 {% endblock %}

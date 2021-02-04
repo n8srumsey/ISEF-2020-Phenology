@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'), 
+    path('settings/', views.settings, name='settings'),
     path('data-management/', views.data_management, name='data_management'),
     path('data-management/sites/', views.sites, name='sites'),
     path('data-management/sites/add/', views.site_add, name='add_site'), 
@@ -14,4 +15,7 @@ urlpatterns = [
     path('data-management/upload_images/', views.upload_images, name='upload_images'),
     path('analysis/', views.analysis, name='analysis'),
     path('analysis/<str:sitename>/', views.analysis_site, name='analysis-site'),
+    path('compare/', views.compare, name='compare'),
+    path('compare/<str:site1name>&<str:site2name>/', views.compare_sites, name='compare-sites'),
+    path('site-map/', views.site_map, name='site-map')
 ]

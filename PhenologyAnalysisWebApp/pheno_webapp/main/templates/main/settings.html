@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Settings {% endblock %}
+
+{% block content %}
+<div style="margin-top: 1rem;">
+    <h1>Settings</h1>
+    <form method='post' action='/settings/'> 
+        {% csrf_token %} 
+        <button class='btn btn-danger' type='submit' name='delete_all_images' style='margin-top:2rem;'> Delete All Images</button>
+
+        <div style='margin-top:2rem;'> 
+            <span> Site: <select class="custom-select" style="width: 12rem;" name="site_selected">
+                {% for site_iter in sites %}
+                    <option value="{{site_iter}}">{{site_iter}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-danger" type='submit'> Delete Site Images </button> </span> 
+        </div>
+    </form>
+</div>
+{% endblock %}

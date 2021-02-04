@@ -3,7 +3,8 @@
   <head>
     {% load static %}
     <link rel='stylesheet' type='text/css' href={% static 'bootstrap.min.css' %}/>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <style>
       #page-container {
         position: relative;
@@ -75,6 +76,11 @@
                   <a class="nav-link" href="/compare/">Compare</a>
                 </li>
               {% endblock %}
+              {% block navbar-sitemap %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/site-map/"> Site Map</a>
+                </li>
+              {% endblock %}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -89,7 +95,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">n8srumsey<span class="caret"></span></a>
                 <ul class="dropdown-menu" style="white-space: normal; right: 0; left: auto;">
                   <h6 class="dropdown-header">Signed in as</h6>
-                  <h6 class="dropdown-header" style="font-weight: bold; padding-top: 0%;">*user*</h6>
+                  <h6 class="dropdown-header" style="font-weight: bold; padding-top: 0%;">n8srumsey</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/settings/">Settings</a>
                   <a class="dropdown-item" href="#">Logout</a></li>

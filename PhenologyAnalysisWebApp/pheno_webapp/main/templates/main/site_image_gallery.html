@@ -1,14 +1,18 @@
 {% extends 'main/data_management.html' %}
-
+{% load site_view_funcs%}
 {% block style %}
 div.gallery {
-  margin: 5px;
+  margin: 0.5rem;
   border: 1px solid white;
   float: left;
   width: 330px;
 }
 
-div.gallery:hover {
+.gallery:hover .popup i {
+	display: block;
+}
+
+.gallery:hover {
   background: lightgrey;
 }
 
@@ -25,9 +29,22 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 15px;
+  margin-top: 1rem;
   text-align: center;
 }
+
+.popup i {
+	position: relative;
+  left: 18rem;
+  top: -13rem;
+	display: none;
+  z-index:12
+}
+
+.popup {
+  color: black;
+}
+
 {% endblock %}
 
 {% block content %}
@@ -36,12 +53,20 @@ div.desc {
 
 {% for image in images%}
 <div class="gallery">
-  <a target="_blank" href="./{{image.image_upload.name}}">
+  <a href="./{{image.image_upload.name}}">
     <img src="/media/{{image.image_upload.name}}"/>
   </a>
-  <div class="desc">{{image.image_upload.name|slice:"7:-4"}}</div>
+  <div class="desc"><p style="">{% imgname_to_datetime image.image_upload.name %}</p></div>
+  <!--<div style="display: block;">
+    <a class="popup" href="#"><i class="far fa-trash-alt"></i></a>
+    <a class="popup" style="left: 17.93rem;" href="#"><i class="far fa-arrow-alt-circle-down"></i></a>
+  </div> -->
 </div>
 {% endfor %}
 
 </div>
+{% endblock %}
+
+{% block quick_links %}
+  <a  href='/data-management/sites/{{site}}/'><h6 style="margin-top:1rem; text-align: center;">&#8592; Back to Site Info </h6></a>
 {% endblock %}

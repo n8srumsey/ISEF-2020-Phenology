@@ -1,0 +1,59 @@
+{% extends 'main/analysis_home.html' %}
+
+{% block title %} {{site.sitename}} Analysis {% endblock %}
+
+{% block analysis_header %} {{site.sitename}} Analysis {% endblock %}
+
+{% block analysis_content %}
+
+<form method='post'>
+    {% csrf_token %}
+    Site: <select class="custom-select" style="width: 12rem;" name="site_selected">
+        {% for site_iter in sites %}
+            {% if site_iter == site.sitename%}
+                <option value="{{site_iter}}" selected>{{site_iter}}</option>
+            {% else %}
+                <option value="{{site_iter}}">{{site_iter}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <button class="btn btn-success" type='submit'> Go </button>
+</form>
+
+<h2 style="margin-top: 3rem;"> Transition Dates </h2>
+
+<table class="table table-hover">
+    <thead> 
+        <tr> 
+            <th scope='col' colspan='4'> Bud Burst Phenophases </th>
+            <th scope='col' colspan='4'> Leaf Senescence Phenophases </th>
+        </tr> 
+        <tr> 
+            <th scope='col' colspan='2'>Start Date</th>
+            <th scope='col' rowspan='2' style='padding-right:5rem;'>Duration (days)</th>
+            <th scope='col' colspan='2'>Start Date</th>
+            <th scope='col' rowspan='2'>Duration (days)</th>
+        </tr>
+        <tr> 
+            <th scope='col'>Year</th>
+            <th scope='col'>Month/Day</th>
+            <th scope='col'>Year</th>
+            <th scope='col'>Month/Day</th>
+
+        </tr>  
+    </thead>
+    <tbody> 
+        {% for phase in phases %}
+            <tr> 
+            <td>{{phase.0.year}}</td>
+            <td>{{phase.0.month_day}}</td>
+            <td>{{phase.0.duration}}</td>
+            <td>{{phase.1.year}}</td>
+            <td>{{phase.1.month_day}}</td>
+            <td>{{phase.1.duration}}</td>
+            </tr>
+        {% endfor%}      
+    </tbody>
+</table>
+
+{% endblock%}

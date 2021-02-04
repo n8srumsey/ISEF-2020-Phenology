@@ -26,9 +26,9 @@ class Image(models.Model):
 class TransitionDate(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
-    falling_to_rising = models.BooleanField()
-    obj_created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True)
+    rising_phase = models.BooleanField()
+    duration = models.IntegerField(default=0, null=True)    
     
     def __str__(self):
-        return str(self.date)
+        if self.rising_phase: return 'Rising Phase - Starts At {}'.format(self.date_time.strftime("%m/%d/%Y"))
+        else: return 'Falling Phase - Starts At {}'.format(self.date_time.strftime("%m/%d/%Y"))
