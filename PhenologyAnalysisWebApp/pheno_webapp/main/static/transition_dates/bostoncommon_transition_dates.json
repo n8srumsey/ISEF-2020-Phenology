@@ -1,0 +1,85 @@
+{
+    "sitename": "bostoncommon",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2011_4_25",
+            "year": 2011,
+            "month": 4,
+            "day": 25,
+            "doy": 115
+        },
+        {
+            "rising": true,
+            "date": "2012_4_11",
+            "year": 2012,
+            "month": 4,
+            "day": 11,
+            "doy": 102
+        },
+        {
+            "rising": true,
+            "date": "2013_4_26",
+            "year": 2013,
+            "month": 4,
+            "day": 26,
+            "doy": 116
+        },
+        {
+            "rising": true,
+            "date": "2014_5_7",
+            "year": 2014,
+            "month": 5,
+            "day": 7,
+            "doy": 127
+        },
+        {
+            "rising": true,
+            "date": "2015_5_4",
+            "year": 2015,
+            "month": 5,
+            "day": 4,
+            "doy": 124
+        },
+        {
+            "rising": false,
+            "date": "2014_11_18",
+            "year": 2014,
+            "month": 11,
+            "day": 18,
+            "doy": 322
+        },
+        {
+            "rising": false,
+            "date": "2013_11_12",
+            "year": 2013,
+            "month": 11,
+            "day": 12,
+            "doy": 316
+        },
+        {
+            "rising": false,
+            "date": "2012_11_18",
+            "year": 2012,
+            "month": 11,
+            "day": 18,
+            "doy": 323
+        },
+        {
+            "rising": false,
+            "date": "2011_11_25",
+            "year": 2011,
+            "month": 11,
+            "day": 25,
+            "doy": 329
+        },
+        {
+            "rising": false,
+            "date": "2010_11_17",
+            "year": 2010,
+            "month": 11,
+            "day": 17,
+            "doy": 321
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+{
+    "sitename": "umichbiological2",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2009_5_15",
+            "year": 2009,
+            "month": 5,
+            "day": 15,
+            "doy": 135
+        },
+        {
+            "rising": true,
+            "date": "2010_4_27",
+            "year": 2010,
+            "month": 4,
+            "day": 27,
+            "doy": 117
+        },
+        {
+            "rising": true,
+            "date": "2011_5_14",
+            "year": 2011,
+            "month": 5,
+            "day": 14,
+            "doy": 134
+        },
+        {
+            "rising": true,
+            "date": "2012_5_7",
+            "year": 2012,
+            "month": 5,
+            "day": 7,
+            "doy": 128
+        },
+        {
+            "rising": true,
+            "date": "2013_5_6",
+            "year": 2013,
+            "month": 5,
+            "day": 6,
+            "doy": 126
+        },
+        {
+            "rising": false,
+            "date": "2013_10_12",
+            "year": 2013,
+            "month": 10,
+            "day": 12,
+            "doy": 285
+        },
+        {
+            "rising": false,
+            "date": "2012_9_30",
+            "year": 2012,
+            "month": 9,
+            "day": 30,
+            "doy": 274
+        },
+        {
+            "rising": false,
+            "date": "2011_10_4",
+            "year": 2011,
+            "month": 10,
+            "day": 4,
+            "doy": 277
+        },
+        {
+            "rising": false,
+            "date": "2010_9_18",
+            "year": 2010,
+            "month": 9,
+            "day": 18,
+            "doy": 261
+        },
+        {
+            "rising": false,
+            "date": "2009_10_7",
+            "year": 2009,
+            "month": 10,
+            "day": 7,
+            "doy": 280
+        }
+    ]
+}

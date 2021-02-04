@@ -1,0 +1,77 @@
+{
+    "sitename": "sanford",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2015_5_1",
+            "year": 2015,
+            "month": 5,
+            "day": 1,
+            "doy": 121
+        },
+        {
+            "rising": true,
+            "date": "2016_5_1",
+            "year": 2016,
+            "month": 5,
+            "day": 1,
+            "doy": 122
+        },
+        {
+            "rising": true,
+            "date": "2017_4_16",
+            "year": 2017,
+            "month": 4,
+            "day": 16,
+            "doy": 106
+        },
+        {
+            "rising": true,
+            "date": "2018_5_3",
+            "year": 2018,
+            "month": 5,
+            "day": 3,
+            "doy": 123
+        },
+        {
+            "rising": false,
+            "date": "2018_10_27",
+            "year": 2018,
+            "month": 10,
+            "day": 27,
+            "doy": 300
+        },
+        {
+            "rising": false,
+            "date": "2017_10_19",
+            "year": 2017,
+            "month": 10,
+            "day": 19,
+            "doy": 292
+        },
+        {
+            "rising": false,
+            "date": "2016_10_29",
+            "year": 2016,
+            "month": 10,
+            "day": 29,
+            "doy": 303
+        },
+        {
+            "rising": false,
+            "date": "2015_10_21",
+            "year": 2015,
+            "month": 10,
+            "day": 21,
+            "doy": 294
+        },
+        {
+            "rising": false,
+            "date": "2014_10_14",
+            "year": 2014,
+            "month": 10,
+            "day": 14,
+            "doy": 287
+        }
+    ]
+}

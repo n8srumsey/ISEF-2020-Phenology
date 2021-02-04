@@ -1,0 +1,29 @@
+{
+    "sitename": "hubbardbrook",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2009_4_30",
+            "year": 2009,
+            "month": 4,
+            "day": 30,
+            "doy": 120
+        },
+        {
+            "rising": true,
+            "date": "2010_4_20",
+            "year": 2010,
+            "month": 4,
+            "day": 20,
+            "doy": 110
+        },
+        {
+            "rising": false,
+            "date": "2009_10_21",
+            "year": 2009,
+            "month": 10,
+            "day": 21,
+            "doy": 294
+        }
+    ]
+}

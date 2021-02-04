@@ -1,0 +1,53 @@
+{
+    "sitename": "willamettepoplar",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2016_3_30",
+            "year": 2016,
+            "month": 3,
+            "day": 30,
+            "doy": 90
+        },
+        {
+            "rising": true,
+            "date": "2017_4_3",
+            "year": 2017,
+            "month": 4,
+            "day": 3,
+            "doy": 93
+        },
+        {
+            "rising": true,
+            "date": "2018_4_4",
+            "year": 2018,
+            "month": 4,
+            "day": 4,
+            "doy": 94
+        },
+        {
+            "rising": false,
+            "date": "2017_10_30",
+            "year": 2017,
+            "month": 10,
+            "day": 30,
+            "doy": 303
+        },
+        {
+            "rising": false,
+            "date": "2016_9_22",
+            "year": 2016,
+            "month": 9,
+            "day": 22,
+            "doy": 266
+        },
+        {
+            "rising": false,
+            "date": "2015_10_12",
+            "year": 2015,
+            "month": 10,
+            "day": 12,
+            "doy": 285
+        }
+    ]
+}

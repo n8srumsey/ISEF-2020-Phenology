@@ -1,0 +1,101 @@
+{
+    "sitename": "downerwoods",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2013_5_16",
+            "year": 2013,
+            "month": 5,
+            "day": 16,
+            "doy": 136
+        },
+        {
+            "rising": true,
+            "date": "2014_5_20",
+            "year": 2014,
+            "month": 5,
+            "day": 20,
+            "doy": 140
+        },
+        {
+            "rising": true,
+            "date": "2015_5_15",
+            "year": 2015,
+            "month": 5,
+            "day": 15,
+            "doy": 135
+        },
+        {
+            "rising": true,
+            "date": "2016_5_18",
+            "year": 2016,
+            "month": 5,
+            "day": 18,
+            "doy": 139
+        },
+        {
+            "rising": true,
+            "date": "2017_5_14",
+            "year": 2017,
+            "month": 5,
+            "day": 14,
+            "doy": 134
+        },
+        {
+            "rising": true,
+            "date": "2018_5_16",
+            "year": 2018,
+            "month": 5,
+            "day": 16,
+            "doy": 136
+        },
+        {
+            "rising": false,
+            "date": "2018_10_9",
+            "year": 2018,
+            "month": 10,
+            "day": 9,
+            "doy": 282
+        },
+        {
+            "rising": false,
+            "date": "2017_10_16",
+            "year": 2017,
+            "month": 10,
+            "day": 16,
+            "doy": 289
+        },
+        {
+            "rising": false,
+            "date": "2016_10_16",
+            "year": 2016,
+            "month": 10,
+            "day": 16,
+            "doy": 290
+        },
+        {
+            "rising": false,
+            "date": "2015_10_15",
+            "year": 2015,
+            "month": 10,
+            "day": 15,
+            "doy": 288
+        },
+        {
+            "rising": false,
+            "date": "2014_10_12",
+            "year": 2014,
+            "month": 10,
+            "day": 12,
+            "doy": 285
+        },
+        {
+            "rising": false,
+            "date": "2013_10_24",
+            "year": 2013,
+            "month": 10,
+            "day": 24,
+            "doy": 297
+        }
+    ]
+}

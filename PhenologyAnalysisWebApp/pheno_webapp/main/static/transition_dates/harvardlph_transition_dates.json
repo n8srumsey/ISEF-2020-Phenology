@@ -1,0 +1,13 @@
+{
+    "sitename": "harvardlph",
+    "transitions": [
+        {
+            "rising": false,
+            "date": "2010_10_16",
+            "year": 2010,
+            "month": 10,
+            "day": 16,
+            "doy": 289
+        }
+    ]
+}

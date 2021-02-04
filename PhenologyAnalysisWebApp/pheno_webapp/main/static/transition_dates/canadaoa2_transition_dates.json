@@ -1,0 +1,37 @@
+{
+    "sitename": "canadaoa2",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_5_11",
+            "year": 2017,
+            "month": 5,
+            "day": 11,
+            "doy": 131
+        },
+        {
+            "rising": true,
+            "date": "2018_5_10",
+            "year": 2018,
+            "month": 5,
+            "day": 10,
+            "doy": 130
+        },
+        {
+            "rising": false,
+            "date": "2017_9_29",
+            "year": 2017,
+            "month": 9,
+            "day": 29,
+            "doy": 272
+        },
+        {
+            "rising": false,
+            "date": "2016_9_27",
+            "year": 2016,
+            "month": 9,
+            "day": 27,
+            "doy": 271
+        }
+    ]
+}

@@ -1,0 +1,109 @@
+{
+    "sitename": "alligatorriver",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2013_4_11",
+            "year": 2013,
+            "month": 4,
+            "day": 11,
+            "doy": 101
+        },
+        {
+            "rising": true,
+            "date": "2014_4_9",
+            "year": 2014,
+            "month": 4,
+            "day": 9,
+            "doy": 99
+        },
+        {
+            "rising": true,
+            "date": "2015_4_12",
+            "year": 2015,
+            "month": 4,
+            "day": 12,
+            "doy": 102
+        },
+        {
+            "rising": true,
+            "date": "2016_4_3",
+            "year": 2016,
+            "month": 4,
+            "day": 3,
+            "doy": 94
+        },
+        {
+            "rising": true,
+            "date": "2017_4_8",
+            "year": 2017,
+            "month": 4,
+            "day": 8,
+            "doy": 98
+        },
+        {
+            "rising": true,
+            "date": "2018_4_15",
+            "year": 2018,
+            "month": 4,
+            "day": 15,
+            "doy": 105
+        },
+        {
+            "rising": false,
+            "date": "2018_10_10",
+            "year": 2018,
+            "month": 10,
+            "day": 10,
+            "doy": 283
+        },
+        {
+            "rising": false,
+            "date": "2017_10_9",
+            "year": 2017,
+            "month": 10,
+            "day": 9,
+            "doy": 282
+        },
+        {
+            "rising": false,
+            "date": "2016_10_13",
+            "year": 2016,
+            "month": 10,
+            "day": 13,
+            "doy": 287
+        },
+        {
+            "rising": false,
+            "date": "2015_10_12",
+            "year": 2015,
+            "month": 10,
+            "day": 12,
+            "doy": 285
+        },
+        {
+            "rising": false,
+            "date": "2014_10_19",
+            "year": 2014,
+            "month": 10,
+            "day": 19,
+            "doy": 292
+        },
+        {
+            "rising": false,
+            "date": "2013_10_14",
+            "year": 2013,
+            "month": 10,
+            "day": 14,
+            "doy": 287
+        },
+        {
+            "rising": false,
+            "date": "2012_10_10",
+            "year": 2012,
+            "month": 10,
+            "day": 10,
+            "doy": 284
+        }
+    ]
+}

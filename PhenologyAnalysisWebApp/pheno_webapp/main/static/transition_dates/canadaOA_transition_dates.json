@@ -1,0 +1,93 @@
+{
+    "sitename": "canadaOA",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2012_5_11",
+            "year": 2012,
+            "month": 5,
+            "day": 11,
+            "doy": 132
+        },
+        {
+            "rising": true,
+            "date": "2013_5_15",
+            "year": 2013,
+            "month": 5,
+            "day": 15,
+            "doy": 135
+        },
+        {
+            "rising": true,
+            "date": "2014_5_22",
+            "year": 2014,
+            "month": 5,
+            "day": 22,
+            "doy": 142
+        },
+        {
+            "rising": true,
+            "date": "2015_5_16",
+            "year": 2015,
+            "month": 5,
+            "day": 16,
+            "doy": 136
+        },
+        {
+            "rising": true,
+            "date": "2016_5_4",
+            "year": 2016,
+            "month": 5,
+            "day": 4,
+            "doy": 125
+        },
+        {
+            "rising": true,
+            "date": "2016_6_22",
+            "year": 2016,
+            "month": 6,
+            "day": 22,
+            "doy": 174
+        },
+        {
+            "rising": false,
+            "date": "2015_9_30",
+            "year": 2015,
+            "month": 9,
+            "day": 30,
+            "doy": 273
+        },
+        {
+            "rising": false,
+            "date": "2014_9_23",
+            "year": 2014,
+            "month": 9,
+            "day": 23,
+            "doy": 266
+        },
+        {
+            "rising": false,
+            "date": "2013_10_2",
+            "year": 2013,
+            "month": 10,
+            "day": 2,
+            "doy": 275
+        },
+        {
+            "rising": false,
+            "date": "2012_9_27",
+            "year": 2012,
+            "month": 9,
+            "day": 27,
+            "doy": 271
+        },
+        {
+            "rising": false,
+            "date": "2011_9_30",
+            "year": 2011,
+            "month": 9,
+            "day": 30,
+            "doy": 273
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sitename": "NEON.D01.BART.DP1.00033",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2017_5_11",
+            "year": 2017,
+            "month": 5,
+            "day": 11,
+            "doy": 131
+        },
+        {
+            "rising": true,
+            "date": "2018_5_11",
+            "year": 2018,
+            "month": 5,
+            "day": 11,
+            "doy": 131
+        },
+        {
+            "rising": false,
+            "date": "2018_10_4",
+            "year": 2018,
+            "month": 10,
+            "day": 4,
+            "doy": 277
+        },
+        {
+            "rising": false,
+            "date": "2017_10_2",
+            "year": 2017,
+            "month": 10,
+            "day": 2,
+            "doy": 275
+        }
+    ]
+}

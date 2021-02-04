@@ -1,0 +1,21 @@
+{
+    "sitename": "freemanwood",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2013_4_10",
+            "year": 2013,
+            "month": 4,
+            "day": 10,
+            "doy": 100
+        },
+        {
+            "rising": false,
+            "date": "2013_11_27",
+            "year": 2013,
+            "month": 11,
+            "day": 27,
+            "doy": 331
+        }
+    ]
+}

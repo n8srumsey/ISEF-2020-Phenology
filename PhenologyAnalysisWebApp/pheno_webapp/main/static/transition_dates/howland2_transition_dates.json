@@ -1,0 +1,69 @@
+{
+    "sitename": "howland2",
+    "transitions": [
+        {
+            "rising": true,
+            "date": "2010_5_20",
+            "year": 2010,
+            "month": 5,
+            "day": 20,
+            "doy": 140
+        },
+        {
+            "rising": true,
+            "date": "2011_5_29",
+            "year": 2011,
+            "month": 5,
+            "day": 29,
+            "doy": 149
+        },
+        {
+            "rising": true,
+            "date": "2012_5_20",
+            "year": 2012,
+            "month": 5,
+            "day": 20,
+            "doy": 141
+        },
+        {
+            "rising": true,
+            "date": "2013_5_29",
+            "year": 2013,
+            "month": 5,
+            "day": 29,
+            "doy": 149
+        },
+        {
+            "rising": false,
+            "date": "2013_9_29",
+            "year": 2013,
+            "month": 9,
+            "day": 29,
+            "doy": 272
+        },
+        {
+            "rising": false,
+            "date": "2012_9_28",
+            "year": 2012,
+            "month": 9,
+            "day": 28,
+            "doy": 272
+        },
+        {
+            "rising": false,
+            "date": "2011_9_29",
+            "year": 2011,
+            "month": 9,
+            "day": 29,
+            "doy": 272
+        },
+        {
+            "rising": false,
+            "date": "2010_10_3",
+            "year": 2010,
+            "month": 10,
+            "day": 3,
+            "doy": 276
+        }
+    ]
+}
