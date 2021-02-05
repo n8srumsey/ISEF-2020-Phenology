@@ -1,11 +1,12 @@
+import copy
 import json
-from datetime import datetime, timedelta
 import os
+from datetime import datetime, timedelta
 
 import pytz
+from django.db.models.functions import Lower
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.db.models.functions import Lower
 
 from .forms import SiteForm
 from .models import Image, Site, TransitionDate
@@ -37,6 +38,7 @@ def is_rising(sitename, date_time):
         return closest[1] >= timedelta()
     else:
         return closest[1] < timedelta()
+
 
 def transition_dates_on_site_update(site, based_off_images=False):
     # delete all previous transition dates
@@ -88,13 +90,12 @@ def transition_dates_on_site_update(site, based_off_images=False):
                 t = TransitionDate(site=site, date_time=date_time, rising_phase=transitions[i]['phase'], duration=None)
             t.save()
 
-        
         tdates = site.transitiondate_set.order_by('date_time')
         reference = tdates[0]
         for tdate in tdates[1:]:
             tdelta = tdate.date_time - reference.date_time
             days = int(tdelta.total_seconds() / 86400)
-            if days > 280: # remove large gaps
+            if days > 280:  # remove large gaps
                 days = None
             reference.duration = days
             reference.save()
@@ -114,22 +115,23 @@ def transition_dates_on_site_update(site, based_off_images=False):
         for i in range(len(transitions)):
             date_time = datetime(transitions[i]['year'], transitions[i]['month'], transitions[i]['day'], tzinfo=pytz.timezone('UTC'))
             rising_phase = transitions[i]['rising']
-            
+
             t = TransitionDate(site=site, date_time=date_time, rising_phase=rising_phase, duration=None)
             if (i == 0) or (i == len(transitions)-1):
                 t = TransitionDate(site=site, date_time=date_time, rising_phase=rising_phase, duration=None)
             t.save()
-        
+
         tdates = site.transitiondate_set.order_by('date_time')
         reference = tdates[0]
         for tdate in tdates[1:]:
             tdelta = tdate.date_time - reference.date_time
             days = int(tdelta.total_seconds() / 86400)
-            if days > 280 or days < 95 : # remove large gaps
+            if days > 280 or days < 95:  # remove large gaps
                 days = None
             reference.duration = days
             reference.save()
             reference = tdate
+
 
 def save_images(images, sitename):
     site = Site.objects.get(sitename=sitename)
@@ -295,52 +297,189 @@ def analysis_site(response, sitename):
     transition_dates_on_site_update(site)
     all_sites = Site.objects.all().order_by(Lower('sitename'))
     sitenames = [str(site.sitename) for site in all_sites]
-    def get_transition_table_data(site):
+
+    def get_phase_data(site):
         rising_transition_dates = site.transitiondate_set.filter(rising_phase__exact=True).order_by('date_time')
         falling_transition_dates = site.transitiondate_set.filter(rising_phase__exact=False).order_by('date_time')
         rising_phases = []
         falling_phases = []
         for i in range(max([rising_transition_dates.count(), falling_transition_dates.count()])):
-            try:            
+            try:
                 rising_phase = rising_transition_dates[i]
                 # if rising_phase.duration is not None:
-                rising_phases.append({'year': rising_phase.date_time.year,
-                            'month_day': '{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day), 'duration': rising_phase.duration})
+                rising_phases.append({'year': rising_phase.date_time.year, 'month_day': '{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day),
+                                      'duration': rising_phase.duration, 'percent_change': None})
             except:
                 pass
             try:
                 falling_phase = falling_transition_dates[i]
                 # if falling_phase.duration is not None:
-                falling_phases.append({'year': falling_phase.date_time.year,
-                        'month_day': '{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day), 'duration': falling_phase.duration})
+                falling_phases.append({'year': falling_phase.date_time.year, 'month_day': '{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day),
+                                       'duration': falling_phase.duration, 'percent_change': None})
             except:
                 pass
-        
-        min_year = min([rising_phases[0]['year'], falling_phases[0]['year']])
-        max_year = max([rising_phases[-1]['year'], falling_phases[-1]['year']])
-            
+        min_year = 0
+        max_year = 0
+        if len(rising_phases) != 0 and len(falling_phases) != 0:
+            min_year = min([rising_phases[0]['year'], falling_phases[0]['year']])
+            max_year = max([rising_phases[-1]['year'], falling_phases[-1]['year']])
+        elif len(rising_phases) == 0:
+            min_year = falling_phases[0]['year']
+            max_year = falling_phases[-1]['year']
+        elif len(falling_phases) == 0:
+            min_year = rising_phases[0]['year']
+            max_year = rising_phases[-1]['year']
+
         tdates_by_yr = []
         for yr in range(min_year, max_year+1):
             rising = None
-            for rsng in rising_phases: 
-                if yr == rsng['year'] and rsng['duration'] is not None: rising = rsng
+            for rsng in rising_phases:
+                if yr == rsng['year'] and rsng['duration'] is not None:
+                    rising = rsng
             falling = None
-            for fllng in falling_phases: 
-                if yr == fllng['year'] and fllng['duration'] is not None: falling = fllng
+            for fllng in falling_phases:
+                if yr == fllng['year'] and fllng['duration'] is not None:
+                    falling = fllng
             tdates_by_yr.append((rising, falling))
-            
+
         tdates = []
         for rising_phase, falling_phase in tdates_by_yr:
             row = [None, None]
-            try: row[0] = rising_phase
-            except: pass
-            try: row[1] = falling_phase
-            except: pass
+            try:
+                row[0] = rising_phase
+            except:
+                pass
+            try:
+                row[1] = falling_phase
+            except:
+                pass
             tdates.append(row)
-        
-        return tdates
-    
-    context = {'sites': sitenames, 'site': site, 'phases': get_transition_table_data(site)}
+
+        # calculate % change in duration
+        for i in range(len(tdates)):
+            for j in range(len(tdates[i])):
+                if tdates[i][j] is not None and i is not 0:
+                    try:
+                        percent_change = float(tdates[i][j]['duration'] - tdates[i-1][j]['duration']) / (0.01 * tdates[i-1][j]['duration'])
+                        tdates[i][j]['percent_change'] = percent_change
+                    except:
+                        pass
+                    if tdates[i][j]['percent_change'] is None:
+                        tdates[1][j]['percent_change'] = 'null'
+                elif tdates[i][j] is not None and i is 0:
+                    tdates[i][j]['percent_change'] = 'null'
+
+        # replace null with default dict
+        pad_tdates = copy.deepcopy(tdates)
+        for i in range(len((pad_tdates))):
+            for j in range(len(pad_tdates[i])):
+                if pad_tdates[i][j] is None:
+                    pad_tdates[i][j] = {'year': i + min_year, 'month_day': None, 'duration': 0, 'percent_change': 'null'}
+        return tdates, pad_tdates
+
+    def get_phase_years(site):
+        rising_transition_dates = site.transitiondate_set.filter(rising_phase__exact=True).order_by('date_time')
+        falling_transition_dates = site.transitiondate_set.filter(rising_phase__exact=False).order_by('date_time')
+        rising_phases = []
+        falling_phases = []
+        for i in range(max([rising_transition_dates.count(), falling_transition_dates.count()])):
+            try:
+                rising_phase = rising_transition_dates[i]
+                # if rising_phase.duration is not None:
+                rising_phases.append({'year': rising_phase.date_time.year, 'month_day': '{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day),
+                                      'duration': rising_phase.duration, 'percent_change': None})
+            except:
+                pass
+            try:
+                falling_phase = falling_transition_dates[i]
+                # if falling_phase.duration is not None:
+                falling_phases.append({'year': falling_phase.date_time.year, 'month_day': '{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day),
+                                       'duration': falling_phase.duration, 'percent_change': None})
+            except:
+                pass
+        min_year = 0
+        max_year = 0
+        if len(rising_phases) != 0 and len(falling_phases) != 0:
+            min_year = min([rising_phases[0]['year'], falling_phases[0]['year']])
+            max_year = max([rising_phases[-1]['year'], falling_phases[-1]['year']])
+        elif len(rising_phases) == 0:
+            min_year = falling_phases[0]['year']
+            max_year = falling_phases[-1]['year']
+        elif len(falling_phases) == 0:
+            min_year = rising_phases[0]['year']
+            max_year = rising_phases[-1]['year']
+        years = [yr for yr in range(min_year, max_year+1)]
+        return years
+
+    def get_transition_dates(site):
+        rising_transition_dates = site.transitiondate_set.filter(rising_phase__exact=True).order_by('date_time')
+        falling_transition_dates = site.transitiondate_set.filter(rising_phase__exact=False).order_by('date_time')
+        rising_transitions = [r for r in rising_transition_dates]
+        falling_transitions = [f for f in falling_transition_dates]
+
+        min_year = 0
+        max_year = 0
+        if len(rising_transitions) != 0 and len(falling_transitions) != 0:
+            min_year = min([rising_transitions[0].date_time.year, falling_transitions[0].date_time.year])
+            max_year = max([rising_transitions[-1].date_time.year, falling_transitions[-1].date_time.year])
+        elif len(rising_transitions) == 0:
+            min_year = falling_transitions[0].date_time.year
+            max_year = falling_transitions[-1].date_time.year
+        elif len(falling_transitions) == 0:
+            min_year = rising_transitions[0].date_time.year
+            max_year = rising_transitions[-1].date_time.year
+        years = [yr for yr in range(min_year, max_year+1)]
+
+        rising_transitions_yearly = []
+        falling_transitions_yearly = []
+        for year in years:
+            rising = None
+            falling = None
+            for transition in rising_transitions:
+                try:
+                    if transition.date_time.year == year:
+                        rising = transition
+                except:
+                    pass
+            for transition in falling_transitions:
+                try:
+                    if transition.date_time.year == year:
+                        falling = transition
+                except:
+                    pass
+            rising_transitions_yearly.append(rising)
+            falling_transitions_yearly.append(falling)
+
+        rising_years = copy.deepcopy(years)
+        falling_years = copy.deepcopy(years)
+        for i in range(len(years)):
+            try:
+                if rising_transitions_yearly[i] is None:
+                    del rising_years[i]
+                    del rising_transitions_yearly[i]
+            except:
+                pass
+        for i in range(len(falling_years)):
+            try:
+                if falling_transitions_yearly[i] is None:
+                    del falling_years[i]
+                    del falling_transitions_yearly[i]
+            except:
+                pass
+        r = [(x, y) for x, y in zip(rising_years, rising_transitions_yearly)]
+        f = [(x, y) for x, y in zip(falling_years, falling_transitions_yearly)]
+
+        return (rising_years, rising_transitions_yearly), (falling_years, falling_transitions_yearly), r, f
+
+    phases, padded_phases = get_phase_data(site)
+    _, _, r_data, f_data = get_transition_dates(site)
+
+    dates = [img.date_time.strftime("%m/%d/%Y, %H:%M:%S") for img in site.image_set.order_by('date_time')]
+    img_paths = [str(img.image_upload.name) for img in site.image_set.order_by('date_time')]
+    phenophases = [img.is_rising for img in site.image_set.order_by('date_time')]
+
+    context = {'sites': sitenames, 'site': site, 'phases': phases, 'padded_phases': padded_phases, 'use_spline': len(get_phase_years(site)) >= 3,
+               'phase_years': get_phase_years(site), 'bud_burst_data': r_data, 'senescence_data': f_data, 'date_list': dates, 'img_paths': img_paths, 'phenophases': phenophases}
     return render(response, 'main/analysis_site.html', context)
 
 
