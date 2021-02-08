@@ -35,7 +35,7 @@
         "MAT_worldclim": 10.2, 
         "primary_veg_type": "DB", 
         "secondary_veg_type": "EN", 
-        "dominant_species": "Liriodendron tulipifera\r\n\tPinus strobus\r\n\tPrunus serotina\r\n\tRobinia pseudoacacia\r\n\tBetula lenta", 
+        "dominant_species": "Liriodendron tulipifera, Pinus strobus, Prunus serotina, Robinia pseudoacacia, Betula lenta", 
         "landcover_igbp": 14, 
         "wwf_biome": 4, 
         "koeppen_geiger": "Cfb", 

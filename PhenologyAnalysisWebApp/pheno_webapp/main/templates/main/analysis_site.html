@@ -1,12 +1,18 @@
 {% extends 'main/analysis_home.html' %} 
-{% block title %} {{site.sitename}} Analysis {% endblock %} 
-{% block analysis_header %} {{site.sitename}} Analysis {% endblock %} 
+{% block title %} {{site.sitename}} Site Analysis {% endblock %} 
+{% block analysis_header %} {{site.sitename}} Site Analysis {% endblock %} 
 {% block style %}
     .custom-range::-webkit-slider-thumb {
-        background: #93c54b;
+        background: #555555;
     }
     .custom-range::-webkit-slider-thumb:active{
-        background-color: #abc289;
+        background-color: #919191;
+    }
+    #img {
+        border-style: solid;
+        border-width: thick;
+        border-radius: 5px;
+    }
 {% endblock %}
 
 
@@ -29,37 +35,27 @@
 <div>
     <div style="display: flex; justify-content: center; align-items: top; margin-bottom: 3rem;">
         <div style="margin-top: 3rem"> 
-            <h2>Transition Dates</h2>
+            <h2>Phenophase Transition Dates</h2>
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col" colspan="4">Bud Burst Phenophases</th>
-                    <th scope="col" colspan="4">Leaf Senescence Phenophases</th>
+                    <th scope="col" colspan="2">Bud Burst Phenophases</th>
+                    <th scope="col" colspan="2">Leaf Senescence Phenophases</th>
                 </tr>
                 <tr>
-                    <th scope="col" colspan="2">Start Date</th>
-                    <th scope="col" rowspan="2" style="padding-right: 5rem">
-                    Duration (days)
-                    </th>
-                    <th scope="col" colspan="2">Start Date</th>
-                    <th scope="col" rowspan="2">Duration (days)</th>
-                </tr>
-                <tr>
-                    <th scope="col">Year</th>
-                    <th scope="col">Month/Day</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">Month/Day</th>
+                    <th scope="col">Onset Date</th>
+                    <th scope="col" style="padding-right: 5rem;"> Duration </th>
+                    <th scope="col">Onset Date</th>
+                    <th scope="col">Duration </th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for phase in phases %}
                 <tr>
-                    <td>{{phase.0.year}}</td>
-                    <td>{{phase.0.month_day}}</td>
-                    <td>{{phase.0.duration}}</td>
-                    <td>{{phase.1.year}}</td>
-                    <td>{{phase.1.month_day}}</td>
-                    <td>{{phase.1.duration}}</td>
+                    <td><span onclick="tbl_clicked(this.className)" class="td-{{phase.0.year_month_day}}" style="cursor: pointer;">{{phase.0.year_month_day}}</span></td>
+                    <td>{% if phase.0.duration != None %}{{phase.0.duration}} days {% endif %}</td>
+                    <td><span onclick="tbl_clicked(this.className)" class="td-{{phase.1.year_month_day}}" style="cursor: pointer;">{{phase.1.year_month_day}}<span></td>
+                    <td>{% if phase.1.duration != None %}{{phase.1.duration}} days {% endif %}</td>
                 </tr>
                 {% endfor%}
                 </tbody>
@@ -69,28 +65,48 @@
             <h2>Site Images</h2>
             {% get_num_site_imgs site as num_imgs%}
             <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 600px; height: auto;"/> </div>
-            <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width:600px;"/>
+            <input id="sliderRange" type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width:600px;"/>
             <div id="date" style="display:flex;justify-content:center;align-items:center;">{% get_first_datetime site %}</div>
+            <div style="display:flex;justify-content:center;align-items:center;"> <small> <i class="fas fa-square" style="color: #4ac732"></i> - Bud Burst Phenophase &emsp;&emsp;<i class="fas fa-square" style="color: #f5892f"></i> - Leaf Senescence Phenophase</small> </div>
             <script>
+                var n = 0;
                 const True = true;
                 const False = false;
+                var budburst = '#4ac732';
+                var senescence = '#f5892f';
                 var date_list = {{date_list|safe}};
                 var img_paths = {{img_paths|safe}};
                 var phenophases = {{phenophases|safe}};
                 document.getElementById("date").innerHTML = date_list[n];
                 document.getElementById("img").src = "/media/" + img_paths[n];
+                if (phenophases[0]) {
+                    document.getElementById("img").style.borderColor = budburst;
+                    document.getElementById("date").style.color = budburst;}
+                else {
+                    document.getElementById("img").style.borderColor = senescence;
+                    document.getElementById("date").style.color = senescence;}
                 function showVal(n){
                     if (phenophases[n]) {
                         document.getElementById("date").innerHTML = date_list[n];
-                        document.getElementById("date").style.color = 'green';
+                        document.getElementById("date").style.color = budburst;
                         document.getElementById("img").src = "/media/" + img_paths[n];
-                    }
+                        document.getElementById("img").style.borderColor = budburst;}
                     else {
                         document.getElementById("date").innerHTML = date_list[n];
-                        document.getElementById("date").style.color = 'red';
+                        document.getElementById("date").style.color = senescence;
                         document.getElementById("img").src = "/media/" + img_paths[n];
-                    }
-                    
+                        document.getElementById("img").style.borderColor = senescence;}}
+                function tbl_clicked(className) {
+                    var target_date = className.substring(3);
+                    console.log(target_date)
+                    for (var i = 0; i < date_list.length; i++) {
+                        var date_time = date_list[i];
+                        if (date_time.includes(target_date)) {
+                            showVal(i);
+                            document.getElementById("sliderRange").value = i;
+                            break;
+                        }
+                    } 
                 }
             </script>
         </div>
@@ -102,6 +118,10 @@
     <div style="display: flex; justify-content: space-between;"> 
         <div id="chart3" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div>
         <div id="chart4" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div> 
+    </div>
+    <div style="display: flex; justify-content: space-between;"> 
+        <div id="chart5" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div>
+        <div id="chart6" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div> 
     </div>
     <script>
         function regression(arrYears, arrDates) {
@@ -121,6 +141,10 @@
             y2 = a + b * x2;
             
             return {line: [[x1, y1], [x2, y2]], r};}
+        
+        var budBurstColors = ['#90ee7e', '#333333', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+        var senescenceColors = ['#f7a35c', '#333333', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+        var columnColors = ['#90ee7e', '#f7a35c', '#44b330', '#c45825', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'];
         var arrBudBurstYears = [{% for entry in bud_burst_data %} {{entry.0}},{% endfor %}];
         var arrBudBurstDates = [{% for entry in bud_burst_data %} Date.UTC({{1970}},{{entry.1.date_time.month}},{{entry.1.date_time.day}}), {% endfor %}];
         let budBurstRegression = regression(arrBudBurstYears, arrBudBurstDates);
@@ -138,29 +162,25 @@
                         useHTML: true,
                         yDateFormat: '{value:%m/%d}'},
                 setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: budBurstColors,
                 tooltip: {shared: true},
                 series: [
                             {type: 'spline', name: "Bud Burst Phenophase Start Date", data:[{% for entry in bud_burst_data %} [{{entry.0}}, Date.UTC({{1970}}, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
-                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}}},
+                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}},},
                             {type: 'line', name: "Least-Squares Regression", data: lineBudBurst, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
                         ]
             }
-        for (var i=0; i<splineBudBurstStartChart.series[0].data.length; i++) {
-            if (splineBudBurstStartChart.series[0].data[i] == 'null') {
-                splineBudBurstStartChart.series[0].data[i] = null;
-            }}
-
         document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart1', splineBudBurstStartChart);});
 
-        var arrSenecenceYears = [{% for entry in senescence_data %} {{entry.0}},{% endfor %}];
-        var arrSenecenceDates = [{% for entry in senescence_data %} Date.UTC({{1970}},{{entry.1.date_time.month}},{{entry.1.date_time.day}}), {% endfor %}];
-        let senescenceRegression = regression(arrSenecenceYears, arrSenecenceDates)
-        lineSenecence = senescenceRegression.line;
-        rSenecence = senescenceRegression.r;
-        var splineSenecenceStartChart = {
+        var arrSenescenceYears = [{% for entry in senescence_data %} {{entry.0}},{% endfor %}];
+        var arrSenescenceDates = [{% for entry in senescence_data %} Date.UTC({{1970}},{{entry.1.date_time.month}},{{entry.1.date_time.day}}), {% endfor %}];
+        let senescenceRegression = regression(arrSenescenceYears, arrSenescenceDates)
+        lineSenescence = senescenceRegression.line;
+        rSenescence = senescenceRegression.r;
+        var splineSenescenceStartChart = {
                 chart: {type: 'line'},
                 title: {text: 'Leaf Senescence Phenophase Start Dates by Year'},
-                subtitle: {text: `r = ${rSenecence}`},
+                subtitle: {text: `r = ${rSenescence}`},
                 xAxis: {title: {text: 'Year'}, tickInterval: 1,},
                 yAxis: {type: "datetime", title: {text: 'Date'}, labels: {format: '{value:%m/%d}'}},
                 tooltip: {headerFormat: '<table>',
@@ -169,41 +189,41 @@
                         useHTML: true,
                         yDateFormat: '{value:%m/%d}'},
                 setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: senescenceColors,
                 tooltip: {shared: true},
                 series: [
                             {type: 'spline', name: "Leaf Senescence Phenophase Start Date", data:[{% for entry in senescence_data %} [{{entry.0}}, Date.UTC({{1970}}, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
-                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}}},
-                            {type: 'line', name: "Least-Squares Regression", data: lineSenecence, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
+                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}},},
+                            {type: 'line', name: "Least-Squares Regression", data: lineSenescence, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
                         ]
             }
-        for (var i=0; i<splineSenecenceStartChart.series[0].data.length; i++) {
-            if (splineSenecenceStartChart.series[0].data[i] == 'null') {
-                splineSenecenceStartChart.series[0].data[i] = null;
-            }}
-
-        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart2', splineSenecenceStartChart);});
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart2', splineSenescenceStartChart);});
 
         var colDurationLengthOptions = {
                 chart: {type: 'column'},
                 title: {text: 'Phenophase Durations by Year'},
                 xAxis: {title: {text: 'Year'}, categories: [{% for year in phase_years %}'{{year}}',{% endfor %}]},
                 yAxis: {title: {text: 'Phenophase Duration (days)'}},
-                tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y} days</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true},
+                tooltip: {valueSuffix: ' days', shared: true},
                 plotOptions: {column: {pointPadding: 0.2, borderWidth: 0}, spline: {enableMouseTracking: false}},
+                colors: columnColors,
                 series: [
-                            {type: 'column', id: 'bb_col', name: 'Bud Burst',       data:[{% for phase in padded_phases %} {{phase.0.duration}}, {% endfor %}], enableMouseTracking: true},
-                            {type: 'column', id: 'ls_col', name: 'Leaf Senescence', data:[{% for phase in padded_phases %} {{phase.1.duration}}, {% endfor %}], enableMouseTracking: true},
+                            {type: 'column', id: 'bb_col', name: 'Bud Burst',       data:[{% for phase in padded_phases %} {{phase.0.duration}}, {% endfor %}], enableMouseTracking: true, },
+                            {type: 'column', id: 'ls_col', name: 'Leaf Senescence', data:[{% for phase in padded_phases %} {{phase.1.duration}}, {% endfor %}], enableMouseTracking: true, },
                             {% if use_spline %}
-                            {type: 'spline', id: 'bb_spline', name: 'Bud Burst',       data:[{% for phase in padded_phases %} {{phase.0.duration}}, {% endfor %}],  linkedTo: 'bb_col', pointPlacement: -0.15},
-                            {type: 'spline', id: 'ls_spline', name: 'Leaf Senescence', data:[{% for phase in phases %} {{phase.1.duration}}, {% endfor %}], linkedTo: 'ls_col', pointPlacement: 0.15}
+                            {type: 'spline', id: 'bb_spline', name: 'Bud Burst',       data:[{% for phase in padded_phases %} {{phase.0.duration}}, {% endfor %}],  linkedTo: 'bb_col', pointPlacement: -0.14},
+                            {type: 'spline', id: 'ls_spline', name: 'Leaf Senescence', data:[{% for phase in phases %} {{phase.1.duration}}, {% endfor %}], linkedTo: 'ls_col', pointPlacement: 0.16}
                             {% endif %}
                         ]
 
             }
+        for (var i=0; i<colDurationLengthOptions.series[0].data.length; i++) {
+            if (colDurationLengthOptions.series[0].data[i] == 0) {
+                colDurationLengthOptions.series[0].data[i] = null;
+            }}
+        for (var i=0; i<colDurationLengthOptions.series[1].data.length; i++) {
+            if (colDurationLengthOptions.series[1].data[i] == 0) {
+                colDurationLengthOptions.series[1].data[i] = null;}}
         for (var i=0; i<colDurationLengthOptions.series[2].data.length; i++) {
             if (colDurationLengthOptions.series[2].data[i] == 0) {
                 colDurationLengthOptions.series[2].data[i] = null;
@@ -220,17 +240,12 @@
                 title: {text: 'Percentage Change of Phenophase Durations by Year'},
                 xAxis: {title: {text: 'Year'}, categories: [{% for year in phase_years|slice:"1:" %}'{{year}}',{% endfor %}]},
                 yAxis: {title: {text: 'Percentage Change of Phenophase Duration (%)'}, labels: {formatter: function(){return this.value+"%"}}},
-                tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.2f}%</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true},
-                plotOptions: {column: {pointPadding: 0.2, borderWidth: 0,
-                                    //zones: [{value:0, color:'red'}, {color:'green'}]
-                                    }},
+                tooltip: {valueSuffix: ' days', shared: true, valueDecimals: 2},
+                plotOptions: {column: {pointPadding: 0.2, borderWidth: 0}},
+                colors: columnColors,
                 series: [
-                            {type: 'column', id: 'bb_col', name: 'Bud Burst',       data:[{% for phase in padded_phases|slice:"1:" %} {{phase.0.percent_change}}, {% endfor %}]},
-                            {type: 'column', id: 'ls_col', name: 'Leaf Senescence', data:[{% for phase in padded_phases|slice:"1:" %} {{phase.1.percent_change}}, {% endfor %}]},
+                            {type: 'column', id: 'bb_col', name: 'Bud Burst',       data:[{% for phase in padded_phases|slice:"1:" %} {{phase.0.percent_change}}, {% endfor %}], },
+                            {type: 'column', id: 'ls_col', name: 'Leaf Senescence', data:[{% for phase in padded_phases|slice:"1:" %} {{phase.1.percent_change}}, {% endfor %}], },
                         ]
 
             }
@@ -242,7 +257,67 @@
             if (colDurationLengthOptions.series[1].data[i] == 'null') {
                 colDurationLengthOptions.series[1].data[i] = null;
             }}
+        
         document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart4', colDurationChangeOptions);});
+
+        var arrBudBurstDurationYears = [{% for year in phase_years %}{{year}},{% endfor %}];
+        var arrBudBurstDurations = [{% for phase in padded_phases %} {{phase.0.duration}}, {% endfor %}];
+        if (arrBudBurstDurations[0] == 0) {
+            arrBudBurstDurations.splice(0, 1)
+            arrBudBurstDurationYears.splice(0,1)}
+        var dataBudBurstDuration = [];
+        for (var i=0; i < arrBudBurstDurations.length; i++) {
+            var xy = [arrBudBurstDurationYears[i], arrBudBurstDurations[i]];
+            dataBudBurstDuration.push(xy);}
+        var budBurstRegressionDuration = regression(arrBudBurstDurationYears, arrBudBurstDurations);
+        var lineBudBurstDuration = budBurstRegressionDuration.line;
+        var rBudBurstDuration = budBurstRegressionDuration.r;
+        var splineBudBurstDurationChart = {
+                chart: {type: 'line'},
+                title: {text: 'Bud Burst Phenophase Durations by Year'},
+                subtitle: {text: `r = ${rBudBurstDuration}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {title: {text: 'Duration (days)'}},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: budBurstColors,
+                tooltip: {valueSuffix: ' days'},
+                series: [
+                            {type: 'spline', id: 'bb_spline', name: 'Bud Burst Duration', data: dataBudBurstDuration},
+                            {type: 'line', name: "Least-Squares Regression", data: lineBudBurstDuration, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}},
+                            
+                        ]
+            }
+
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart5', splineBudBurstDurationChart);});
+
+        var arrSenescenceDurationYears = [{% for year in phase_years %}{{year}},{% endfor %}];
+        var arrSenescenceDurations = [{% for phase in padded_phases %} {{phase.1.duration}}, {% endfor %}];
+        if (arrSenescenceDurations[arrSenescenceDurations.length - 1] == 0) {
+            arrSenescenceDurations.splice(arrSenescenceDurations.length - 1, 1);
+            arrSenescenceDurationYears.splice(arrSenescenceDurations.length - 1,1);}
+        var dataSenescenceDuration = []
+        for (var i=0; i < arrSenescenceDurations.length; i++) {
+            dataSenescenceDuration.push([arrSenescenceDurationYears[i], arrSenescenceDurations[i]]);}
+        let senescenceRegressionDuration = regression(arrSenescenceDurationYears, arrSenescenceDurations);
+        lineSenescenceDuration = senescenceRegressionDuration.line;
+        rSenescenceDuration = senescenceRegressionDuration.r;
+        var splineSenescenceDurationChart = {
+                chart: {type: 'line'},
+                title: {text: 'Senescence Phenophase Durations by Year'},
+                subtitle: {text: `r = ${rSenescenceDuration}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {title: {text: 'Date'}},
+                tooltip: {valueSuffix: ' days'},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: senescenceColors,
+                tooltip: {shared: true},
+                series: [
+                            {type: 'spline', id: 'lf_spline', name: 'Senescence Duration', data:dataSenescenceDuration},
+                            {type: 'line', name: "Least-Squares Regression", data: lineSenescenceDuration, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}},
+                            
+                        ]
+            }
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart6', splineSenescenceDurationChart);});
     </script>
 </div>
 

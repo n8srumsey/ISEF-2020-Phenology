@@ -42,14 +42,6 @@
             "doy": 125
         },
         {
-            "rising": true,
-            "date": "2016_6_22",
-            "year": 2016,
-            "month": 6,
-            "day": 22,
-            "doy": 174
-        },
-        {
             "rising": false,
             "date": "2015_9_30",
             "year": 2015,

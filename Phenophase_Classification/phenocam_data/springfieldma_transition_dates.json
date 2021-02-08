@@ -26,14 +26,6 @@
             "doy": 124
         },
         {
-            "rising": true,
-            "date": "2015_8_5",
-            "year": 2015,
-            "month": 8,
-            "day": 5,
-            "doy": 217
-        },
-        {
             "rising": false,
             "date": "2013_10_20",
             "year": 2013,
@@ -48,14 +40,6 @@
             "month": 10,
             "day": 19,
             "doy": 293
-        },
-        {
-            "rising": false,
-            "date": "2016_10_26",
-            "year": 2016,
-            "month": 10,
-            "day": 26,
-            "doy": 300
         },
         {
             "rising": false,

@@ -306,16 +306,22 @@ def analysis_site(response, sitename):
         for i in range(max([rising_transition_dates.count(), falling_transition_dates.count()])):
             try:
                 rising_phase = rising_transition_dates[i]
-                # if rising_phase.duration is not None:
-                rising_phases.append({'year': rising_phase.date_time.year, 'month_day': '{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day),
-                                      'duration': rising_phase.duration, 'percent_change': None})
+                if rising_phase.date_time.day < 10:
+                    rising_phases.append({'year': rising_phase.date_time.year, 'year_month_day': '0{}/0{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day, rising_phase.date_time.year),
+                                          'month': rising_phase.date_time.month, 'day': rising_phase.date_time.day, 'duration': rising_phase.duration, 'percent_change': None})
+                else:
+                    rising_phases.append({'year': rising_phase.date_time.year, 'year_month_day': '0{}/{}/{}'.format(rising_phase.date_time.month, rising_phase.date_time.day, rising_phase.date_time.year),
+                                          'month': rising_phase.date_time.month, 'day': rising_phase.date_time.day, 'duration': rising_phase.duration, 'percent_change': None})
             except:
                 pass
             try:
                 falling_phase = falling_transition_dates[i]
-                # if falling_phase.duration is not None:
-                falling_phases.append({'year': falling_phase.date_time.year, 'month_day': '{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day),
-                                       'duration': falling_phase.duration, 'percent_change': None})
+                if falling_phase.date_time.day < 10:
+                    falling_phases.append({'year': falling_phase.date_time.year, 'year_month_day': '{}/0{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day, falling_phase.date_time.year),
+                                           'month': falling_phase.date_time.month, 'day': falling_phase.date_time.day, 'duration': falling_phase.duration, 'percent_change': None})
+                else:
+                    falling_phases.append({'year': falling_phase.date_time.year, 'year_month_day': '{}/{}/{}'.format(falling_phase.date_time.month, falling_phase.date_time.day, falling_phase.date_time.year),
+                                           'month': falling_phase.date_time.month, 'day': falling_phase.date_time.day, 'duration': falling_phase.duration, 'percent_change': None})
             except:
                 pass
         min_year = 0
@@ -334,11 +340,11 @@ def analysis_site(response, sitename):
         for yr in range(min_year, max_year+1):
             rising = None
             for rsng in rising_phases:
-                if yr == rsng['year'] and rsng['duration'] is not None:
+                if yr == rsng['year'] and rsng['duration'] != None:
                     rising = rsng
             falling = None
             for fllng in falling_phases:
-                if yr == fllng['year'] and fllng['duration'] is not None:
+                if yr == fllng['year'] and fllng['duration'] != None:
                     falling = fllng
             tdates_by_yr.append((rising, falling))
 
@@ -358,7 +364,7 @@ def analysis_site(response, sitename):
         # calculate % change in duration
         for i in range(len(tdates)):
             for j in range(len(tdates[i])):
-                if tdates[i][j] is not None and i is not 0:
+                if tdates[i][j] != None and i != 0:
                     try:
                         percent_change = float(tdates[i][j]['duration'] - tdates[i-1][j]['duration']) / (0.01 * tdates[i-1][j]['duration'])
                         tdates[i][j]['percent_change'] = percent_change
@@ -366,7 +372,7 @@ def analysis_site(response, sitename):
                         pass
                     if tdates[i][j]['percent_change'] is None:
                         tdates[1][j]['percent_change'] = 'null'
-                elif tdates[i][j] is not None and i is 0:
+                elif tdates[i][j] != None and i == 0:
                     tdates[i][j]['percent_change'] = 'null'
 
         # replace null with default dict
@@ -374,7 +380,7 @@ def analysis_site(response, sitename):
         for i in range(len((pad_tdates))):
             for j in range(len(pad_tdates[i])):
                 if pad_tdates[i][j] is None:
-                    pad_tdates[i][j] = {'year': i + min_year, 'month_day': None, 'duration': 0, 'percent_change': 'null'}
+                    pad_tdates[i][j] = {'year': i + min_year, 'year_month_day': None, 'month': None, 'day': None, 'duration': 0, 'percent_change': 'null'}
         return tdates, pad_tdates
 
     def get_phase_years(site):
@@ -494,6 +500,6 @@ def compare_sites(response, site1name, site2name):
     return render(response, 'main/analysis_site.html', context)
 
 
-def site_map(response):
-    context = {}
+def site_map(response, view):
+    context = {'view': view}
     return render(response, 'main/site-map.html', context)

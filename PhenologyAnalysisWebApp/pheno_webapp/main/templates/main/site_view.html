@@ -1,6 +1,6 @@
 {% extends 'main/data_management.html' %}
 {% load site_view_funcs %}
-{% block title %} {{site.sitename}} {% endblock %}
+{% block title %} {{site.sitename}} Site Details{% endblock %}
 
 {% block style %}
     .custom-range::-webkit-slider-thumb {
@@ -14,7 +14,7 @@
 {% block content %}
 <div style="margin-top: 1rem;">
     {% block editable_site_info%}
-    <h1> {{site.sitename}} </h1>
+    <h1> {{site.sitename}} Site Details</h1>
     <p> Location: {{site.location_desc}} </p>
     {% mult_neg_one site.latitude as neg_latitude %}
     {% mult_neg_one site.longitude as neg_longitude %}
@@ -40,13 +40,11 @@
     {% site_last_updated_str site as lst_update %}
     <p>Site Last Modified: {{lst_update}}</p>
     
-    <p><br></br></p>
-
     <div> 
         {% get_num_site_imgs site as num_imgs%}
-        <h4>Images</h4>
-        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 500px; height: auto;"/> </div>
-        <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem;"/>
+        <h2 style="margin-top: 3rem;">Images</h2>
+        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 40em; height: auto;"/> </div>
+        <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width: 40em;"/>
         <p id="date">{% get_first_datetime site %}</p>
         <script>
             var date_list = {{date_list|safe}};
@@ -62,6 +60,7 @@
 
     {% block site_links %}
     <a href='./gallery'><button type="button" class="btn btn-success">Go to Gallery</button></a>
+    <a href='/analysis/{{site.sitename}}/'><button type="button" class="btn btn-success">Go to Analysis</button></a>
     <a href='./edit'><button type="button" class="btn btn-success">Edit Site</button></a>
     {% endblock %}
     <p><br></br></p>
