@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Spatial Analysis Data Selection {% endblock %}
+
+
+{% block style %}
+table tr{
+   max-height: 10px;
+}
+{% endblock %}
+
+{% block navbar-sitemap %}
+    <li class="nav-item active">
+        <a class="nav-link" href="/site-map/site-locations/"> Spatial Analysis <span class="sr-only">(current)</span> </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 1rem; margin-left: 18.5rem; margin-right: 18.5rem; width: 100%;">
+<h1> Spatial Analysis Data Selection </h1>
+<div style="display:flex;justify-content:left;align-items:center; margin-bottom: 1rem;">
+    <a href="/spatial-analysis/site-locations/"><button class="btn btn-outline-success btn-lg">Site Locations</button></a>
+    <a style="margin-left: 1em;" href='/map-dataselect/'><button class="btn btn-success btn-lg active">Data Visualization</button></a>
+</div>
+
+<table class="table table-hover" style="width: 45%; margin-bottom: 5rem;">
+    <thead> 
+        <tr> 
+            <th scope="col">Spatial Data </th>
+            <th scope='col'></th>
+        </tr> 
+    </thead>
+    <tbody> 
+        {% for field in fields %}
+            <tr> 
+            <td>{{field.title}}</td>
+            <td style="padding: 5px 0px 0px 0px;"><a href="/spatial-analysis/{{field.field}}"><button class="btn btn-link">Go</button></a></td>
+            </tr>
+        {% endfor%}      
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

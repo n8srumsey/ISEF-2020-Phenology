@@ -15,7 +15,6 @@ urlpatterns = [
     path('data-management/upload_images/', views.upload_images, name='upload_images'),
     path('analysis/', views.analysis, name='analysis'),
     path('analysis/<str:sitename>/', views.analysis_site, name='analysis-site'),
-    path('compare/', views.compare, name='compare'),
-    path('compare/<str:site1name>&<str:site2name>/', views.compare_sites, name='compare-sites'),
-    path('site-map/<str:view>/', views.site_map, name='site-map'),
+    path('spatial-analysis/<str:view>/', views.site_map, name='site-map'),
+    path('map-dataselect/', views.site_datamap, name='site-map-hub')
 ]

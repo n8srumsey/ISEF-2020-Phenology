@@ -405,6 +405,11 @@ def calc_constants(data, min_year, max_year):
                                 maxval = value
             constants[constant_list[0]] = minval
             constants[constant_list[1]] = maxval
+            if tdate:
+                minval_list = minval.split('/')
+                maxval_list = maxval.split('/')
+                constants[constant_list[0]] = '{}/{}'.format(minval_list[0], minval_list[1])
+                constants[constant_list[1]] = '{}/{}'.format(maxval_list[0], maxval_list[1])
 
             # create constants for senescence
             phase = 'senescence'
@@ -421,9 +426,9 @@ def calc_constants(data, min_year, max_year):
                 if value != None:
                     if tdate:
                         if compare_dates(value, minval):
-                            minval = value
+                            minval = value[0:4]
                         elif compare_dates(maxval, value):
-                            maxval = value
+                            maxval = value[0:4]
                     else:
                         if minval > value:
                             if not ('{PHASE}_DUR' in str_format and value <=60):
@@ -438,6 +443,11 @@ def calc_constants(data, min_year, max_year):
 
             constants[constant_list[2]] = minval
             constants[constant_list[3]] = maxval
+            if tdate:
+                minval_list = minval.split('/')
+                maxval_list = maxval.split('/')
+                constants[constant_list[2]] = '{}/{}'.format(minval_list[0], minval_list[1])
+                constants[constant_list[3]] = '{}/{}'.format(maxval_list[0], maxval_list[1])
 
         else:  # if yearly stats
             years = [x for x in range(min_year, max_year)]

@@ -2,6 +2,7 @@ import copy
 import json
 import os
 from datetime import datetime, timedelta
+import csv
 
 import pytz
 from django.db.models.functions import Lower
@@ -501,5 +502,175 @@ def compare_sites(response, site1name, site2name):
 
 
 def site_map(response, view):
-    context = {'view': view}
+    str_formats = ['last_{PHASE}_tdate',
+                   'last_{PHASE}_doy',
+                   'last_{PHASE}_dur',
+
+                   'avg_last3yrs_{PHASE}_tdate',
+                   'avg_last3yrs_{PHASE}_doy',
+                   'avg_last3yrs_{PHASE}_dur',
+
+                   'avg_diff_yrly_{PHASE}_tdate',
+                   'avg_diff_yrly_{PHASE}_dur',
+                   'avg_diff_yrly_{PHASE}_dur_prcnt',
+
+                   'diff_firstlast_{PHASE}_tdate',
+                   'diff_firstlast_{PHASE}_dur',
+                   'diff_firstlast_{PHASE}_dur_prcnt']
+
+    constant_pairs = [['MIN_BUDBURST_RECENT_TDATE', 'MAX_BUDBURST_RECENT_TDATE'], ['MIN_SENESCENCE_RECENT_TDATE', 'MAX_SENESCENCE_RECENT_TDATE'],  # MOST RECENT
+                      ['MIN_BUDBURST_RECENT_DOY', 'MAX_BUDBURST_RECENT_DOY'], ['MIN_SENESCENCE_RECENT_DOY', 'MAX_SENESCENCE_RECENT_DOY'],
+                      ['MIN_BUDBURST_RECENT_DUR', 'MAX_BUDBURST_RECENT_DUR'], ['MIN_SENESCENCE_RECENT_DUR', 'MAX_SENESCENCE_RECENT_DUR'],  # END MOST RECENT
+
+                      ['MIN_BUDBURST_AVG3YRS_TDATE', 'MAX_BUDBURST_AVG3YRS_TDATE'], 
+                      ['MIN_SENESCENCE_AVG3YRS_TDATE', 'MAX_SENESCENCE_AVG3YRS_TDATE'],  # 3YR AVERAGE
+                      ['MIN_BUDBURST_AVG3YRS_DOY', 'MAX_BUDBURST_AVG3YRS_DOY'], ['MIN_SENESCENCE_AVG3YRS_DOY', 'MAX_SENESCENCE_AVG3YRS_DOY'],
+                      ['MIN_BUDBURST_AVG3YRS_DUR', 'MAX_BUDBURST_AVG3YRS_DUR'], ['MIN_SENESCENCE_AVG3YRS_DUR', 'MAX_SENESCENCE_AVG3YRS_DUR'],  # END 3YR AVERAGE
+
+                      ['MIN_BUDBURST_AVG_DIFF_TDATE', 'MAX_BUDBURST_AVG_DIFF_TDATE'], 
+                      ['MIN_SENESCENCE_AVG_DIFF_TDATE', 'MAX_SENESCENCE_AVG_DIFF_TDATE'],  # AVG DIFF
+                      ['MIN_BUDBURST_AVG_DIFF_DUR', 'MAX_BUDBURST_AVG_DIFF_DUR'], ['MIN_SENESCENCE_AVG_DIFF_DUR', 'MAX_SENESCENCE_AVG_DIFF_DUR'],
+                      ['MIN_BUDBURST_AVG_DIFF_DUR_PRCNT', 'MAX_BUDBURST_AVG_DIFF_DUR_PRCNT'], 
+                      ['MIN_SENESCENCE_AVG_DIFF_DUR_PRCNT', 'MAX_SENESCENCE_AVG_DIFF_DUR_PRCNT'],  # END AVG DIF
+
+                      ['MIN_BUDBURST_TOTAL_DIFF_DOY', 'MAX_BUDBURST_TOTAL_DIFF_DOY'], 
+                      ['MIN_SENESCENCE_TOTAL_DIFF_DOY', 'MAX_SENESCENCE_TOTAL_DIFF_DOY'],  # TOTAL DIFF
+                      ['MIN_BUDBURST_TOTAL_DIFF_DUR', 'MAX_BUDBURST_TOTAL_DIFF_DUR'], ['MIN_SENESCENCE_TOTAL_DIFF_DUR', 'MAX_SENESCENCE_TOTAL_DIFF_DUR'],
+                      ['MIN_BUDBURST_TOTAL_DIFF_DUR_PRCNT', 'MAX_BUDBURST_TOTAL_DIFF_DUR_PRCNT'], ['MIN_SENESCENCE_TOTAL_DIFF_DUR_PRCNT', 'MAX_SENESCENCE_TOTAL_DIFF_DUR_PRCNT']]  # END TOTAL DIFF
+
+    titles = ['Most Recent {PHASE} Onset Date', # most recent *complete* ...?
+              'Most Recent {PHASE} Onset Date',
+              'Most Recent {PHASE} Duration',
+
+              'Three Year Average {PHASE} Onset Date',
+              'Three Year Average {PHASE} Onset Date',
+              'Three Year Average {PHASE} Duration',
+
+              'Average Yearly Change in {PHASE} Onset Date', # move {PHASE} first??
+              'Average Yearly Change in {PHASE} Duration',
+              'Average Yearly Change in {PHASE} Duration',
+
+              'Change in {PHASE} Onset Date Since First Year of Data',
+              'Change in {PHASE} Duration Since First Year of Data',
+              'Change in {PHASE} Duration Since First Year of Data']
+
+    legend_descs = ['Earlier onset dates reflected by lighter gradients and smaller circles',
+                    'Earlier onset dates reflected by lighter gradients and smaller circles',
+                    'Lower phenophase durations reflected by lighter gradients and smaller circles',
+
+                    'Earlier onset dates reflected by lighter gradients and smaller circles',
+                    'Earlier onset dates reflected by lighter gradients and smaller circles',
+                    'Lower phenophase durations reflected by lighter gradients and smaller circles',
+
+                    'Lower average yearly phenophase onset date differences reflected by lighter gradients and smaller circles',
+                    'Lower average yearly phenophase duration differences reflected by lighter gradients and smaller circles',
+                    'Lower average yearly phenophase duration differences in percentage reflected by lighter gradients and smaller circles',
+
+                    'Lower differences in phenophase onset date compared to first record reflected by lighter gradients and smaller circles',
+                    'Lower differences in phenophase duration compared to first record reflected by lighter gradients and smaller circles',
+                    'Lower differences in phenophase duration compared to first record in percentage reflected by lighter gradients and smaller circles']
+
+    units = ['',
+             '',
+             'days',
+
+             '',
+             '',
+             'days',
+
+             'days',
+             'days',
+             '%',
+
+             'days',
+             'days',
+             '%']
+
+    fields = []
+    for i, format in enumerate(str_formats):
+        phase = 'budburst'
+        phase_title = 'Bud Burst'
+        field = format.format(PHASE = phase)
+        title = titles[i].format(PHASE = phase_title)
+        legend_desc = legend_descs[i].format(PHASE = phase_title.lower())
+        fields.append([field, constant_pairs[2*i][0], constant_pairs[2*i][1], constant_pairs[2*i][0], constant_pairs[2*i][1], title, legend_desc, units[i]])
+    
+        phase = 'senescence'
+        phase_title = 'Leaf Senescence'
+        field = format.format(PHASE = phase)
+        title = titles[i].format(PHASE = phase_title)
+        legend_desc = legend_descs[i].format(PHASE = phase_title.lower())
+        fields.append([field, constant_pairs[2*i+1][0], constant_pairs[2*i+1][1], constant_pairs[2*i+1][0], constant_pairs[2*i+1][1], title, legend_desc, units[i]])
+
+    field_data = []
+
+    with open('./main/static/mapdata.csv') as f:
+        data = [{k: v for k, v in row.items()} for row in csv.DictReader(f, skipinitialspace=True)]
+    
+    for field_set in fields:
+        set_data = {'field': field_set[0], 'min_field': field_set[1], 'min': data[0][field_set[1]], 'max_field': field_set[2], 'max': data[0][field_set[2]], 'min_label': data[0][field_set[3]], 
+                    'max_label': data[0][field_set[4]], 'title': field_set[5], 'legend_description': field_set[6], 'unit': field_set[7]}
+        field_data.append(set_data)
+
+
+    # only return requested data
+    idx = 0
+    for i, set_data in enumerate(field_data):
+        if view == set_data['field']:
+            idx = i
+            break
+
+    # fix date of year labels
+    target_field = field_data[idx]['field']
+    if ('doy' in target_field) and (not 'diff' in target_field):
+        field_data[idx]['min_label'] = field_data[idx-2]['min_label']
+        field_data[idx]['max_label'] = field_data[idx-2]['max_label']
+            
+    context = {'view': view, 'field': field_data[idx]}
     return render(response, 'main/site-map.html', context)
+
+def site_datamap(response):
+    str_formats = ['last_{PHASE}_doy',
+                   'last_{PHASE}_dur',
+
+                   'avg_last3yrs_{PHASE}_doy',
+                   'avg_last3yrs_{PHASE}_dur',
+
+                   'avg_diff_yrly_{PHASE}_tdate',
+                   'avg_diff_yrly_{PHASE}_dur',
+                   'avg_diff_yrly_{PHASE}_dur_prcnt',
+
+                   'diff_firstlast_{PHASE}_tdate',
+                   'diff_firstlast_{PHASE}_dur',
+                   'diff_firstlast_{PHASE}_dur_prcnt']
+
+    titles = ['Most Recent {PHASE} Onset Date',
+              'Most Recent {PHASE} Duration',
+
+              'Three Year Average {PHASE} Onset Date',
+              'Three Year Average {PHASE} Duration',
+
+              'Average Yearly Change in {PHASE} Onset Date',
+              'Average Yearly Change in {PHASE} Duration',
+              'Average Yearly Change in {PHASE} Duration',
+
+              'Change in {PHASE} Onset Date Since First Year of Data',
+              'Change in {PHASE} Duration Since First Year of Data',
+              'Change in {PHASE} Duration Since First Year of Data']
+
+    fields = []
+    for i, format in enumerate(str_formats):
+            phase = 'budburst'
+            phase_title = 'Bud Burst'
+            field = format.format(PHASE = phase)
+            title = titles[i].format(PHASE = phase_title)
+            fields.append({'field': field, 'title': title})
+        
+            phase = 'senescence'
+            phase_title = 'Leaf Senescence'
+            field = format.format(PHASE = phase)
+            title = titles[i].format(PHASE = phase_title)
+            fields.append({'field': field, 'title': title})
+
+    context = {'fields': fields}
+    return render(response, 'main/site-datamap.html', context)

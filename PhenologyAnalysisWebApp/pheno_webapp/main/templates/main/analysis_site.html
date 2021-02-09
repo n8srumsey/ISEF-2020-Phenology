@@ -19,6 +19,7 @@
 {% load site_view_funcs %}
 
 {% block analysis_content %}
+
 <form method="post" class="siteSelect">
   {% csrf_token %} Sites:
   <select class="custom-select" style="width: 12rem" name="site_selected">
@@ -123,6 +124,10 @@
         <div id="chart5" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div>
         <div id="chart6" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;"></div> 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+
     <script>
         function regression(arrYears, arrDates) {
             let r, sy, sx, b, a, meanX, meanY;
