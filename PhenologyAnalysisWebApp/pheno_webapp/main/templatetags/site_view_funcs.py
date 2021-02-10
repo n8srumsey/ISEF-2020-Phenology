@@ -47,7 +47,7 @@ def imgname_to_datetime(imgname):
         del date_time_list[4]
     except: 
         pass
-    hrminsec = date_time_list[3]
+    hrminsec = date_time_list[3].split('.')[0]
     date_time_list[3] = hrminsec[:2]
     date_time_list.append(hrminsec[2:4])
     date_time_list.append(hrminsec[4:])
