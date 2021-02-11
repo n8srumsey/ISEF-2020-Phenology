@@ -16,5 +16,6 @@ urlpatterns = [
     path('analysis/', views.analysis, name='analysis'),
     path('analysis/<str:sitename>/', views.analysis_site, name='analysis-site'),
     path('spatial-analysis/<str:view>/', views.site_map, name='site-map'),
-    path('map-dataselect/', views.site_datamap, name='site-map-hub')
+    path('map-dataselect/', views.site_datamap, name='site-map-hub'),
+    path('analysis-aggregate/', views.aggregate_analysis, name='analysis-aggregate')
 ]

@@ -170,7 +170,7 @@
                 colors: budBurstColors,
                 tooltip: {shared: true},
                 series: [
-                            {type: 'spline', name: "Bud Burst Phenophase Start Date", data:[{% for entry in bud_burst_data %} [{{entry.0}}, Date.UTC({{1970}}, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
+                            {type: 'spline', name: "Bud Burst Phenophase Start Date", data:[{% for entry in bud_burst_data %} [{{entry.0}}, Date.UTC(1970, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
                                 tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}},},
                             {type: 'line', name: "Least-Squares Regression", data: lineBudBurst, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
                         ]

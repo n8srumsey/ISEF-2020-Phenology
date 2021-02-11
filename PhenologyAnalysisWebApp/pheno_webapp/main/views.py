@@ -490,15 +490,122 @@ def analysis_site(response, sitename):
     return render(response, 'main/analysis_site.html', context)
 
 
-def compare(response):
-    context = {}
-    return render(response, 'main/compare_home.html', context)
+def aggregate_analysis(response):
+    """
+        phenophase table
+        ~~~~~~~~~~~~~~~~~
+        list of data containing sets of each year
+        each year set is dict with:
+        - year
+        - avg budburst month/day
+        - avg budburst duration
+        - avg senescence month/day
+        - avg senescence duration
+    """
+    years = sorted(list(set([tdate.date_time.year for tdate in TransitionDate.objects.all()])))
+    yearly_avg_budburst_monthdays = []
+    for year in years:
+        date_times = []
+        for td in TransitionDate.objects.filter(rising_phase__exact=True):
+            if td.date_time.year == year:
+                date_times.append(td.date_time)
+        try:
+            avg = datetime.fromtimestamp(int(sum([datetime.timestamp(dt) for dt in date_times]) / len(date_times)))
+            yearly_avg_budburst_monthdays.append(avg.strftime('%m/%d/%Y'))
+        except:
+            pass
+    
+    yearly_avg_budburst_durations = []
+    for year in years:
+        durations = [td.duration for td in TransitionDate.objects.filter(rising_phase__exact=True) if td.duration != None and td.date_time.year==year]
+        avg = int(sum(durations) / len(durations))
+        try: 
+            yearly_avg_budburst_durations.append(avg)
+        except: 
+            pass
+    
+    yearly_avg_senescence_monthdays = []
+    for year in years:
+        date_times = []
+        for td in TransitionDate.objects.filter(rising_phase__exact=False):
+            if td.date_time.year == year:
+                date_times.append(td.date_time)
+        try:
+            avg = datetime.fromtimestamp(int(sum([datetime.timestamp(dt) for dt in date_times]) / len(date_times)))
+            yearly_avg_senescence_monthdays.append(avg.strftime('%m/%d/%Y'))
+        except:
+            pass
 
+    yearly_avg_senescence_durations = []
+    for year in years:
+        durations = [td.duration for td in TransitionDate.objects.filter(rising_phase__exact=False) if td.duration != None and td.date_time.year==year]
+        try: 
+            avg = int(sum(durations) / len(durations))
+            yearly_avg_senescence_durations.append(avg)
+        except:
+            yearly_avg_senescence_durations.append(None)
 
-def compare_sites(response, site1name, site2name):
+    table_data = []
+    for i in range(len(years)):
+        table_data.append({'year': years[i], 'bb_date': yearly_avg_budburst_monthdays[i], 'bb_dur': yearly_avg_budburst_durations[i], 
+                           'ls_date': yearly_avg_senescence_monthdays[i], 'ls_dur':yearly_avg_senescence_durations[i]})
 
-    context = {}
-    return render(response, 'main/analysis_site.html', context)
+    """
+        analysis graphs
+        ~~~~~~~~~~~~~~~~~~~
+        1. average budburst onset date from previous year (col 2, row 1)
+        2. average senescence onset date from previous year (col 2, row 2)
+        3. average budburst duration from prev year (col 1, row 3)
+        4. average senescence duration from prev year (col 2, row 3)
+
+        Data:
+        - list of all years there are transition dates (int)
+        - list of all average budburst onset datetimes (will be handeled js side)
+        - list of all average budburst duration
+        - list of all average senescence onset (will be handeled js side)
+        - list of all average senescence duration differences 
+
+        - list of [year, y-value pairings] for all of the above
+    """
+    
+    yearly_avg_budburst_datetimes = []
+    for year in years:
+        date_times = []
+        for td in TransitionDate.objects.filter(rising_phase__exact=True):
+            if td.date_time.year == year:
+                date_times.append(td.date_time)
+        try:
+            avg = datetime.fromtimestamp(int(sum([datetime.timestamp(dt) for dt in date_times]) / len(date_times)))
+            yearly_avg_budburst_datetimes.append(avg)
+        except:
+            pass
+    
+    yearly_avg_senescence_datetimes = []
+    for year in years:
+        date_times = []
+        for td in TransitionDate.objects.filter(rising_phase__exact=False):
+            if td.date_time.year == year:
+                date_times.append(td.date_time)
+        try:
+            avg = datetime.fromtimestamp(int(sum([datetime.timestamp(dt) for dt in date_times]) / len(date_times)))
+            yearly_avg_senescence_datetimes.append(avg)
+        except:
+            pass
+
+    budburst_onset_data = [[year, onset] for year, onset in zip(years, yearly_avg_budburst_datetimes)]
+
+    senescence_onset_data = [[year, onset] for year, onset in zip(years, yearly_avg_senescence_datetimes)]
+
+    budburst_duration_data = [[year, duration] for year, duration in zip(years, yearly_avg_budburst_durations)]
+
+    senescence_duration_data = [[year, duration] for year, duration in zip(years, yearly_avg_senescence_durations)]
+    
+    
+    context = {'table_data': table_data, 'years': years, 'budburst_avg_onset': yearly_avg_budburst_datetimes, 'budburst_avg_dur': yearly_avg_budburst_durations, 
+               'senescence_avg_onset': yearly_avg_senescence_datetimes, 'senescence_avg_dur': yearly_avg_senescence_durations, 
+               'budburst_onset_data': budburst_onset_data, 'budburst_dur_data': budburst_duration_data, 
+               'senescence_onset_data': senescence_onset_data, 'senescence_dur_data': senescence_duration_data}
+    return render(response, 'main/analysis_aggregate.html', context)
 
 
 def site_map(response, view):
@@ -625,9 +732,17 @@ def site_map(response, view):
     if ('doy' in target_field) and (not 'diff' in target_field):
         field_data[idx]['min_label'] = field_data[idx-2]['min_label']
         field_data[idx]['max_label'] = field_data[idx-2]['max_label']
+    
+    if 'PRCNT' in field_data[idx]['min_field'] or 'PRCNT' in field_data[idx]['max_field']:
+        minfield = float(field_data[idx]['min_label']) * 100
+        maxfield = float(field_data[idx]['max_label']) * 100
+
+        field_data[idx]['min_label'] = f"{minfield:.4f}"
+        field_data[idx]['max_label'] = f"{maxfield:.4f}"
             
     context = {'view': view, 'field': field_data[idx]}
     return render(response, 'main/site-map.html', context)
+
 
 def site_datamap(response):
     str_formats = ['last_{PHASE}_doy',

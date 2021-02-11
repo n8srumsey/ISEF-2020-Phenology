@@ -17,7 +17,7 @@
     }
     .esri-view-width-xlarge .esri-popup__main-container,
     .esri-view-width-large .esri-popup__main-container,
-    .esri-view-width-medium .esri-popup__main-container{max-height: 400px !important;}
+    .esri-view-width-medium .esri-popup__main-container{max-height: 450px !important;}
 
       .active-map {
         color: #fff;
@@ -49,8 +49,8 @@
 <script src="https://js.arcgis.com/4.18/"></script>
 <script>
     require(["esri/config", "esri/Map", "esri/views/MapView", "esri/layers/CSVLayer", "esri/widgets/Legend", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
-            "esri/widgets/Home", "esri/layers/support/Field"], 
-    function (esriConfig, Map, MapView, CSVLayer, Legend, SimpleMarkerSymbol, SimpleLineSymbol, Home, Field) {
+            "esri/widgets/Home", "esri/layers/support/Field", "esri/smartMapping/renderers/location"], 
+    function (esriConfig, Map, MapView, CSVLayer, Legend, SimpleMarkerSymbol, SimpleLineSymbol, Home, Field, locationRendererCreator) {
     esriConfig.apiKey = "AAPKfb00003515d74e4184b4384e710571f8Lji43BB09iGFEFMip7j44M4B671KaSuiU7a8hLDUzpLRvglkpSZkDc3G0NeJYEVi";    
     
     // POPUP TEMPLATES
@@ -69,14 +69,16 @@
     
     
     {% if view == 'site-locations' %}
-        var greenOutline = {type: 'simple-line', color: [38, 115, 0, 1], width: 1.75};
-        var pathMarker = {type: "simple-marker", size: 26, outline: greenOutline, color: [56, 168, 0, 0.55], angle: 0, 
+        const greenOutline = {type: 'simple-line', color: [38, 115, 0, 1], width: 1.75};
+        var pathMarker = {type: "simple-marker", size: 22, outline: greenOutline, color: [56, 168, 0, 0.55], angle: 0, 
                     path: "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z"};
-        var metaRenderer = {type: "simple", symbol: pathMarker, label: "Location of Site from Database",}
+        var renderer = {type: "simple", symbol: pathMarker, label: "Location of Site from Database"}
+        
+
 
         const metaLayer = new CSVLayer({
             url: "http://127.0.0.1:8000/static/mapdata.csv",
-            renderer: metaRenderer,
+            renderer: renderer,
             title: "Phenology Analysis",
             popupTemplate: generalMetadataPopupTemplate,
             fields: [new Field({name: 'sitename', alias: "Site", type: "string"})]
@@ -88,26 +90,115 @@
         var metaLegend = new Legend({view: view, layerInfos: [{layer: metaLayer, title: "Site Locations"}]})
         view.ui.add(metaLegend, "bottom-left");
         view.ui.add(new Home({view: view}), "top-left");
+
+        view.when().then(function() {
+            var renderer = {type: "simple", symbol: pathMarker, label: "Location of Site from Database"}
+            view.watch("scale", function(newValue) {
+                var scale = 0;
+                const zoomOutScale = 73957190.94894;
+                const zoomInScale = 2622324.434309;
+                var size = 0;
+                const smallSize = 5;
+                const largeSize = 40;
+                
+                if (newValue >= zoomOutScale) {scale = zoomOutScale;}
+                else if (newValue <= zoomInScale) {scale = zoomInScale;}
+                else {scale = newValue;}
+                
+                var scalar = 1 - Math.sqrt((scale - zoomInScale) / (zoomOutScale - zoomInScale));
+                console.log(scalar)
+                size = smallSize + scalar * (largeSize - smallSize);
+                
+                pathMarker = {type: "simple-marker", size: size, outline: greenOutline, color: [56, 168, 0, 0.55], angle: 0, 
+                    path: "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z"};
+                renderer = {type: "simple", symbol: pathMarker, label: "Location of Site from Database"}
+
+                metaLayer.renderer = renderer;
+            });
+        });
+        
     {% else %}
+        const generalDataPopupTemplate = {title: "<b>{sitename}</b>",
+                                        content: [{type: 'text', text: "<br><b>{{field.title}}:</b> { {{field.field}} } {{field.unit}}"},
+                                                  {type: 'fields',
+                                                    fieldInfos: [{fieldName: "location", label: "Location"},
+                                                                    {fieldName: "latitude", label: "Latitude"},
+                                                                    {fieldName: "longitude", label: "Longitude"},
+                                                                    {fieldName: "elevation", label: "Elevation (ft.)"},
+                                                                    {fieldName: "dominant_species", label: "Dominant Species"},
+                                                                    {fieldName: "first_im_date", label: "First Image Taken"},
+                                                                    {fieldName: "last_im_date", label: "Most Recent Image Taken"},]},
+                                                    {type: 'text', text: "<small>Last upadated {last_updated}</small>"}],
+                                        };
         const defaultSym = {type: "simple-marker", color: [0, 0, 0, 0.0], outline: {color: [0, 0, 0, 1], width: 1}, size: 5};
         
         var map = new Map({basemap: "topo-vector", layers: []});
         var view = new MapView({map: map, center: [-84.3268, 38.0], zoom: 5, container: "viewDiv"})               
-                
+        
+        const lowSize = 5
+        const highSize = 25
+
+        const colorScheme = 'plasma'
+        let lowColor, midColor, highColor
+
+        if (colorScheme == 'viridis') {
+            lowColor = "#440D57"
+            midColor = "#20908D"
+            highColor = "#F8E620"
+        }
+        else if (colorScheme == 'magma') {
+            lowColor = "#2F1062"
+            midColor = "#B83778"
+            highColor = "#FDDD9F"
+        }
+        else if (colorScheme == 'plasma') {
+            lowColor = "#100787"
+            midColor = "#CF4B74"
+            highColor = "#EFF821"
+        }
+        else if (colorScheme == 'inferno') {
+            lowColor = "#2B0A56"
+            midColor = "#B73456"
+            highColor = "#F1EB6C"
+        }
+        else if (colorScheme == 'cividis') {
+            lowColor = "#002554"
+            midColor = "#797977"
+            highColor = "#FDE636"
+        }
+        else {
+            lowColor = "#000000"
+            midColor = "#777777"
+            highColor = "#FFFFFF"
+        }
+        
+        
         var {{field.field}}Renderer = {type: 'simple', symbol: defaultSym, visualVariables: [
             {type: "color", field:"{{field.field}}", normalizationField: "{{field.max_field}}", 
                 legendOptions: {title: "{{field.legend_description}}"}, 
-                stops: [{value: {{field.min}}/{{field.max}}, color: "#FFFCD4", label: "{{field.min_label}} {{field.unit}}"}, 
-                        {value: 1.0, color: "#350242", label:"{{field.max_label}} {{field.unit}}"}]},
+                stops: [{value: {{field.min}}/{{field.max}}, color: lowColor, label: "{{field.min_label}} {{field.unit}}"}, 
+                        {value: (({{field.min}}/{{field.max}}+1.0)/2), color: midColor, label: ""},
+                        {value: 1.0, color: highColor, label:"{{field.max_label}} {{field.unit}}"}]},
             {type: "size", field:"{{field.field}}", normalizationField: "{{field.max_field}}", 
                 legendOptions: {title: ""}, 
-                stops: [{value: {{field.min}}/{{field.max}}, size: 7, label: "{{field.min_label}} {{field.unit}}"}, 
-                        {value: 1.0, size: 25, label:"{{field.max_label}} {{field.unit}}"}]},]}
+                stops: [{value: {{field.min}}/{{field.max}}, size: lowSize, label: "{{field.min_label}} {{field.unit}}"}, 
+                        {value: 1.0, size: highSize, label:"{{field.max_label}} {{field.unit}}"}]},]}
+        if ("{{field.field}}".includes('diff'))        
+            {{field.field}}Renderer = {type: 'simple', symbol: defaultSym, visualVariables: [
+                {type: "color", field:"{{field.field}}", normalizationField: "{{field.max_field}}", 
+                    legendOptions: {title: "{{field.legend_description}}"}, 
+                    stops: [{value: {{field.min}}/{{field.max}}, color: lowColor, label: "{{field.min_label}} {{field.unit}}"}, 
+                            {value: 0.0, color: midColor, label: ""},
+                            {value: 1.0, color: highColor, label:"{{field.max_label}} {{field.unit}}"}]},
+                {type: "size", field:"{{field.field}}", normalizationField: "{{field.max_field}}", 
+                    legendOptions: {title: ""}, 
+                    stops: [{value: {{field.min}}/{{field.max}}, size: lowSize, label: "{{field.min_label}} {{field.unit}}"}, 
+                            {value: 1.0, size: highSize, label:"{{field.max_label}} {{field.unit}}"}]},]}
         const {{field.field}}Layer = new CSVLayer({
             url: "http://127.0.0.1:8000/static/mapdata.csv",
             renderer: {{field.field}}Renderer,
             title: "Phenology Analysis Sites",
-            popupTemplate: generalMetadataPopupTemplate, 
+            popupTemplate: generalDataPopupTemplate, 
             id: "{{field.field}}",
             visible: true
         });

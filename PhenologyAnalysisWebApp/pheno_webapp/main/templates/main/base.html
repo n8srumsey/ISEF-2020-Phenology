@@ -5,8 +5,7 @@
     <link rel='stylesheet' type='text/css' href={% static 'bootstrap.min.css' %}/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    {% block links %} {% endblock %}
-    
+        
     <style>
       #page-container {
         position: relative;
@@ -71,6 +70,11 @@
               {% block navbar-analysis %}
                 <li class="nav-item">
                   <a class="nav-link" href="/analysis/">Analysis</a>
+                </li>
+              {% endblock %}
+              {% block navbar-overall-analysis %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/analysis-aggregate/">Aggregate Analysis</a>
                 </li>
               {% endblock %}
               {% block navbar-sitemap %}

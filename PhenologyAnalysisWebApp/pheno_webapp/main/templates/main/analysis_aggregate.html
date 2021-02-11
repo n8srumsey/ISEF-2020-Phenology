@@ -1,0 +1,178 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Aggregate Analysis {% endblock %}
+
+{% block navbar-overall-analysis %}
+    <li class="nav-item">
+        <a class="nav-link" href="/analysis-aggregate/">Aggregate Analysis <span class="sr-only">(current)</span> </a>
+    </li>
+{% endblock %}
+
+{% block style %}
+table tr{
+    height: 55px;
+}
+{% endblock %}
+
+{% block content %}
+<div style="margin-right: 18.5rem; margin-left: 18.5rem; margin-top: 1rem; margin-bottom:1rem;">
+    <div><h1 style="margin-left: -1rem;"> Aggregate Site Analysis </h1></div>
+    <div>
+        <div class="row">
+            <div style="margin-top: 2rem" class="column"> 
+                <h2 style="margin-bottom: 1rem;">Cross-Site Average Phenophase Transition Dates</h2>
+                <table class="table table-hover" >
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2">Bud Burst Phenophases</th>
+                        <th scope="col" colspan="2">Leaf Senescence Phenophases</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Onset Date</th>
+                        <th scope="col" style="padding-right: 5rem;"> Duration </th>
+                        <th scope="col">Onset Date</th>
+                        <th scope="col">Duration </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for year in table_data%}
+                        <tr>
+                            <td>{{year.bb_date}} </td>
+                            <td>{{year.bb_dur}} days </td>
+                            <td>{% if year.ls_dur != None %}{{year.ls_date}} {% endif %}</td>
+                            <td>{% if year.ls_dur != None %}{{year.ls_dur}} days {% endif %}</td>
+                        </tr>
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 6rem; margin-top: 2rem;" class="column">
+                <div id="budburstOnset" style="width=100%;height:400px; margin-bottom: 2rem;" ></div>
+                <div id="senescenceOnset" style="width=100%;height:400px;" ></div> 
+            </div>
+        </div>
+        <div class="row" style="margin-top: 2rem;"> 
+            <div id="budburstDur" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;" class="col"></div>
+            <div id="senescenceDur" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;" class="col"></div> 
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+    <script>
+        var None = null;
+        
+        function regression(arrYears, arrDates) {
+            let r, sy, sx, b, a, meanX, meanY;
+            r = jStat.corrcoeff(arrYears, arrDates);
+            sy = jStat.stdev(arrDates);
+            sx = jStat.stdev(arrYears);
+            meanY = jStat(arrDates).mean();
+            meanX = jStat(arrYears).mean();
+            b = r * (sy / sx);
+            a = meanY - meanX * b;
+            //Set up a line
+            let y1, y2, x1, x2;
+            x1 = jStat.min(arrYears);
+            x2 = jStat.max(arrYears);
+            y1 = a + b * x1;
+            y2 = a + b * x2;
+            
+            return {line: [[x1, y1], [x2, y2]], r};}
+        
+        const budBurstColors = ['#90ee7e', '#333333', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+        const senescenceColors = ['#f7a35c', '#333333', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+        
+        const arrYears = {{years}};
+
+        const arrBudBurstDates = [{% for date in budburst_avg_onset%} Date.UTC(1970,({{date.month}}-1),{{date.day}}), {% endfor %}];
+        var {line: budBurstDateRegLine, r: budBurstDateR} = regression(arrYears, arrBudBurstDates);
+        var budBurstOnsetChart = {
+                chart: {type: 'line'},
+                title: {text: 'Average Yearly Bud Burst Phenophase Onset Dates Across All Sites'},
+                subtitle: {text: `r = ${budBurstDateR}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {type: "datetime", title: {text: 'Date'}, labels: {format: '{value:%m/%d}'}},
+                tooltip: {headerFormat: '<table>',
+                        footerFormat: '</table>',
+                        shared: false,
+                        useHTML: true,
+                        yDateFormat: '{value:%m/%d}'},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: budBurstColors,
+                tooltip: {shared: true},
+                series: [
+                            {type: 'spline', name: "Cross-Site Average Yearly Bud Burst Onset Date", data:[{% for entry in budburst_onset_data %} [{{entry.0}}, Date.UTC(1970,{{entry.1.month}}-1,{{entry.1.day}})], {% endfor %}],
+                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}}, showInLegend: false},
+                            {type: 'line', name: "Least-Squares Regression", data: budBurstDateRegLine, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
+                        ]
+            }
+
+        const arrSenescenceDates = [{% for date in senescence_avg_onset%} Date.UTC(1970,({{date.month}}-1),{{date.day}}), {% endfor %}];
+        var {line: senescencetDateRegLine, r: senescenceDateR} = regression(arrYears, arrSenescenceDates);
+        var senescenceOnsetChart = {
+                chart: {type: 'line'},
+                title: {text: 'Average Yearly Leaf Senescence Phenophase Onset Dates Across All Sites'},
+                subtitle: {text: `r = ${senescenceDateR}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {type: "datetime", title: {text: 'Date'}, labels: {format: '{value:%m/%d}'}},
+                tooltip: {headerFormat: '<table>',
+                        footerFormat: '</table>',
+                        shared: false,
+                        useHTML: true,
+                        yDateFormat: '{value:%m/%d}'},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: senescenceColors,
+                tooltip: {shared: true},
+                series: [
+                            {type: 'spline', name: "Cross-Site Average Yearly Leaf Senescence Onset Date", data:[{% for entry in senescence_onset_data %} [{{entry.0}}, Date.UTC(1970,{{entry.1.month}}-1,{{entry.1.day}})], {% endfor %}],
+                                tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}}, showInLegend: false},
+                            {type: 'line', name: "Least-Squares Regression", data: senescencetDateRegLine, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
+                        ]
+            }
+
+        const arrBudBurstDurations = [{% for dur in budburst_avg_dur %} {{dur}}, {% endfor %}];
+        var {line: budBurstDurRegLine, r: budBurstDurR} = regression(arrYears, arrBudBurstDurations);
+        var budBurstDurChart = {
+                chart: {type: 'line'},
+                title: {text: 'Cross-Site Average Bud Burst Phenophase Durations  Across All Sites'},
+                subtitle: {text: `r = ${budBurstDurR}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {title: {text: 'Duration (days)'}},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: budBurstColors,
+                tooltip: {valueSuffix: ' days'},
+                series: [
+                            {type: 'spline', id: 'bb_spline', name: 'Bud Burst Phenophase Duration', data: {{budburst_dur_data}}, showInLegend: false},
+                            {type: 'line', name: "Least-Squares Regression", data: budBurstDurRegLine, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}},
+                            
+                        ]
+            }
+
+        const arrSenescenceDurations = [{% for dur in senescence_avg_dur %} {{dur}}, {% endfor %}];
+        arrYears.splice(arrYears.length-1,1)
+        arrSenescenceDurations.splice(arrYears.length,1)
+        var {line: senescenceDurRegLine, r: senescenceDurR} = regression(arrYears, arrSenescenceDurations);
+        var senescenceDurChart = {
+                chart: {type: 'line'},
+                title: {text: 'Cross-Site Average Leaf Senescence Phenophase Durations Across All Sites'},
+                subtitle: {text: `r = ${senescenceDurR}`},
+                xAxis: {title: {text: 'Year'}},
+                yAxis: {title: {text: 'Duration (days)'}},
+                setOptions: {time: {timezone: 'UTC'}, legend: {enabled: false}},
+                colors: senescenceColors,
+                tooltip: {valueSuffix: ' days'},
+                series: [
+                            {type: 'spline', id: 'ls_spline', name: 'Leaf Senescence Phenophase Duration', data: {{senescence_dur_data}}, showInLegend: false},
+                            {type: 'line', name: "Least-Squares Regression", data: senescenceDurRegLine, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}},
+                            
+                        ]
+            }
+        
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('budburstOnset', budBurstOnsetChart);});
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('senescenceOnset', senescenceOnsetChart);});
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('budburstDur', budBurstDurChart);});
+        document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('senescenceDur', senescenceDurChart);});
+    </script>
+</div>
+
+{% endblock %}
