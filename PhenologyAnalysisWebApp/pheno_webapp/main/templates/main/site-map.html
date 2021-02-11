@@ -3,7 +3,7 @@
 {% block title %} {% if view == 'site-locations' %} Site Locations {% else %} Data Visualization - {{field.title}}{% endif %} {% endblock %}
 
 {% block links %} 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css"> 
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 {% endblock %}
@@ -27,6 +27,7 @@
 {% endblock %}
 
 {% block jsScripts %}
+<link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/css/main.css">
 {% endblock %}
 
 {% block navbar-sitemap %}
@@ -44,7 +45,7 @@
         {% if view != 'site-locations' %} <a style="margin-left: 1em;" href='/map-dataselect/'><button class="btn btn-success btn-lg active">Data Visualization</button></a>
             {% else %}<a style="margin-left: 1em;" href="/map-dataselect/"><button class="btn btn-outline-success btn-lg">Data Visualization</button></a>{% endif %}
 </div>
-<div id="viewDiv"> </div>
+<div> <div id="viewDiv"> </div> </div>
 
 <script src="https://js.arcgis.com/4.18/"></script>
 <script>
@@ -76,7 +77,7 @@
         
 
 
-        const metaLayer = new CSVLayer({
+        var metaLayer = new CSVLayer({
             url: "http://127.0.0.1:8000/static/mapdata.csv",
             renderer: renderer,
             title: "Phenology Analysis",
