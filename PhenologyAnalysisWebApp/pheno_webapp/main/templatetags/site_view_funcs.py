@@ -55,3 +55,12 @@ def imgname_to_datetime(imgname):
     date_time = datetime(year=date_time_list[0], month=date_time_list[1], day=date_time_list[2], hour=date_time_list[3],
                          minute=date_time_list[4], second=date_time_list[5], tzinfo=pytz.timezone('UTC'))
     return date_time.strftime("%m/%d/%Y  %H:%M:%S")
+
+@register.simple_tag
+def dominant_species_to_ul(site):
+    if len(site.dominant_species) == 0:
+        return "N/A"
+    start = '''<ul style="margin-top:-1rem;"> <li> '''
+    middle = '</li> <li> '.join(site.dominant_species.replace("\"", '').split(','))
+    end = "</li> </ul>"
+    return start + middle + end

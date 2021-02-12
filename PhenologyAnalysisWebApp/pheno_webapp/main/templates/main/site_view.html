@@ -33,6 +33,11 @@
     {% endif%}
     {% endblock %}
 
+    <p> Elevation: {{site.elevation}} ft. </p>
+
+    {% dominant_species_to_ul site as dom_species%}
+    <p> Dominant Species: {{dom_species | safe}} </p>
+
     {% get_last_image_date site as last_im_date %}
     {% get_first_image_date site as first_im_date %}
     <p>Image Date Range: {{first_im_date}} - {{last_im_date}}</p>

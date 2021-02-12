@@ -33,7 +33,31 @@
         {% block content %}
         <div style="margin-top: 1rem;">
             <h1> Data Management </h1>
-            <p> *Welcome Message*</p>
+            <p> Manage sites and site data.</p>
+            <p> You can: </p>
+            <ul style="margin-top:-1rem;"> 
+                <li> Add new sites to the databse </li>
+                <li> Upload images to existing sites </li>
+                <li> View and edit site details</li>
+            </ul>
+            <p> Site details available: </p>
+            <ul style="margin-top:-1rem;"> 
+                <li> Site name </li>
+                <li> Location </li>
+                <li> Latitude and longitude coordinates </li>
+                <li> Elevation </li>
+                <li> Dominant deciduous broadleaf species </li>
+                <li> Date range of site images </li>
+            </ul>
+            <p> 
+                When images are uploaded they are classified as either occurring during the <br> 
+                bud burst phenophase or the leaf senescence phenophase, using a machine<br> 
+                learning classification model.
+            </p>
+            <p>
+                The transition dates of the phenophases are then estimated from the <br> 
+                series of classified images, the analysis of which can be viewed under "<a href="/analysis/">Analysis</a>."
+            </p>
         </div>
         {% endblock %}
 </div>

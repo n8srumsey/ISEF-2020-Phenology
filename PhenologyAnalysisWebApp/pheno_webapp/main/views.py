@@ -195,7 +195,9 @@ def site_add(response):
             loc = form.cleaned_data['location_desc']
             lat = form.cleaned_data['latitude']
             long = form.cleaned_data['longitude']
-            s = Site(sitename=stnm, location_desc=loc, latitude=lat, longitude=long)
+            elev = form.cleaned_data['elevation']
+            dominant_species = form.cleaned_data['dominant_species']
+            s = Site(sitename=stnm, location_desc=loc, latitude=lat, longitude=long, elevation=elev, dominant_species=dominant_species)
             s.save()
             sitename = s.sitename
             images = response.FILES.getlist('images')
@@ -206,7 +208,7 @@ def site_add(response):
             loc = form.cleaned_data['location_desc']
             lat = form.cleaned_data['latitude']
             long = form.cleaned_data['longitude']
-            s = Site(sitename=stnm, location_desc=loc, latitude=lat, longitude=long)
+            s = Site(sitename=stnm, location_desc=loc, latitude=lat, longitude=long,  elevation=elev, dominant_species=dominant_species)
             s.save()
             sitename = s.sitename
             images = response.FILES.getlist('images')
@@ -236,10 +238,13 @@ def site_view_edit(response, sitename):
             site.location_desc = form.cleaned_data['location_desc']
             site.latitude = form.cleaned_data['latitude']
             site.longitude = form.cleaned_data['longitude']
+            site.elevation = form.cleaned_data['elevation']
+            site.dominant_species = form.cleaned_data['dominant_species']
             site.save()
             return HttpResponseRedirect('/data-management/sites/{}'.format(site.sitename))
     else:
-        form = SiteForm(initial={'sitename': site.sitename, 'location_desc': site.location_desc, 'latitude': site.latitude, 'longitude': site.longitude})
+        form = SiteForm(initial={'sitename': site.sitename, 'location_desc': site.location_desc, 'latitude': site.latitude, 
+                                 'longitude': site.longitude, 'elevation': site.elevation, 'dominant_species': site.dominant_species})
 
     dates = [img.date_time.strftime("%m/%d/%Y, %H:%M:%S") for img in site.image_set.order_by('date_time')]
     img_paths = [str(img.image_upload.name) for img in site.image_set.order_by('date_time')]

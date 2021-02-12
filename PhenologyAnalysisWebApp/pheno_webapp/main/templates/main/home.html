@@ -1,10 +1,73 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Phenology Analysis Suite {% endblock %}
+
+{% load static %}
 
 {% block content %}
-<div style="margin-top: 1rem; margin-left: 18.5rem;">
-    <h1>Home</h1>
-    <p>blah blah blah</p>
+<div style="margin-top: 1rem; margin-left: 18.5rem; margin-right:16.5rem;">
+    <div class="row" style="width:100%">  
+        <div class="jumbotron text-white" style="width:100%; backgroud-size: cover;  background-image: linear-gradient(rgba(88,88,88,0.6),rgba(88,88,88,0.6)), url({% static 'background.jpg' %})">
+
+            <h1> Phenology Analysis Suite</h1>
+            <p class="lead"> Content content content </p>
+            
+
+        </div>
+    </div>
+    <h2 style="margin-top: 1.5rem;"> Features </h2>
+    <div class="row" style="width:100%; margin-top: 1rem;">  
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary"> </div>
+                <div class="card-body"> 
+                    <h4> <b> Data Management </b> </h4>
+                    <p> 
+                        Manage your phenology data across multiple locations. <br><br> Upload images of the site to take advantage of machine learning algrothims to classify
+                        and determine phenophases and transition dates.
+                    </p>
+                </div>
+                <div class="card-footer" style="display:flex;justify-content:center;align-items:center;"> 
+                    <a href="/data-management/" class="btn btn-primary"> Go To Data Management</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary">  </div>
+                <div class="card-body"> 
+                    <h4> <b> Site Analysis </b> </h4>
+                    Contnt content content content
+                </div>
+                <div class="card-footer" style="display:flex;justify-content:center;align-items:center;"> 
+                    <a href="/analysis/" class="btn btn-primary"> Go To Site Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary"> </div>
+                <div class="card-body"> 
+                    <h4> <b> Aggregate Analysis </b> </h4>
+                    Contnt content content content
+                </div>
+                <div class="card-footer" style="display:flex;justify-content:center;align-items:center;"> 
+                    <a href="/analysis-aggregate/" class="btn btn-primary"> Go To Aggregate Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary"> </div>
+                <div class="card-body"> 
+                    <h4> <b> Spatial Analysis </b> </h4>
+                    Contnt content content content
+                </div>
+                <div class="card-footer" style="display:flex;justify-content:center;align-items:center;"> 
+                    <a href="/spatial-analysis/site-locations/" class="btn btn-primary"> Go To Spatial Analysis</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

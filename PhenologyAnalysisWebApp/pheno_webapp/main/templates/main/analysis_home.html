@@ -4,7 +4,7 @@
 
 {% block navbar-analysis %}
     <li class="nav-item active">
-        <a class="nav-link" href="/analysis/">Analysis <span class="sr-only">(current)</span> </a>
+        <a class="nav-link" href="/analysis/"> Site Analysis <span class="sr-only">(current)</span> </a>
     </li>
 {% endblock %}
 
@@ -22,6 +22,21 @@
         </select>
         <button class="btn btn-success" type='submit'> Go </button>
     </form>
+
+    <div id="message">
+        <p style="margin-top: 1rem;"> Select a site to view phenophase analyses. </p>
+        <p> Analyses include:
+        <ul style="margin-top:-1rem;"> 
+            <li> Table of phenophase transition dates</li>
+            <li> All site images classified by phenophase</li>
+            <li> Phenophase onset dates by year</li>
+            <li> Phenophase durations by year</li>
+            <li> Yearly percentage change in phenophase durations</li>
+        </ul>
+        </p> 
+    </div>
+
+
     {% endblock %}
 </div>
 {% endblock %}

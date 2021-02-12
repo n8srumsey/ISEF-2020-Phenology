@@ -16,10 +16,10 @@ table tr{
 
 {% block content %}
 <div style="margin-right: 18.5rem; margin-left: 18.5rem; margin-top: 1rem; margin-bottom:1rem;">
-    <div><h1 style="margin-left: -1rem;"> Aggregate Site Analysis </h1></div>
+    <div><h1 style="margin-left: 0rem;"> Aggregate Site Analysis </h1></div>
     <div>
         <div class="row">
-            <div style="margin-top: 2rem" class="column"> 
+            <div style="margin-top: 2rem; width: 580px" class="col"> 
                 <h2 style="margin-bottom: 1rem;">Cross-Site Average Phenophase Transition Dates</h2>
                 <table class="table table-hover" >
                     <thead>
@@ -46,14 +46,14 @@ table tr{
                     </tbody>
                 </table>
             </div>
-            <div style="margin-left: 6rem; margin-top: 2rem;" class="column">
-                <div id="budburstOnset" style="width=100%;height:400px; margin-bottom: 2rem;" ></div>
-                <div id="senescenceOnset" style="width=100%;height:400px;" ></div> 
+            <div style="margin-left: 4rem; margin-top: 2rem;" class="col">
+                <div id="budburstOnset" class="row" style="width:580px;height:400px; margin-bottom:2rem;" ></div>
+                <div id="senescenceOnset" class="row" style="width:580px;height:400px;" ></div> 
             </div>
         </div>
-        <div class="row" style="margin-top: 2rem;"> 
-            <div id="budburstDur" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;" class="col"></div>
-            <div id="senescenceDur" style="width=100%;height:400px; margin: 2rem 2rem 6rem 2rem;" class="col"></div> 
+        <div class="row" style="margin-top: 2rem; margin-bottom: 6rem;"> 
+            <div id="budburstDur" style="min-width:580px;height:400px; margin-right: 4rem;" class="col"></div>
+            <div id="senescenceDur" style="min-width:580px;height:400px;" class="col"></div> 
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>

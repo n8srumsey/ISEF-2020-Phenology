@@ -8,6 +8,9 @@ class Site(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
+    elevation = models.IntegerField(default=0)
+    dominant_species = models.CharField(max_length=1000, default='')
+
 
     def __str__(self):
         return self.sitename
