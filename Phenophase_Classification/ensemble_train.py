@@ -7,9 +7,9 @@ from tensorflow.keras.callbacks import EarlyStopping
 from  tensorflow.keras.backend import clear_session
 import tensorflow as tf
 
-from define_models import define_model
-from generator_dataset import get_generators
-from utils import (BATCH_SIZE, EPOCHS, MODELS_DIR, NB_TRANSFORMATIONS,
+from .define_models import define_model
+from .generator_dataset import get_generators
+from .utils import (BATCH_SIZE, EPOCHS, MODELS_DIR, NB_TRANSFORMATIONS,
                    RESULTS_DIR, TRANSFORM, K)
 
 params = {

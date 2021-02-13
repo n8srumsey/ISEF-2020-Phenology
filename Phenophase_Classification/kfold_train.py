@@ -4,9 +4,9 @@ import re
 
 from tensorflow.keras.callbacks import EarlyStopping
 
-from define_models import define_model
-from generator_dataset import get_generators
-from utils import (BATCH_SIZE, EPOCHS, NB_TRANSFORMATIONS, RESULTS_DIR,
+from .define_models import define_model
+from .generator_dataset import get_generators
+from .utils import (BATCH_SIZE, EPOCHS, NB_TRANSFORMATIONS, RESULTS_DIR,
                    TRANSFORM, K)
 
 # training parameters

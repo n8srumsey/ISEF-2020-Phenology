@@ -6,7 +6,7 @@ from tensorflow.keras.metrics import AUC, BinaryAccuracy, Precision, Recall
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.regularizers import l1_l2, l2
 
-from data_preprocessing import image_shape
+from .data_preprocessing import image_shape
 
 # define model
 

@@ -9,8 +9,8 @@ import tensorflow as tf
 from skimage.util import random_noise
 from tqdm import tqdm
 
-from data_preprocessing import image_shape
-from utils import (BATCH_SIZE, EFFECTIVE_BATCH_SIZE, NB_TRANSFORMATIONS,
+from .data_preprocessing import image_shape
+from .utils import (BATCH_SIZE, EFFECTIVE_BATCH_SIZE, NB_TRANSFORMATIONS,
                    TRANSFORM, K)
 
 im_dir = './Phenophase_Classification/data/images/'

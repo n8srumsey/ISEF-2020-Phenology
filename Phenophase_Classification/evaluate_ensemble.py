@@ -5,8 +5,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from tqdm import tqdm
 
-from generator_dataset import get_generators
-from utils import MODELS_DIR, RESULTS_DIR
+from .generator_dataset import get_generators
+from .utils import MODELS_DIR, RESULTS_DIR
 
 
 def load_models(path):

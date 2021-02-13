@@ -8,8 +8,8 @@ from skimage.util import random_noise
 from sklearn.utils import shuffle
 from tensorflow.keras.utils import Sequence
 
-from data_preprocessing import image_shape
-from utils import BATCH_SIZE, IMAGES_DIR, K
+from .data_preprocessing import image_shape
+from .utils import BATCH_SIZE, IMAGES_DIR, K
 
 """Define generators"""
 
