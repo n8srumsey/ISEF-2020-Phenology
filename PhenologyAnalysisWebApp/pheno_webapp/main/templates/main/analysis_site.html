@@ -3,10 +3,10 @@
 {% block analysis_header %} {{site.sitename}} Site Analysis {% endblock %} 
 {% block style %}
     .custom-range::-webkit-slider-thumb {
-        background: #555555;
+        background: #12997f;
     }
-    .custom-range::-webkit-slider-thumb:active{
-        background-color: #919191;
+    .custom-range::-webkit-slider-thumb:active {
+        background: #7dc7b9
     }
     #img {
         border-style: solid;
@@ -151,7 +151,7 @@
         var senescenceColors = ['#f7a35c', '#333333', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
         var columnColors = ['#90ee7e', '#f7a35c', '#44b330', '#c45825', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'];
         var arrBudBurstYears = [{% for entry in bud_burst_data %} {{entry.0}},{% endfor %}];
-        var arrBudBurstDates = [{% for entry in bud_burst_data %} Date.UTC({{1970}},{{entry.1.date_time.month}},{{entry.1.date_time.day}}), {% endfor %}];
+        var arrBudBurstDates = [{% for entry in bud_burst_data %} Date.UTC({{1970}},{{entry.1.date_time.month}}-1,{{entry.1.date_time.day}}), {% endfor %}];
         let budBurstRegression = regression(arrBudBurstYears, arrBudBurstDates);
         lineBudBurst = budBurstRegression.line;
         rBudBurst = budBurstRegression.r;
@@ -170,7 +170,7 @@
                 colors: budBurstColors,
                 tooltip: {shared: true},
                 series: [
-                            {type: 'spline', name: "Bud Burst Phenophase Start Date", data:[{% for entry in bud_burst_data %} [{{entry.0}}, Date.UTC(1970, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
+                            {type: 'spline', name: "Bud Burst Phenophase Start Date", data:[{% for entry in bud_burst_data %} [{{entry.0}}, Date.UTC(1970, {{entry.1.date_time.month}}-1, {{entry.1.date_time.day}})], {% endfor %}],
                                 tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}},},
                             {type: 'line', name: "Least-Squares Regression", data: lineBudBurst, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
                         ]
@@ -178,7 +178,7 @@
         document.addEventListener('DOMContentLoaded', function () {const chart = Highcharts.chart('chart1', splineBudBurstStartChart);});
 
         var arrSenescenceYears = [{% for entry in senescence_data %} {{entry.0}},{% endfor %}];
-        var arrSenescenceDates = [{% for entry in senescence_data %} Date.UTC({{1970}},{{entry.1.date_time.month}},{{entry.1.date_time.day}}), {% endfor %}];
+        var arrSenescenceDates = [{% for entry in senescence_data %} Date.UTC({{1970}},{{entry.1.date_time.month}}-1,{{entry.1.date_time.day}}), {% endfor %}];
         let senescenceRegression = regression(arrSenescenceYears, arrSenescenceDates)
         lineSenescence = senescenceRegression.line;
         rSenescence = senescenceRegression.r;
@@ -197,7 +197,7 @@
                 colors: senescenceColors,
                 tooltip: {shared: true},
                 series: [
-                            {type: 'spline', name: "Leaf Senescence Phenophase Start Date", data:[{% for entry in senescence_data %} [{{entry.0}}, Date.UTC({{1970}}, {{entry.1.date_time.month}}, {{entry.1.date_time.day}})], {% endfor %}],
+                            {type: 'spline', name: "Leaf Senescence Phenophase Start Date", data:[{% for entry in senescence_data %} [{{entry.0}}, Date.UTC(1970, {{entry.1.date_time.month}}-1, {{entry.1.date_time.day}})], {% endfor %}],
                                 tooltip: {pointFormatter: function() {return `<tr><td style="padding:0"><b>${Highcharts.dateFormat('%m/%d', this.y)}/${this.x}</b></td></tr>`;}},},
                             {type: 'line', name: "Least-Squares Regression", data: lineSenescence, enableMouseTracking: false, dashStyle: 'shortdot', marker: {enabled: false}}
                         ]

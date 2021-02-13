@@ -192,7 +192,7 @@ def site_add(response):
         form = SiteForm(response.POST)
         if form.is_valid() and 'save_leave' in response.POST:
             stnm = form.cleaned_data['sitename']
-            loc = form.cleaned_data['location_desc']
+            loc = form.cleaned_data['location']
             lat = form.cleaned_data['latitude']
             long = form.cleaned_data['longitude']
             elev = form.cleaned_data['elevation']
@@ -205,7 +205,7 @@ def site_add(response):
             return HttpResponseRedirect('/data-management/sites/')
         if form.is_valid() and 'save_add_more' in response.POST:
             stnm = form.cleaned_data['sitename']
-            loc = form.cleaned_data['location_desc']
+            loc = form.cleaned_data['location']
             lat = form.cleaned_data['latitude']
             long = form.cleaned_data['longitude']
             s = Site(sitename=stnm, location_desc=loc, latitude=lat, longitude=long,  elevation=elev, dominant_species=dominant_species)
@@ -213,11 +213,8 @@ def site_add(response):
             sitename = s.sitename
             images = response.FILES.getlist('images')
             save_images(images, sitename)
-            form = SiteForm()
-    else:
-        form = SiteForm()
 
-    context = {'form': form}
+    context = {}
     return render(response, 'main/site_add.html', context)
 
 
@@ -235,7 +232,7 @@ def site_view_edit(response, sitename):
         form = SiteForm(response.POST)
         if form.is_valid():
             site.sitename = form.cleaned_data['sitename']
-            site.location_desc = form.cleaned_data['location_desc']
+            site.location_desc = form.cleaned_data['location']
             site.latitude = form.cleaned_data['latitude']
             site.longitude = form.cleaned_data['longitude']
             site.elevation = form.cleaned_data['elevation']

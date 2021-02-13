@@ -4,10 +4,10 @@
 
 {% block style %}
     .custom-range::-webkit-slider-thumb {
-        background: #93c54b;
+        background: #17bf9e;
     }
-    .custom-range::-webkit-slider-thumb:active{
-        background-color: #abc289;
+    .custom-range::-webkit-slider-thumb:active {
+        background: #7dc7b9
     }
 {% endblock %}
 
@@ -15,40 +15,43 @@
 <div style="margin-top: 1rem;">
     {% block editable_site_info%}
     <h1> {{site.sitename}} Site Details</h1>
-    <p> Location: {{site.location_desc}} </p>
+    <p> <b> Location: </b> {{site.location_desc}} </p>
+
+    {% dominant_species_to_ul site as dom_species%}
+    <p> <b> Dominant Species: </b> {{dom_species | safe}} </p>
+
     {% mult_neg_one site.latitude as neg_latitude %}
     {% mult_neg_one site.longitude as neg_longitude %}
     {% if site.latitude >= 0.0%}
         {% if site.longitude >= 0.0 %}
-            <p> Coordinates: {{site.latitude}}<span>&#176;</span> N, {{site.longitude}}<span>&#176;</span> E</p>
+            <p> <b> Coordinates: </b> {{site.latitude}}<span>&#176;</span> N, {{site.longitude}}<span>&#176;</span> E</p>
         {% else %}
-            <p> Coordinates: {{site.latitude}}<span>&#176;</span> N, {{neg_longitude}}<span>&#176;</span> W</p>
+            <p> <b> Coordinates: </b> {{site.latitude}}<span>&#176;</span> N, {{neg_longitude}}<span>&#176;</span> W</p>
         {% endif %}
     {% else %}
         {% if site.longitude >= 0.0 %}
-            <p> Coordinates: {{neg_latitude}}<span>&#176;</span> S, {{site.longitude}}<span>&#176;</span> E</p>
+            <p> <b> Coordinates: </b> {{neg_latitude}}<span>&#176;</span> S, {{site.longitude}}<span>&#176;</span> E</p>
         {% else %}
-            <p> Coordinates: {{neg_latitude}}<span>&#176;</span> S, {{neg_longitude}}<span>&#176;</span> W</p>
+            <p> <b> Coordinates: </b> {{neg_latitude}}<span>&#176;</span> S, {{neg_longitude}}<span>&#176;</span> W</p>
         {% endif %}
     {% endif%}
+    
+
+    <p> <b> Elevation: </b> {{site.elevation}} ft. </p>
+    
     {% endblock %}
-
-    <p> Elevation: {{site.elevation}} ft. </p>
-
-    {% dominant_species_to_ul site as dom_species%}
-    <p> Dominant Species: {{dom_species | safe}} </p>
 
     {% get_last_image_date site as last_im_date %}
     {% get_first_image_date site as first_im_date %}
-    <p>Image Date Range: {{first_im_date}} - {{last_im_date}}</p>
+    <p> <b> Image Date Range: </b> {{first_im_date}} - {{last_im_date}}</p>
     
     {% site_last_updated_str site as lst_update %}
-    <p>Site Last Modified: {{lst_update}}</p>
+    <p> <b> Site Last Modified: </b>{{lst_update}}</p>
     
     <div> 
         {% get_num_site_imgs site as num_imgs%}
         <h2 style="margin-top: 3rem;">Images</h2>
-        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 40em; height: auto;"/> </div>
+        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 40em; height: auto; border-style: solid; border-width: thick; border-radius: 5px; border-color:#444;"/> </div>
         <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width: 40em;"/>
         <p id="date">{% get_first_datetime site %}</p>
         <script>
@@ -65,7 +68,7 @@
 
     {% block site_links %}
     <a href='./gallery'><button type="button" class="btn btn-success">Go to Gallery</button></a>
-    <a href='/analysis/{{site.sitename}}/'><button type="button" class="btn btn-success">Go to Analysis</button></a>
+    <a href='/analysis/{{site.sitename}}/'><button type="button" class="btn btn-success">Go to Site Analysis</button></a>
     <a href='./edit'><button type="button" class="btn btn-success">Edit Site</button></a>
     {% endblock %}
     <p><br></br></p>

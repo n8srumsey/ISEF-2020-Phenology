@@ -6,7 +6,44 @@
     <h1> Edit {{site.sitename}} </h1>
     <form method='post' action='/data-management/sites/{{site.sitename}}/edit/'>
         {% csrf_token %}
-        {{form.as_p}}
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="sitename" class="col-sm-3 col-form-label"><b> Site Name </b></label>
+            <div class="col-sm-7">
+                <input name="sitename" type="text" class="form-control" id="sitename" placeholder="Site Name"  value="{{site.sitename}}">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="location" class="col-sm-3 col-form-label"><b> Location </b></label>
+            <div class="col-sm-7">
+                <input name="location" type="text" class="form-control" id="location" placeholder="Location" value="{{site.location_desc}}">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:1.9rem;">
+            <label for="dominant_species" class="col-sm-3 col-form-label"><b> Dominant Species </b></label>
+            <div class="col-sm-7">
+                <input name="dominant_species" type="text" class="form-control" id="dominant_species" placeholder="Dominant Species" value="{{site.dominant_species}}">
+                <small class="form-text text-muted">Separate species names with commas.</small>
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="latitude" class="col-sm-3 col-form-label"><b> Latitude </b></label>
+            <div class="col-sm-3">
+                <input name="latitude" type="number" class="form-control" id="latitude" placeholder="Latitude" value="{{site.latitude}}">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="longitude" class="col-sm-3 col-form-label"><b> Longitude </b></label>
+            <div class="col-sm-3">
+                <input name="longitude" type="number" class="form-control" id="longitude" placeholder="Longitude" value="{{site.longitude}}">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="elevation" class="col-sm-3 col-form-label"><b>Elevation (ft.)</b></label>
+            <div class="col-sm-3" style="margin-bottom:0.5rem;">
+                <input name="elevation" type="number" class="form-control" id="elevation" placeholder="Elevation" value="{{site.elevation}}">
+                <small class="form-text text-muted">Whole numbers only.</small>
+            </div>
+        </div>
         <a href='/data-management/sites/{{site.sitename}}/'><button type="button" class="btn btn-success">Cancel</button></a>
         <button type='submit' class="btn btn-success" name='save'> Save </button>
     </form>

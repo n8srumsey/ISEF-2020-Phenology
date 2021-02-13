@@ -7,20 +7,61 @@
     <h1> Add New Site </h1>
     <form method='post' action='/data-management/sites/add/'>
         {% csrf_token %}
-        {{form.as_p}}
-
-        <p>&nbsp;</p>
-        <p> Upload Initial Images: 
-            <div class="input-group" style="margin-top:1rem;display:flex;align-items:center;">
-                <input type="file" id="actual-btn" multiple hidden name="images"/>
-                <label class="btn btn-success" for="actual-btn">Choose Files</label>
-                <span id="file-chosen" style="margin-left:1rem;">No file chosen</span>
-            </div> 
-            <small id="fileHelp" class="form-text text-muted">Files must be JPG files and follow the naming convention "sitename_YYYY_MM_DD_HHMMSS.jpg"</small>
-        </p>
-        <p>&nbsp;</p>
-        <button type='submit' class="btn btn-success" name='save_leave'> Save </button>
-        <button type='submit' class="btn btn-success" name='save_add_more'> Save and Add Another </button>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="sitename" class="col-sm-3 col-form-label">Site Name</label>
+            <div class="col-sm-7">
+                <input name="sitename" type="text" class="form-control" id="sitename" placeholder="Site Name">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="location" class="col-sm-3 col-form-label">Location</label>
+            <div class="col-sm-7">
+                <input name="location" type="text" class="form-control" id="location" placeholder="Location">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:1.9rem;">
+            <label for="dominant_species" class="col-sm-3 col-form-label">Dominant Species</label>
+            <div class="col-sm-7">
+                <input name="dominant_species" type="text" class="form-control" id="dominant_species" placeholder="Dominant Species">
+                <small class="form-text text-muted">Separate species names with commas.</small>
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="latitude" class="col-sm-3 col-form-label">Latitude</label>
+            <div class="col-sm-2">
+                <input name="latitude" type="number" class="form-control" id="latitude" placeholder="Latitude">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="longitude" class="col-sm-3 col-form-label">Longitude</label>
+            <div class="col-sm-2">
+                <input name="longitude" type="number" class="form-control" id="longitude" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="elevation" class="col-sm-3 col-form-label">Elevation (ft.)</label>
+            <div class="col-sm-2" style="margin-bottom:0.5rem;">
+                <input name="elevation" type="number" class="form-control" id="elevation" placeholder="Elevation">
+                <small class="form-text text-muted">Whole numbers only.</small>
+            </div>
+        </div>
+        
+        <div class="form-row" style="margin-bottom:0.3rem;">
+            <label for="actual-btn" class="col-sm-3 col-form-label"><br>Upload Initial Images</label>
+            <div class="col-sm-9">
+                <div class="input-group" style="margin-top:1.4rem;display:flex;align-items:center;">
+                    <input type="file" id="actual-btn" multiple hidden name="images"/>
+                    <label class="btn btn-success" for="actual-btn">Choose Files</label>
+                    <span id="file-chosen" style="margin-left:1rem;">No file chosen</span>
+                    <small id="fileHelp" class="form-text text-muted">Files must be JPG files and follow the naming convention "sitename_YYYY_MM_DD_HHMMSS.jpg"</small>
+                </div> 
+            </div>
+        </div>
+        
+        <button type='submit' class="btn btn-success" name='save_leave' style="margin-top: 1.5rem;"> Save </button>
+        <button type='submit' class="btn btn-success" name='save_add_more' style="margin-top: 1.5rem;"> Save and Add Another </button>
+    
+    
     </form>
 
     <script>
