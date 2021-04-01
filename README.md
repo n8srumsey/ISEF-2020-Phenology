@@ -19,14 +19,14 @@
   <p align="center">
     <i>A suite of analysis tools using machine learning to study the trends and pattern in phenology of deciduous forests.</i>
     <br />
-    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Report Bug</a>
     ·
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Request Feature</a>
   </p>
 </p>
+<br />
+<br />
 
 
 
