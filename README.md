@@ -14,16 +14,14 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center"><b>Machine-Learning Powered Spatiotemporal Analytics System for Deciduous Forest Phenology</b></h3>
 
   <p align="center">
-    project_description
+    A suite of analysis tools using machine learning to study the trends and pattern in phenology of deciduous forests.
     <br />
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology">View Demo</a>
-    ·
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Report Bug</a>
     ·
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Request Feature</a>
@@ -36,8 +34,11 @@
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
+    <li> 
+      <a href="#abstract">Abstract</a>
+    </li>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#analytics-system">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -49,39 +50,61 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Abstract
+Shifts in plant phenology provide compelling evidence that ecosystems and species are influenced by climate change. In this project I present a system using machine learning to assist in the study and observation of deciduous forest phenology.
 
+I employed a deep Convolutional Neural Network (CNN) to classify the current phenophase of deciduous forests from a single image, trained using early stopping and k-fold cross validation. The CNN achieved a best accuracy of 60.67%, precision of 60.66%, recall of 60.65%, and F1 Score of 60.66% on the validation dataset. These results exhibited considerably lower performance than published literature. This can be primarily attributed to a faulty dataset, containing frequently mislabeled samples and unrelated images. To address this issue best in the future, the dataset should be curated manually to remove any problematic samples. Additionally, in future work transfer learning should be employed to reduce the overhead of training, so that features do not need to be trained from scratch, decreasing the sensitivity of the CNN to issues in the dataset.
+
+I then developed a website containing an analytics suite which provides analyses based on a timeseries of images of a deciduous forest. The website includes local site, aggregate, and spatial analyses to provide unique insight into the spatiotemporal trends of deciduous forest phenology, using the timeseries of images classified according to phenophase of the deciduous forest. My analyses elucidated spatiotemporal patterns in an earlier bud-burst phenophase consistent with climate-change predictions, demonstrating the potential utility of this analytical suite in assisting researchers.  
+
+## Analytics System
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+### **Features**
 
+### Data Management
+
+Manage your phenology data across multiple locations.
+
+Upload images from the site to take advantage of machine learning algorithms to classify and determine phenophases and transition dates.
+
+### Site Analysis
+
+Analyize site phenophase onset and duration trends.
+
+Select a site to view tables and graphs of bud burst and leaf senescence onset dates and durations, as well as view images of the site at said phenophase transition dates.
+
+### Aggregate Analysis
+
+Analyize aggregate phenophase onset and duration trends.
+
+View tables and graphs of the average bud burst and leaf senescence onset dates and durations, across all sites as well as view images of the site at said phenophase transition dates.
+
+### Spatial Analysis
+
+Analyize spatial trends of bud burst and leaf senescence phenophases across multiple sites.
+
+Using an interactive GIS map, view the spatial patterns between sites' locations of onset dates and durations of bud burst and leaf senescence phenophases.
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [TensorFlow](https://www.tensorflow.org/)
+* [Django](https://www.djangoproject.com/)
+* [Bootstrap](https://getbootstrap.com/)
+* [ArcGIS](https://developers.arcgis.com/javascript/latest/)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To set up the project as is. Please note that this project was not developed for others to set up individually - it was a proof-of-concept engineering project.
+Steps to set up the project as is. Please note that this project was not developed for others to set up individually - it was a proof-of-concept engineering project.
 
 ### Prerequisites
 
@@ -107,10 +130,6 @@ This is an example of how to list things you need to use the software and how to
     conda activate isef-2020
    ```
 
-<!-- ROADMAP -->
-## Roadmap
-
-
 <!-- LICENSE -->
 ## License
 
@@ -131,7 +150,8 @@ Project Link: [https://github.com/n8srumsey/ISEF-2020-Phenology](https://github.
 [stars-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/stargazers
 [issues-shield]: https://img.shields.io/github/issues/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
 [issues-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/issues
-[license-shield]: https://img.shields.io/github/license/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
-[license-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/blob/ec989af35283e90d40e2980e20f519c525af49e7/LICENSE
+[license-shield]: https://img.shields.io/github/license/n8srumsey/ISEF-2020-Phenology?label=license&style=for-the-badge
+[license-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/nathan-rumsey-66ab1320a/
+
