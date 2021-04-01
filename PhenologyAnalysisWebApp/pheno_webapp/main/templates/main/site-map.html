@@ -92,6 +92,7 @@
         view.ui.add(metaLegend, "bottom-left");
         view.ui.add(new Home({view: view}), "top-left");
 
+        /*
         view.when().then(function() {
             var renderer = {type: "simple", symbol: pathMarker, label: "Location of Site from Database"}
             view.watch("scale", function(newValue) {
@@ -117,6 +118,7 @@
                 metaLayer.renderer = renderer;
             });
         });
+        */
         
     {% else %}
         const generalDataPopupTemplate = {title: "<b>{sitename}</b>",

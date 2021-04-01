@@ -1,4 +1,7 @@
-# organize into data folder as needed for dataset structure
+"""
+Organizes and resizes images from the PhenoCam v2.0 Dataset to be used in the training of a deciduous forest phehnophase classification. 
+"""
+
 import os
 from PIL import Image
 from tqdm import tqdm

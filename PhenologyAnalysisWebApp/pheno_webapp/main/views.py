@@ -238,7 +238,7 @@ def site_view_edit(response, sitename):
             site.elevation = form.cleaned_data['elevation']
             site.dominant_species = form.cleaned_data['dominant_species']
             site.save()
-            return HttpResponseRedirect('/data-management/sites/{}'.format(site.sitename))
+            return HttpResponseRedirect('/data-management/sites/{}/'.format(site.sitename))
     else:
         form = SiteForm(initial={'sitename': site.sitename, 'location_desc': site.location_desc, 'latitude': site.latitude, 
                                  'longitude': site.longitude, 'elevation': site.elevation, 'dominant_species': site.dominant_species})
@@ -663,21 +663,21 @@ def site_map(response, view):
               'Change in {PHASE} Duration Since First Year of Data',
               'Change in {PHASE} Duration Since First Year of Data']
 
-    legend_descs = ['Earlier onset dates reflected by lighter gradients and smaller circles',
-                    'Earlier onset dates reflected by lighter gradients and smaller circles',
-                    'Lower phenophase durations reflected by lighter gradients and smaller circles',
+    legend_descs = ['Earlier onset dates reflected by darker gradients and smaller circles',
+                    'Earlier onset dates reflected by darker gradients and smaller circles',
+                    'Lower phenophase durations reflected by darker gradients and smaller circles',
 
-                    'Earlier onset dates reflected by lighter gradients and smaller circles',
-                    'Earlier onset dates reflected by lighter gradients and smaller circles',
-                    'Lower phenophase durations reflected by lighter gradients and smaller circles',
+                    'Earlier onset dates reflected by darker gradients and smaller circles',
+                    'Earlier onset dates reflected by darker gradients and smaller circles',
+                    'Lower phenophase durations reflected by darker gradients and smaller circles',
 
-                    'Lower average yearly phenophase onset date differences reflected by lighter gradients and smaller circles',
-                    'Lower average yearly phenophase duration differences reflected by lighter gradients and smaller circles',
-                    'Lower average yearly phenophase duration differences in percentage reflected by lighter gradients and smaller circles',
+                    'Lower average yearly phenophase onset date differences reflected by darker gradients and smaller circles',
+                    'Lower average yearly phenophase duration differences reflected by darker gradients and smaller circles',
+                    'Lower average yearly phenophase duration differences in percentage reflected by darker gradients and smaller circles',
 
-                    'Lower differences in phenophase onset date compared to first record reflected by lighter gradients and smaller circles',
-                    'Lower differences in phenophase duration compared to first record reflected by lighter gradients and smaller circles',
-                    'Lower differences in phenophase duration compared to first record in percentage reflected by lighter gradients and smaller circles']
+                    'Lower differences in phenophase onset date compared to first record reflected by darker gradients and smaller circles',
+                    'Lower differences in phenophase duration compared to first record reflected by darker gradients and smaller circles',
+                    'Lower differences in phenophase duration compared to first record in percentage reflected by darker gradients and smaller circles']
 
     units = ['',
              '',

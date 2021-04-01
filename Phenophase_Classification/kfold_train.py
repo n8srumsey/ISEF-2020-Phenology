@@ -1,3 +1,4 @@
+"""Train the models defined in define_models.py using k-fold cross validation."""
 import json
 import os
 import re

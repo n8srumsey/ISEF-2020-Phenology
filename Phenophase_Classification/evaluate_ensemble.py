@@ -1,3 +1,4 @@
+"""Evaluate the ensemble of models trained with k-fold cross validation."""
 import os
 from statistics import mode
 

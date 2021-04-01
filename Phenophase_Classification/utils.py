@@ -1,3 +1,5 @@
+"""Define training constants and directories."""
+
 K = 7
 EPOCHS = 100
 BATCH_SIZE = 320

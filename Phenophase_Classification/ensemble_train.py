@@ -1,3 +1,5 @@
+"""Trains the models from define_models.py on the PhenoCam v2.0 dataset."""
+
 import gc
 import json
 import os

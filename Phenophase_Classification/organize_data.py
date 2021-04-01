@@ -1,7 +1,8 @@
 """ Organize Data
 This is where the code for the organization of data for phenophase classification will reside.
 
-Three important parts of this: (1) finding average transition dates for each site and each year (2) storing this data in a readable JSON format
+Three important parts of this: (1) finding average transition dates for each site and each year 
+                               (2) storing this data in a readable JSON format
                                (3) organizing images according to transition date
 
 """

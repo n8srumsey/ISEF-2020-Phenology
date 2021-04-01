@@ -1,3 +1,5 @@
+"""Visualize the resutls of the training using Seaborn."""
+
 import json
 import os
 import re

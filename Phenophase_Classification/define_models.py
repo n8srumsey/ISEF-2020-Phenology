@@ -1,3 +1,5 @@
+"""Defines the DCNN architecture trained in ensemble_train.py"""
+
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import (BatchNormalization, Conv2D, Dense,
                                      Dropout, Flatten, MaxPool2D)

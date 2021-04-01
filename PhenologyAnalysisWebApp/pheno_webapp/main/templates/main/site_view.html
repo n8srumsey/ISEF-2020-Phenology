@@ -12,7 +12,8 @@
 {% endblock %}
 
 {% block content %}
-<div style="margin-top: 1rem;">
+
+<div class="col-4" style="margin-top: 1.5rem;">
     {% block editable_site_info%}
     <h1> {{site.sitename}} Site Details</h1>
     <p> <b> Location: </b> {{site.location_desc}} </p>
@@ -46,25 +47,7 @@
     <p> <b> Image Date Range: </b> {{first_im_date}} - {{last_im_date}}</p>
     
     {% site_last_updated_str site as lst_update %}
-    <p> <b> Site Last Modified: </b>{{lst_update}}</p>
-    
-    <div> 
-        {% get_num_site_imgs site as num_imgs%}
-        <h2 style="margin-top: 3rem;">Images</h2>
-        <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 40em; height: auto; border-style: solid; border-width: thick; border-radius: 5px; border-color:#444;"/> </div>
-        <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width: 40em;"/>
-        <p id="date">{% get_first_datetime site %}</p>
-        <script>
-            var date_list = {{date_list|safe}};
-            var img_paths = {{img_paths|safe}};
-            document.getElementById("date").innerHTML = date_list[n];
-            document.getElementById("img").src = "/media/" + img_paths[n];
-            function showVal(n){
-                document.getElementById("date").innerHTML = date_list[n];
-                document.getElementById("img").src = "/media/" + img_paths[n];
-            }
-        </script>
-    </div>
+    <p style="margin-bottom:4rem;"> <b> Site Last Modified: </b>{{lst_update}}</p>
 
     {% block site_links %}
     <a href='./gallery'><button type="button" class="btn btn-success">Go to Gallery</button></a>
@@ -72,5 +55,22 @@
     <a href='./edit'><button type="button" class="btn btn-success">Edit Site</button></a>
     {% endblock %}
     <p><br></br></p>
+</div>
+<div class="col"> 
+    {% get_num_site_imgs site as num_imgs%}
+    <h3 style="margin-top: 4.5rem;">Site Images</h2>
+    <div><img id="img" src="/media/{{img_paths.0}}" style="object-fit: contain; width: 35em; height: auto; border-style: solid; border-width: thick; border-radius: 5px; border-color:#444;"/> </div>
+    <input type="range" class="custom-range" min="0" max="{{num_imgs}}" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" style="margin-top:1rem; width: 35em;"/>
+    <p id="date">{% get_first_datetime site %}</p>
+    <script>
+        var date_list = {{date_list|safe}};
+        var img_paths = {{img_paths|safe}};
+        document.getElementById("date").innerHTML = date_list[n];
+        document.getElementById("img").src = "/media/" + img_paths[n];
+        function showVal(n){
+            document.getElementById("date").innerHTML = date_list[n];
+            document.getElementById("img").src = "/media/" + img_paths[n];
+        }
+    </script>
 </div>
 {% endblock %}
