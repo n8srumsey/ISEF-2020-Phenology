@@ -60,8 +60,8 @@
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
-<br/>
-<br/>
+
+
 
 <!-- ABOUT THE PROJECT -->
 ## Abstract
