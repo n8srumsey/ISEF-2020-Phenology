@@ -11,13 +11,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/n8srumsey/ISEF-2020-Phenology">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="readme_images/logo.png" alt="Analytics System" width=80>
   </a>
 
   <h3 align="center"><b>Machine-Learning Powered Spatiotemporal Analytics System for Deciduous Forest Phenology</b></h3>
 
   <p align="center">
-    A suite of analysis tools using machine learning to study the trends and pattern in phenology of deciduous forests.
+    <i>A suite of analysis tools using machine learning to study the trends and pattern in phenology of deciduous forests.</i>
     <br />
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology"><strong>Explore the docs »</strong></a>
     <br />
@@ -38,9 +38,15 @@
       <a href="#abstract">Abstract</a>
     </li>
     <li>
-      <a href="#analytics-system">About The Project</a>
+      <a href="#analytics-system">Analytics System</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#features">Features</a></li>
+        <ul><li><a href="#data-management">Data Management</a></li>
+        <li><a href="#site-analysis">Site Analysis</a></li>
+        <li><a href="#aggregate-analysis">Aggregate Analysis</a></li>
+        <li><a href="#spatial-analysis">Spatial Analysis</a></li>
+      </ul>
+      <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -64,33 +70,38 @@ I employed a deep Convolutional Neural Network (CNN) to classify the current phe
 I then developed a website containing an analytics suite which provides analyses based on a timeseries of images of a deciduous forest. The website includes local site, aggregate, and spatial analyses to provide unique insight into the spatiotemporal trends of deciduous forest phenology, using the timeseries of images classified according to phenophase of the deciduous forest. My analyses elucidated spatiotemporal patterns in an earlier bud-burst phenophase consistent with climate-change predictions, demonstrating the potential utility of this analytical suite in assisting researchers.  
 
 ## Analytics System
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+<img src="readme_images/HomePage.png">
 
 ### **Features**
 
 ### Data Management
 
-Manage your phenology data across multiple locations.
+<img src="readme_images/DataManagement.png"> 
 
-Upload images from the site to take advantage of machine learning algorithms to classify and determine phenophases and transition dates.
+- Manage your phenology data across multiple locations.
+- Upload images from the site to take advantage of machine learning algorithms to classify and determine phenophases and transition dates.
 
 ### Site Analysis
 
-Analyize site phenophase onset and duration trends.
+<img src="readme_images/SiteAnalysis1.png">
 
-Select a site to view tables and graphs of bud burst and leaf senescence onset dates and durations, as well as view images of the site at said phenophase transition dates.
+- Analyize site phenophase onset and duration trends.
+- Select a site to view tables and graphs of bud burst and leaf senescence onset dates and durations, as well as view images of the site at said phenophase transition dates.
 
 ### Aggregate Analysis
 
-Analyize aggregate phenophase onset and duration trends.
+<img src="readme_images/AggregateAnalysis.png">
 
-View tables and graphs of the average bud burst and leaf senescence onset dates and durations, across all sites as well as view images of the site at said phenophase transition dates.
+- Analyize aggregate phenophase onset and duration trends.
+- View tables and graphs of the average bud burst and leaf senescence onset dates and durations, across all sites as well as view images of the site at said phenophase transition dates.
 
 ### Spatial Analysis
 
-Analyize spatial trends of bud burst and leaf senescence phenophases across multiple sites.
+<img src="readme_images/SpatialAnalysis.png">
 
-Using an interactive GIS map, view the spatial patterns between sites' locations of onset dates and durations of bud burst and leaf senescence phenophases.
+- Analyize spatial trends of bud burst and leaf senescence phenophases across multiple sites.
+- Using an interactive GIS map, view the spatial patterns between sites' locations of onset dates and durations of bud burst and leaf senescence phenophases.
 
 ### Built With
 
