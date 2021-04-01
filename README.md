@@ -24,9 +24,10 @@
     ·
     <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Request Feature</a>
   </p>
+<br />
+<br />
 </p>
-<br />
-<br />
+
 
 
 
