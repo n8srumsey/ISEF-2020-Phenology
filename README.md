@@ -132,6 +132,6 @@ Project Link: [https://github.com/n8srumsey/ISEF-2020-Phenology](https://github.
 [issues-shield]: https://img.shields.io/github/issues/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
 [issues-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/issues
 [license-shield]: https://img.shields.io/github/license/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
-[license-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/blob/master/LICENSE.txt
+[license-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/nathan-rumsey-66ab1320a/
