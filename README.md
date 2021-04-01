@@ -33,7 +33,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <summary> <b> Table of Contents </b> </summary>
   <ol>
     <li> 
       <a href="#abstract">Abstract</a>
@@ -76,28 +76,28 @@ I then developed a website containing an analytics suite which provides analyses
 
 ### **Features**
 
-### Data Management
+#### Data Management
 
 <img src="readme_images/DataManagement.png"> 
 
 - Manage your phenology data across multiple locations.
 - Upload images from the site to take advantage of machine learning algorithms to classify and determine phenophases and transition dates.
 
-### Site Analysis
+#### Site Analysis
 
 <img src="readme_images/SiteAnalysis1.png">
 
 - Analyize site phenophase onset and duration trends.
 - Select a site to view tables and graphs of bud burst and leaf senescence onset dates and durations, as well as view images of the site at said phenophase transition dates.
 
-### Aggregate Analysis
+#### Aggregate Analysis
 
 <img src="readme_images/AggregateAnalysis.png">
 
 - Analyize aggregate phenophase onset and duration trends.
 - View tables and graphs of the average bud burst and leaf senescence onset dates and durations, across all sites as well as view images of the site at said phenophase transition dates.
 
-### Spatial Analysis
+#### Spatial Analysis
 
 <img src="readme_images/SpatialAnalysis.png">
 
