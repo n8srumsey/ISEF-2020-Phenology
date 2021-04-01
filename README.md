@@ -10,23 +10,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/n8srumsey/ISEF-2020-Phenology">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">project_title</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    project_description
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/n8srumsey/ISEF-2020-Phenology/issues">Request Feature</a>
   </p>
 </p>
 
@@ -34,7 +34,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -65,94 +65,51 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Here's a blank template to get started:
+**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
+`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* []()
+* []()
+* []()
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To set up the project as is. Please note that this project was not developed for others to set up individually - it was a proof-of-concept engineering project.
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+
+* [Python 3.8](https://www.python.org/)
+* [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit)
+* [cuDNN](https://developer.nvidia.com/cudnn)
+* [Anaconda](https://anaconda.org)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
+
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/gn8srumsey/ISEF-2020-Phenology.git
    ```
-3. Install NPM packages
+
+2. Install Python packages
+
    ```sh
-   npm install
+    conda env create n8srumsey/isef-2020
+    conda activate isef-2020
    ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-## Machine-Learning Powered Spatiotemporal Analytics System for Deciduous Forest Phenology
-
-Shifts in plant phenology provide compelling evidence that ecosystems and species are influenced by climate change. In this project I present a system using machine learning to assist in the study and observation of deciduous forest phenology.
-
-I employed a deep Convolutional Neural Network (CNN) to classify the current phenophase of deciduous forests from a single image, trained using early stopping and k-fold cross validation. The CNN achieved a best accuracy of 60.67%, precision of 60.66%, recall of 60.65%, and F1 Score of 60.66% on the validation dataset. These results exhibited considerably lower performance than published literature. This can be primarily attributed to a faulty dataset, containing frequently mislabeled samples and unrelated images. To address this issue best in the future, the dataset should be curated manually to remove any problematic samples. Additionally, in future work transfer learning should be employed to reduce the overhead of training, so that features do not need to be trained from scratch, decreasing the sensitivity of the CNN to issues in the dataset.
-
-I then developed a website containing an analytics suite which provides analyses based on a timeseries of images of a deciduous forest. The website includes local site, aggregate, and spatial analyses to provide unique insight into the spatiotemporal trends of deciduous forest phenology, using the timeseries of images classified according to phenophase of the deciduous forest. My analyses elucidated spatiotemporal patterns in an earlier bud-burst phenophase consistent with climate-change predictions, demonstrating the potential utility of this analytical suite in assisting researchers.  
 
 <!-- LICENSE -->
 ## License
@@ -164,4 +121,19 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Nathan Rumsey - nathan.s.rumsey@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/n8srumsey/ISEF-2020-Phenology](https://github.com/n8srumsey/ISEF-2020-Phenology)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
+[contributors-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
+[forks-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/network/members
+[stars-shield]: https://img.shields.io/github/stars/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
+[stars-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/stargazers
+[issues-shield]: https://img.shields.io/github/issues/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
+[issues-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/issues
+[license-shield]: https://img.shields.io/github/license/n8srumsey/ISEF-2020-Phenology.svg?style=for-the-badge
+[license-url]: https://github.com/n8srumsey/ISEF-2020-Phenology/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/nathan-rumsey-66ab1320a/
